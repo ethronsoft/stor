@@ -2,13 +2,13 @@
 C++ serverless NoSQL document-store 
 
 Platforms:
-*Windows - MinGW
+*Windows - (tested with MinGW)
 *OSX
 *Linux (tested on Ubuntu 1x.xx)
 
 Tool Dependencies:
  - Cmake (version >=3.6)
- - gcc/g++ (tested on 5.1.0 but all C++11 fully-compliant versions should work).
+ - We CMake "MinGW Makefiles" generator, with gcc/g++ (tested on 5.1.0 but all C++11 fully-compliant versions should work).
  On Windows, the compilation/linking tools used are those provided by TDM-GCC 64bit
  (http://tdm-gcc.tdragon.net/). You may use what you prefer but know that this is 
  what we used.
