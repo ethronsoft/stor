@@ -2,9 +2,9 @@
 C++ serverless NoSQL document-store 
 
 Platforms:
-*Windows - (tested with MinGW)
-*OSX
-*Linux (tested on Ubuntu 1x.xx)
+ - Windows - (tested with MinGW)
+ - OSX
+ - Linux (tested on Ubuntu 1x.xx)
 
 Tool Dependencies:
  - Cmake (version >=3.6)
