@@ -8,7 +8,7 @@ Platforms:
 
 Tool Dependencies:
  - Cmake (version >=3.6)
- - On Windows, we used CMake "MinGW Makefiles" generator. The compilation/linking tools used are those provided by TDM-GCC 64bit
+ - On Windows, we used GCC/G++. The compilation/linking tools used are those provided by TDM-GCC 64bit
  (http://tdm-gcc.tdragon.net/). You may use what you prefer but know that this is 
  what we used.
  - (Optional - for Windows). Some of the commands issued during building may require
