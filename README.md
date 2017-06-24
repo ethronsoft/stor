@@ -15,7 +15,7 @@ Tool Dependencies:
  unix-tools. The usage of a compatible shell environment 
  (we use the one provided by https://git-for-windows.github.io/) should suffice to 
  build from command line. Alternatively (or in conjuction with the above), we use
- UnxUtils (http://unxutils.sourceforge.net/).
+ UnxUtils (http://unxutils.sourceforge.net/) + cmd.exe or PowerShell.
  - (Optional) CLion IDE integrates seamlessly with CMake. CodeBlocks should as well. 
  
 
