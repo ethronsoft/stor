@@ -29,6 +29,7 @@ All dependencies licenses can be found on the links above or in the "license" fo
 in the respective folder under dependencies/. 
 
   Note:
+  
     All dependencies are already provided (for convenience and for self-contained testing) 
     in the dependencies/ folder for the respective
     platforms. 
@@ -39,5 +40,5 @@ in the respective folder under dependencies/.
     are also included. If you already have Boost headers on the PATH g++ looks into for headers, then you may remove
     it from the dependencies/build.py and remove boost_uuid_ROOT_DIR from CmakeLists.txt.
     
-    When linking libstor.a to your own project, you may want to take note of the dependencies linked with the `stor_test` target
+    When linking libstor.a to your own executable, you may want to take note of the dependencies linked with the `stor_test` target
     for each platform and replicate the linking them in your own executable. 
