@@ -20,9 +20,10 @@ Tool Dependencies:
  
 
 Library Dependencies:
- - Catch     (tested on version 1.7.2) -- https://github.com/philsquared/Catch
- - Rapidjson (tested on version 1.0.2) -- https://github.com/miloyip/rapidjson
- - Leveldb   (tested on version 1.18)  -- https://github.com/google/leveldb
+ - Catch        (tested on version 1.7.2) -- https://github.com/philsquared/Catch
+ - Rapidjson    (tested on version 1.0.2) -- https://github.com/miloyip/rapidjson
+ - Leveldb      (tested on version 1.18)  -- https://github.com/google/leveldb
+ - Boost(UUID)  (tested on version 1.55)  -- http://www.boost.org/
 
 All dependencies licenses can be found on the links above or in the "license" folder
 in the respective folder under dependencies/. 
@@ -30,6 +31,10 @@ in the respective folder under dependencies/.
   Note:
     All dependencies are already provided (for convenience) 
     in the dependencies/ folder for the respective
-    platforms. Building scripts called during CMake-builds automatically take care
+    platforms. 
+    Building scripts called during CMake-builds automatically take care
     of building the respective 64-bit libraries for you. You are free to manage
     the dependencies the way you like, just make sure you modify the Cmake accordingly.
+    Boost UUID dependencies, extracted with the bcp utility (http://www.boost.org/doc/libs/1_64_0/tools/bcp/doc/html/index.html)
+    are also included. If you already have Boost headers on the PATH g++ looks into for headers, then you may remove
+    it from the dependencies/build.py and remove boost_uuid_ROOT_DIR from CmakeLists.txt
