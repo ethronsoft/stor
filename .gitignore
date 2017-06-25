@@ -1,4 +1,4 @@
 **/.idea
 **/dependencies/**/bin
 **/dependencies/dependencies.cmake
-**/cmake-build
+core/cmake-build
