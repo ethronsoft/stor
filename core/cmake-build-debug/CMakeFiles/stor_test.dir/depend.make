@@ -672,6 +672,29 @@ CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../include/stor/document/nod
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../src/document/node.cpp
 
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/asn1.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/bio.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/bn.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/crypto.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/e_os2.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/ebcdic.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/err.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/evp.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/lhash.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/obj_mac.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/objects.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/opensslconf.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/opensslv.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/ossl_typ.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/rand.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/safestack.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/sha.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/stack.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../dependencies/mingw/openssl/include/openssl/symhacks.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../include/stor/exceptions/access_exception.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../include/stor/store/access_manager.h
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../src/store/access_manager.cpp
+
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../dependencies/mingw/leveldb/include/leveldb/db.h
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../dependencies/mingw/leveldb/include/leveldb/env.h
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../dependencies/mingw/leveldb/include/leveldb/iterator.h
@@ -1290,6 +1313,12 @@ CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/store/query.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/store/query_instruction.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/store/store.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../src/store/store.cpp
+
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: ../dependencies/multiplatform/catch/include/catch/catch.hpp
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: ../include/stor/exceptions/access_exception.h
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: ../include/stor/store/access_manager.h
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: ../test/include/stor_test/multiplatform_test_util.h
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: ../test/src/access_manager_test.cpp
 
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../dependencies/multiplatform/catch/include/catch/catch.hpp
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../dependencies/multiplatform/rapidjson/include/rapidjson/allocators.h

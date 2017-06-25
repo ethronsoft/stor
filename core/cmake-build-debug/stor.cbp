@@ -25,12 +25,14 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DWIN32"/>
+					<Add option="-DSTOR_CRYPTO"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/boost.uuid/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/openssl/include"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
@@ -54,12 +56,14 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DWIN32"/>
+					<Add option="-DSTOR_CRYPTO"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/boost.uuid/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/openssl/include"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
@@ -83,12 +87,14 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DWIN32"/>
+					<Add option="-DSTOR_CRYPTO"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/boost.uuid/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/openssl/include"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
@@ -112,12 +118,14 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DWIN32"/>
+					<Add option="-DSTOR_CRYPTO"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/boost.uuid/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/openssl/include"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
@@ -258,6 +266,10 @@
 			<Option target="stor"/>
 			<Option target="stor_test"/>
 		</Unit>
+		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/access_manager.cpp">
+			<Option target="stor"/>
+			<Option target="stor_test"/>
+		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/and_instruction.cpp">
 			<Option target="stor"/>
 			<Option target="stor_test"/>
@@ -322,6 +334,9 @@
 			<Option target="stor_test"/>
 		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/include/stor_test/query_test.h">
+			<Option target="stor_test"/>
+		</Unit>
+		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/access_manager_test.cpp">
 			<Option target="stor_test"/>
 		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/document_test.cpp">

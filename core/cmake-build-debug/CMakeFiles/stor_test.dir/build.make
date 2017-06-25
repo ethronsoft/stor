@@ -306,10 +306,35 @@ CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj.provides: CMakeFiles/s
 CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj.provides.build: CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj
 
 
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: CMakeFiles/stor_test.dir/flags.make
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj: ../src/store/access_manager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\access_manager.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\access_manager.cpp
+
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stor_test.dir/src/store/access_manager.cpp.i"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\access_manager.cpp > CMakeFiles\stor_test.dir\src\store\access_manager.cpp.i
+
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stor_test.dir/src/store/access_manager.cpp.s"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\access_manager.cpp -o CMakeFiles\stor_test.dir\src\store\access_manager.cpp.s
+
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.requires:
+
+.PHONY : CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.requires
+
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.provides: CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.provides.build
+.PHONY : CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.provides
+
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.provides.build: CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj
+
+
 CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj: ../src/store/collection_visitor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\collection_visitor.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\collection_visitor.cpp
 
 CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.i: cmake_force
@@ -334,7 +359,7 @@ CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj.provides.build: CM
 CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj: ../src/document/const_iterator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\document\const_iterator.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\document\const_iterator.cpp
 
 CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.i: cmake_force
@@ -359,7 +384,7 @@ CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj.provides.build: CMa
 CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj: ../src/store/db_crypt.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\db_crypt.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\db_crypt.cpp
 
 CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.i: cmake_force
@@ -384,7 +409,7 @@ CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj.provides.build: CMakeFiles/s
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../src/store/and_instruction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\and_instruction.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\and_instruction.cpp
 
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.i: cmake_force
@@ -409,7 +434,7 @@ CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj.provides.build: CMake
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../src/store/gt_instruction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\gt_instruction.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\gt_instruction.cpp
 
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.i: cmake_force
@@ -434,7 +459,7 @@ CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj.provides.build: CMakeF
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../src/store/gte_instruction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\gte_instruction.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\gte_instruction.cpp
 
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.i: cmake_force
@@ -459,7 +484,7 @@ CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj.provides.build: CMake
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../src/store/lt_instruction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\lt_instruction.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\lt_instruction.cpp
 
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.i: cmake_force
@@ -484,7 +509,7 @@ CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj.provides.build: CMakeF
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../src/store/neq_instruction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\neq_instruction.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\neq_instruction.cpp
 
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.i: cmake_force
@@ -509,7 +534,7 @@ CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj.provides.build: CMake
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../src/store/lte_instruction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\src\store\lte_instruction.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\src\store\lte_instruction.cpp
 
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.i: cmake_force
@@ -534,7 +559,7 @@ CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj.provides.build: CMake
 CMakeFiles/stor_test.dir/test/src/main.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/test/src/main.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/test/src/main.cpp.obj: ../test/src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/stor_test.dir/test/src/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/stor_test.dir/test/src/main.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\test\src\main.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\test\src\main.cpp
 
 CMakeFiles/stor_test.dir/test/src/main.cpp.i: cmake_force
@@ -559,7 +584,7 @@ CMakeFiles/stor_test.dir/test/src/main.cpp.obj.provides.build: CMakeFiles/stor_t
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../test/src/document_test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\test\src\document_test.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\test\src\document_test.cpp
 
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.i: cmake_force
@@ -584,7 +609,7 @@ CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj.provides.build: CMakeFil
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../test/src/store_test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\test\src\store_test.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\test\src\store_test.cpp
 
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.i: cmake_force
@@ -609,7 +634,7 @@ CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj.provides.build: CMakeFiles/
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: CMakeFiles/stor_test.dir/flags.make
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../test/src/stor_test/query_test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj"
 	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\test\src\stor_test\query_test.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\test\src\stor_test\query_test.cpp
 
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.i: cmake_force
@@ -631,6 +656,31 @@ CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj.provides: CMakeFi
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj.provides.build: CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj
 
 
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: CMakeFiles/stor_test.dir/flags.make
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: CMakeFiles/stor_test.dir/includes_CXX.rsp
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj: ../test/src/access_manager_test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\stor_test.dir\test\src\access_manager_test.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\test\src\access_manager_test.cpp
+
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.i"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\test\src\access_manager_test.cpp > CMakeFiles\stor_test.dir\test\src\access_manager_test.cpp.i
+
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.s"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\test\src\access_manager_test.cpp -o CMakeFiles\stor_test.dir\test\src\access_manager_test.cpp.s
+
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.requires:
+
+.PHONY : CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.requires
+
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.provides: CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.provides.build
+.PHONY : CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.provides
+
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.provides.build: CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj
+
+
 # Object files for target stor_test
 stor_test_OBJECTS = \
 "CMakeFiles/stor_test.dir/src/document/document.cpp.obj" \
@@ -643,6 +693,7 @@ stor_test_OBJECTS = \
 "CMakeFiles/stor_test.dir/src/store/onclose.cpp.obj" \
 "CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj" \
 "CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj" \
+"CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj" \
 "CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj" \
 "CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj" \
 "CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj" \
@@ -655,7 +706,8 @@ stor_test_OBJECTS = \
 "CMakeFiles/stor_test.dir/test/src/main.cpp.obj" \
 "CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj" \
 "CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj" \
-"CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj"
+"CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj" \
+"CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj"
 
 # External object files for target stor_test
 stor_test_EXTERNAL_OBJECTS =
@@ -670,6 +722,7 @@ stor_test.exe: CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/src/store/onclose.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj
+stor_test.exe: CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj
@@ -683,11 +736,12 @@ stor_test.exe: CMakeFiles/stor_test.dir/test/src/main.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj
+stor_test.exe: CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj
 stor_test.exe: CMakeFiles/stor_test.dir/build.make
 stor_test.exe: CMakeFiles/stor_test.dir/linklibs.rsp
 stor_test.exe: CMakeFiles/stor_test.dir/objects1.rsp
 stor_test.exe: CMakeFiles/stor_test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable stor_test.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\core\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Linking CXX executable stor_test.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\stor_test.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -705,6 +759,7 @@ CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/store/index_path
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/store/onclose.cpp.obj.requires
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj.requires
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj.requires
+CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj.requires
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj.requires
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/document/const_iterator.cpp.obj.requires
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/src/store/db_crypt.cpp.obj.requires
@@ -718,6 +773,7 @@ CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/test/src/main.cpp.ob
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj.requires
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj.requires
 CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj.requires
+CMakeFiles/stor_test.dir/requires: CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj.requires
 
 .PHONY : CMakeFiles/stor_test.dir/requires
 

@@ -7,6 +7,7 @@
 
 #include <string>
 #include <array>
+#include <memory>
 
 namespace esft{
     namespace stor{
@@ -26,30 +27,41 @@ namespace esft{
             /**
              * @brief crypto operation successful
              */
-            constexpr static int ok = 1;
+            constexpr static result ok = 1;
 
             /**
              * @brief crypto operation unsuccessful
              */
-            constexpr static int cipher_fail = 2;
+            constexpr static result cipher_fail = 2;
 
             /**
              * @brief post-decryption file comparison failed
              */
-            constexpr static int checksum_fail = 3;
+            constexpr static result checksum_fail = 3;
 
             /**
              * @brief Constructor
              *
              * @param password key used for encryption
              */
-            access_manager(const std::string &password):
-                    _pwd(password) {}
+            access_manager(const std::string &password);
+
+            /**
+             * @brief Move Constructor
+             * @param o object to move
+             */
+            access_manager(access_manager &&o);
+
+            /**
+             * @brief Move assignment
+             * @param o object to move
+             */
+            access_manager &operator=(access_manager &&o);
 
             /**
              * @brief Destructor
              */
-            virtual ~access_manager() {}
+            virtual ~access_manager();
 
             /**
              * @brief encrypt input_file_name file with name
@@ -59,7 +71,7 @@ namespace esft{
              *  @param output_file_name name of resulting encrypted file
              */
             virtual result encrypt(const std::string &input_file_name,
-                                 const std::string &output_file_name) const = 0;
+                                 const std::string &output_file_name) const;
 
             /**
             * @brief decrypt input_file_name file with name
@@ -69,14 +81,14 @@ namespace esft{
             *  @param output_file_name name of resulting decrypted file
             */
             virtual result decrypt(const std::string &input_file_name,
-                                 const std::string &output_file_name) const = 0;
+                                 const std::string &output_file_name) const;
 
         protected:
 
-            /**
-             * @brief Crypto key
-             */
-            std::string _pwd;
+            //Pointer To Implementation idiom
+            struct impl;
+
+            std::unique_ptr<impl> _impl;
 
         };
     }

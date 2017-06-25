@@ -255,6 +255,36 @@ src/document/node.cpp.s:
 	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/src/document/node.cpp.s
 .PHONY : src/document/node.cpp.s
 
+src/store/access_manager.obj: src/store/access_manager.cpp.obj
+
+.PHONY : src/store/access_manager.obj
+
+# target to build an object file
+src/store/access_manager.cpp.obj:
+	$(MAKE) -f CMakeFiles\stor.dir\build.make CMakeFiles/stor.dir/src/store/access_manager.cpp.obj
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj
+.PHONY : src/store/access_manager.cpp.obj
+
+src/store/access_manager.i: src/store/access_manager.cpp.i
+
+.PHONY : src/store/access_manager.i
+
+# target to preprocess a source file
+src/store/access_manager.cpp.i:
+	$(MAKE) -f CMakeFiles\stor.dir\build.make CMakeFiles/stor.dir/src/store/access_manager.cpp.i
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/src/store/access_manager.cpp.i
+.PHONY : src/store/access_manager.cpp.i
+
+src/store/access_manager.s: src/store/access_manager.cpp.s
+
+.PHONY : src/store/access_manager.s
+
+# target to generate assembly for a file
+src/store/access_manager.cpp.s:
+	$(MAKE) -f CMakeFiles\stor.dir\build.make CMakeFiles/stor.dir/src/store/access_manager.cpp.s
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/src/store/access_manager.cpp.s
+.PHONY : src/store/access_manager.cpp.s
+
 src/store/and_instruction.obj: src/store/and_instruction.cpp.obj
 
 .PHONY : src/store/and_instruction.obj
@@ -705,6 +735,33 @@ src/store/store.cpp.s:
 	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/src/store/store.cpp.s
 .PHONY : src/store/store.cpp.s
 
+test/src/access_manager_test.obj: test/src/access_manager_test.cpp.obj
+
+.PHONY : test/src/access_manager_test.obj
+
+# target to build an object file
+test/src/access_manager_test.cpp.obj:
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj
+.PHONY : test/src/access_manager_test.cpp.obj
+
+test/src/access_manager_test.i: test/src/access_manager_test.cpp.i
+
+.PHONY : test/src/access_manager_test.i
+
+# target to preprocess a source file
+test/src/access_manager_test.cpp.i:
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.i
+.PHONY : test/src/access_manager_test.cpp.i
+
+test/src/access_manager_test.s: test/src/access_manager_test.cpp.s
+
+.PHONY : test/src/access_manager_test.s
+
+# target to generate assembly for a file
+test/src/access_manager_test.cpp.s:
+	$(MAKE) -f CMakeFiles\stor_test.dir\build.make CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.s
+.PHONY : test/src/access_manager_test.cpp.s
+
 test/src/document_test.obj: test/src/document_test.cpp.obj
 
 .PHONY : test/src/document_test.obj
@@ -835,6 +892,9 @@ help:
 	@echo ... src/document/node.obj
 	@echo ... src/document/node.i
 	@echo ... src/document/node.s
+	@echo ... src/store/access_manager.obj
+	@echo ... src/store/access_manager.i
+	@echo ... src/store/access_manager.s
 	@echo ... src/store/and_instruction.obj
 	@echo ... src/store/and_instruction.i
 	@echo ... src/store/and_instruction.s
@@ -880,6 +940,9 @@ help:
 	@echo ... src/store/store.obj
 	@echo ... src/store/store.i
 	@echo ... src/store/store.s
+	@echo ... test/src/access_manager_test.obj
+	@echo ... test/src/access_manager_test.i
+	@echo ... test/src/access_manager_test.s
 	@echo ... test/src/document_test.obj
 	@echo ... test/src/document_test.i
 	@echo ... test/src/document_test.s

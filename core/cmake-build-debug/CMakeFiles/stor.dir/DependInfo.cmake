@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/document.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir/src/document/document.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/iterator.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir/src/document/iterator.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/node.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir/src/document/node.cpp.obj"
+  "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/access_manager.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir/src/store/access_manager.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/and_instruction.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir/src/store/and_instruction.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/collection.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir/src/store/collection.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/collection_visitor.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir/src/store/collection_visitor.cpp.obj"
@@ -28,6 +29,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
+  "STOR_CRYPTO"
   "WIN32"
   )
 
@@ -39,6 +41,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../dependencies/mingw/leveldb/include"
   "../dependencies/multiplatform/rapidjson/include"
   "../dependencies/multiplatform/boost.uuid/include"
+  "../dependencies/mingw/openssl/include"
   )
 
 # Targets to which this target links.

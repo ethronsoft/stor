@@ -10,6 +10,7 @@
 #include <stor/exceptions/store_exception.h>
 #include <stor/store/store.h>
 #include <stor/store/collection_visitor.h>
+#include <stor/store/access_manager.h>
 #include <stor/exceptions/access_exception.h>
 #include <stor/store/db_crypt.h>
 #include <stor_test/query_test.h>
@@ -144,7 +145,7 @@ TEST_CASE("db encryption test","[db_encryption_test]"){
                                                  const std::string &o) const {return stor::access_manager::ok;}
         };
 
-        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>(access_manager_mock("fake_password"));
+        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>("fake_56789012345");
 
         stor::db_crypt enc{stor::db_crypt::mode::ENCRYPT, ptr};
 
@@ -189,7 +190,7 @@ TEST_CASE("db encryption test","[db_encryption_test]"){
                                                  const std::string &o) const {return stor::access_manager::ok;}
         };
 
-        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>(access_manager_mock("fake_password"));
+        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>(access_manager_mock("fake_56789012345"));
 
         stor::db_crypt enc{stor::db_crypt::mode::ENCRYPT, ptr};
 
@@ -264,7 +265,7 @@ TEST_CASE("db decryption test","[db_decryption_test]"){
                                                  const std::string &o) const {return stor::access_manager::ok;}
         };
 
-        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>(access_manager_mock("fake_password"));
+        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>(access_manager_mock("fake_56789012345"));
 
         stor::db_crypt enc{stor::db_crypt::mode::DECRYPT, ptr};
 
@@ -309,7 +310,7 @@ TEST_CASE("db decryption test","[db_decryption_test]"){
                                                  const std::string &o) const {return stor::access_manager::ok;}
         };
 
-        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>(access_manager_mock("fake_password"));
+        std::shared_ptr<stor::access_manager> ptr = std::make_shared<access_manager_mock>(access_manager_mock("fake_56789012345"));
 
         stor::db_crypt dec{stor::db_crypt::mode::DECRYPT, ptr};
 

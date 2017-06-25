@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/document.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/document/document.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/iterator.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/document/iterator.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/node.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/document/node.cpp.obj"
+  "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/access_manager.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/and_instruction.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/collection.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/store/collection.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/collection_visitor.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/store/collection_visitor.cpp.obj"
@@ -23,6 +24,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/or_instruction.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/query.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/store/query.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/store.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/src/store/store.cpp.obj"
+  "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/access_manager_test.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/document_test.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/main.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/test/src/main.cpp.obj"
   "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/stor_test/query_test.cpp" "C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj"
@@ -32,6 +34,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
+  "STOR_CRYPTO"
   "WIN32"
   )
 
@@ -43,6 +46,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../dependencies/mingw/leveldb/include"
   "../dependencies/multiplatform/rapidjson/include"
   "../dependencies/multiplatform/boost.uuid/include"
+  "../dependencies/mingw/openssl/include"
   )
 
 # Targets to which this target links.

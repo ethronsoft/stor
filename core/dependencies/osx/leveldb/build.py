@@ -10,7 +10,11 @@ def build(root):
 	subprocess.check_call("make", shell=True)
 
 def finalize(root, install_path):
-	shutil.copy(os.path.join(root,"source","out-static","libleveldb.a"),install_path)
+	bin_dir = os.path.join(install_path,"bin")
+	if os.path.exists(bin_dir):
+		shutil.rmtree(bin_dir, ignore_errors=True)
+	os.makedirs(bin_dir)
+	shutil.copy(os.path.join(root,"source","out-static","libleveldb.a"),bin_dir)
 
 def clean(root):
 	os.chdir(os.path.join(root,"source"))

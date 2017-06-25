@@ -672,6 +672,29 @@ CMakeFiles/stor_test.dir/src/document/node.cpp.obj
  ../include/stor/document/node.h
  ../include/stor/exceptions/document_exception.h
  C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/node.cpp
+CMakeFiles/stor_test.dir/src/store/access_manager.cpp.obj
+ ../dependencies/mingw/openssl/include/openssl/asn1.h
+ ../dependencies/mingw/openssl/include/openssl/bio.h
+ ../dependencies/mingw/openssl/include/openssl/bn.h
+ ../dependencies/mingw/openssl/include/openssl/crypto.h
+ ../dependencies/mingw/openssl/include/openssl/e_os2.h
+ ../dependencies/mingw/openssl/include/openssl/ebcdic.h
+ ../dependencies/mingw/openssl/include/openssl/err.h
+ ../dependencies/mingw/openssl/include/openssl/evp.h
+ ../dependencies/mingw/openssl/include/openssl/lhash.h
+ ../dependencies/mingw/openssl/include/openssl/obj_mac.h
+ ../dependencies/mingw/openssl/include/openssl/objects.h
+ ../dependencies/mingw/openssl/include/openssl/opensslconf.h
+ ../dependencies/mingw/openssl/include/openssl/opensslv.h
+ ../dependencies/mingw/openssl/include/openssl/ossl_typ.h
+ ../dependencies/mingw/openssl/include/openssl/rand.h
+ ../dependencies/mingw/openssl/include/openssl/safestack.h
+ ../dependencies/mingw/openssl/include/openssl/sha.h
+ ../dependencies/mingw/openssl/include/openssl/stack.h
+ ../dependencies/mingw/openssl/include/openssl/symhacks.h
+ ../include/stor/exceptions/access_exception.h
+ ../include/stor/store/access_manager.h
+ C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/access_manager.cpp
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj
  ../dependencies/mingw/leveldb/include/leveldb/db.h
  ../dependencies/mingw/leveldb/include/leveldb/env.h
@@ -1291,6 +1314,12 @@ CMakeFiles/stor_test.dir/src/store/store.cpp.obj
  ../include/stor/store/query_instruction.h
  ../include/stor/store/store.h
  C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/store.cpp
+CMakeFiles/stor_test.dir/test/src/access_manager_test.cpp.obj
+ ../dependencies/multiplatform/catch/include/catch/catch.hpp
+ ../include/stor/exceptions/access_exception.h
+ ../include/stor/store/access_manager.h
+ ../test/include/stor_test/multiplatform_test_util.h
+ C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/access_manager_test.cpp
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj
  ../dependencies/multiplatform/catch/include/catch/catch.hpp
  ../dependencies/multiplatform/rapidjson/include/rapidjson/allocators.h

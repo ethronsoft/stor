@@ -1,10 +1,17 @@
-
 cmake_minimum_required(VERSION 3.6)
 project(stor)
+
+#project version
 set(VERSION 0.0.1)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall ")
+#### options ###
+#enable crypto (set ON either here or from command line with -DSTOR_CRYPTO=ON
+#Note: setting it from here will likely require to reset (or delete) CMakeCache.txt
+option(STOR_CRYPTO "Enable database encrpytion facilities" ON)
 
+### targets setup ###
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall ")
 
 set(SOURCE_FILES
 		include/stor/document/document.h
@@ -35,6 +42,7 @@ set(SOURCE_FILES
 		include/stor/store/or_instruction.h
 		src/store/or_instruction.cpp
 		include/stor/store/access_manager.h
+		src/store/access_manager.cpp
 		include/stor/store/collection_visitor.h
 		src/store/collection_visitor.cpp
 		include/stor/document/const_iterator.h
@@ -52,127 +60,129 @@ set(SOURCE_FILES
 		src/store/neq_instruction.cpp
 		include/stor/store/neq_instruction.h
 		src/store/lte_instruction.cpp
-		include/stor/store/lte_instruction.h)
+		include/stor/store/lte_instruction.h
+		)
 
-		
+
+#platform specific configurations
 if(WIN32)
 	add_definitions(-DWIN32)
 
 	#dependencies injection
-	execute_process(
-			COMMAND
+	if(STOR_CRYPTO)
+		execute_process(
+				COMMAND
+				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p mingw --with-ssl
+		)
+	else()
+		execute_process(
+				COMMAND
 				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p mingw
-			)
+		)
+	endif(STOR_CRYPTO)
+
 	if (NOT EXISTS ${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
 		message(FATAL_ERROR "dependencies.cmake generation failed")
 	endif()
 	include(${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
-	
-	
-	include_directories(
-			include
-			test/include
-			${catch_ROOT_DIR}/include
-			${leveldb_ROOT_DIR}/include
-			${rapidjson_ROOT_DIR}/include
-			${boost.uuid_ROOT_DIR}/include
-	)
-	
-	add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES} )
 
-		link_directories(
-				${leveldb_ROOT_DIR}/bin
-		)
+	SET(TEST_LINKS
+			leveldb
+			shlwapi
+			pthread)
 
-	add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
-			test/src/main.cpp
-			test/src/document_test.cpp
-			test/src/store_test.cpp
-			test/include/stor_test/multiplatform_test_util.h
-			test/include/stor_test/query_test.h
-			test/src/stor_test/query_test.cpp
-	)
-	
-	target_link_libraries(${PROJECT_NAME}_test leveldb shlwapi pthread)
-	
 elseif(APPLE)
 	add_definitions(-DUNIX -DOSX)
 
 	#dependencies injection
-	execute_process(
-			COMMAND
-			python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p osx
-	)
+	if(STOR_CRYPTO)
+		execute_process(
+				COMMAND
+				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p osx --with-ssl
+		)
+	else()
+		execute_process(
+				COMMAND
+				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p osx
+		)
+	endif(STOR_CRYPTO)
 	if (NOT EXISTS ${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
 		message(FATAL_ERROR "dependencies.cmake generation failed")
 	endif()
 	include(${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
 
+	SET(TEST_LINKS
+			leveldb
+			pthread)
 
-	include_directories(
-			include
-			test/include
-			${catch_ROOT_DIR}/include
-			${leveldb_ROOT_DIR}/include
-			${rapidjson_ROOT_DIR}/include
-			${boost.uuid_ROOT_DIR}/include
-	)
-
-	add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES} )
-
-	link_directories(
-			${leveldb_ROOT_DIR}/bin
-	)
-
-	add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
-			test/src/main.cpp
-			test/src/document_test.cpp
-			test/src/store_test.cpp
-			test/include/stor_test/multiplatform_test_util.h
-			test/include/stor_test/query_test.h
-			test/src/stor_test/query_test.cpp
-			)
-	
-	target_link_libraries(${PROJECT_NAME}_test leveldb pthread)
-	
 elseif (UNIX)
 	add_definitions(-DUNIX)
 
 	#dependencies injection
-	execute_process(
-			COMMAND
-			python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p linux
-	)
+	if(STOR_CRYPTO)
+		execute_process(
+				COMMAND
+				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p linux --with-ssl
+		)
+	else()
+		execute_process(
+				COMMAND
+				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p linux
+		)
+	endif(STOR_CRYPTO)
 	if (NOT EXISTS ${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
 		message(FATAL_ERROR "dependencies.cmake generation failed")
 	endif()
 	include(${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
 
+	SET(TEST_LINKS
+			leveldb
+			pthread)
 
-	include_directories(
-			include
-			test/include
-			${catch_ROOT_DIR}/include
-			${leveldb_ROOT_DIR}/include
-			${rapidjson_ROOT_DIR}/include
-			${boost.uuid_ROOT_DIR}/include
-	)
+endif()
 
-	add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES} )
+#post-platform configurations
+SET(STOR_INCLUDE_DIRS
+		include
+		test/include
+		${catch_ROOT_DIR}/include
+		${leveldb_ROOT_DIR}/include
+		${rapidjson_ROOT_DIR}/include
+		${boost.uuid_ROOT_DIR}/include
+		)
 
-	link_directories(
-			${leveldb_ROOT_DIR}/bin
-	)
+SET(STOR_LINK_DIRS
+		${leveldb_ROOT_DIR}/bin
+		)
 
-	add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
-			test/src/main.cpp
-			test/src/document_test.cpp
-			test/src/store_test.cpp
-			test/include/stor_test/multiplatform_test_util.h
-			test/include/stor_test/query_test.h
-			test/src/stor_test/query_test.cpp
-			)
-	
-	target_link_libraries(${PROJECT_NAME}_test leveldb pthread)
-	
-endif()	
+#options handling
+
+if(STOR_CRYPTO)
+	add_definitions(-DSTOR_CRYPTO)
+	SET(STOR_INCLUDE_DIRS ${STOR_INCLUDE_DIRS}
+			${openssl_ROOT_DIR}/include)
+	SET(STOR_LINK_DIRS ${STOR_LINK_DIRS}
+			${openssl_ROOT_DIR}/bin)
+	SET(TEST_LINKS ${TEST_LINKS}
+			ssl
+			crypto)
+endif(STOR_CRYPTO)
+
+#targets
+
+include_directories(${STOR_INCLUDE_DIRS})
+
+link_directories(${STOR_LINK_DIRS})
+
+add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
+
+add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
+		test/src/main.cpp
+		test/src/document_test.cpp
+		test/src/store_test.cpp
+		test/include/stor_test/multiplatform_test_util.h
+		test/include/stor_test/query_test.h
+		test/src/stor_test/query_test.cpp
+		test/src/access_manager_test.cpp)
+
+target_link_libraries(${PROJECT_NAME}_test ${TEST_LINKS})

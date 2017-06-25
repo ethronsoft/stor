@@ -1,1 +1,1 @@
- -LC:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/bin -lleveldb -lshlwapi -lpthread -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
+ -LC:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/bin  -LC:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/openssl/bin -lleveldb -lshlwapi -lpthread -lssl -lcrypto -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

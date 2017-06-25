@@ -13,7 +13,11 @@ def cleanup(root):
 	subprocess.check_call("mingw32-make.exe clean",shell=True)
 	
 def finalize(root,install_path):
-	shutil.copy(os.path.join(root,"source","libleveldb.a"),install_path)
+	bin_dir = os.path.join(install_path,"bin")
+	if os.path.exists(bin_dir):
+		shutil.rmtree(bin_dir, ignore_errors=True)
+	os.makedirs(bin_dir)
+	shutil.copy(os.path.join(root,"source","libleveldb.a"),bin_dir)
 
 if __name__=="__main__":
 	parser = argparse.ArgumentParser()

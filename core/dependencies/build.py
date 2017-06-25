@@ -5,20 +5,19 @@ import os
 
 def build_dep(root_path, force=False):
 	build_script = os.path.join(root_path,"build.py")
-	dest = os.path.join(root_path,"bin")
+	bin_dir = os.path.join(root_path,"bin")
 	
 	#proceed if a build.py file is found
 	if not os.path.exists(build_script): return
 	
 	#do not re-build if already there or if not forced
-	if os.path.exists(os.path.join(root_path,"bin")):
+	if os.path.exists(bin_dir):
 		if force:
-			shutil.rmtree(dest,ignore_errors=True)
+			shutil.rmtree(bin_dir,ignore_errors=True)
 		else:
 			return
 	
-	os.makedirs(dest)
-	subprocess.check_call("python {0} -i {1}".format(os.path.join(root_path,"build.py"), dest))
+	subprocess.check_call("python {0} -i {1}".format(os.path.join(root_path,"build.py"), root_path))
 	
 def cmake_entry(name, path):
 		return "set({0}_ROOT_DIR \"{1}\")\n".format(name,path.replace("\\","/"))
@@ -29,6 +28,8 @@ if __name__ == "__main__":
 	parser.add_argument("-f", "--forced", action="store_true", required=False,
 						help="force re-build of all dependencies")
 	parser.add_argument("-p", "--platform", choices=["mingw","linux","osx"], required=True)
+	parser.add_argument("-wssl", "--with-ssl", action="store_true", required=False,
+						help="build openssl libraries")
 	args = vars(parser.parse_args())
 	#multiplatform dependencies
 	mp_deps = []
@@ -39,6 +40,8 @@ if __name__ == "__main__":
 		"multiplatform": ["catch", "rapidjson", "boost.uuid"],
 		args["platform"]: ["leveldb"]
 	}
+	if args["with_ssl"]: 
+		dependencies[args["platform"]].append("openssl")
 	
 	#cmake dependencies config entry
 	entries = []

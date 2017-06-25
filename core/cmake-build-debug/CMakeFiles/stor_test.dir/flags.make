@@ -4,7 +4,7 @@
 # compile CXX with C:/TDM-GCC-64/bin/g++.exe
 CXX_FLAGS =  -std=c++11 -Wall  -g  
 
-CXX_DEFINES = -DWIN32
+CXX_DEFINES = -DSTOR_CRYPTO -DWIN32
 
 CXX_INCLUDES = @CMakeFiles/stor_test.dir/includes_CXX.rsp
 

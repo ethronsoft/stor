@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/stor.dir/src/store/onclose.cpp.obj"
   "CMakeFiles/stor.dir/src/store/eq_instruction.cpp.obj"
   "CMakeFiles/stor.dir/src/store/or_instruction.cpp.obj"
+  "CMakeFiles/stor.dir/src/store/access_manager.cpp.obj"
   "CMakeFiles/stor.dir/src/store/collection_visitor.cpp.obj"
   "CMakeFiles/stor.dir/src/document/const_iterator.cpp.obj"
   "CMakeFiles/stor.dir/src/store/db_crypt.cpp.obj"
