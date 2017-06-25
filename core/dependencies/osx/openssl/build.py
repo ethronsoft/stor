@@ -6,7 +6,7 @@ import subprocess
 
 def build(root, install_path):
 	os.chdir(os.path.join(root,"source"))
-	subprocess.check_call("./Configure no-shared no-asm darwin64-x86_64-cc", shell=True)
+	subprocess.check_call("/bin/sh ./Configure no-shared no-asm darwin64-x86_64-cc", shell=True)
 	subprocess.check_call("make build_libs", shell=True)
 
 def finalize(root, install_path):
