@@ -24,6 +24,9 @@ Library Dependencies:
  - Rapidjson    (tested on version 1.0.2) -- https://github.com/miloyip/rapidjson
  - Leveldb      (tested on version 1.18)  -- https://github.com/google/leveldb
  - Boost(UUID)  (tested on version 1.55)  -- http://www.boost.org/
+ - [OpenSSL]    (optional, if compiling 
+                 with STOR_CRYPTO flag.
+                 tested on version 1.0.2) -- https://www.openssl.org/
 
 All dependencies licenses can be found on the links above or in the "license" folder
 in the respective folder under dependencies/. 
