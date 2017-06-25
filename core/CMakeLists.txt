@@ -7,7 +7,7 @@ set(VERSION 0.0.1)
 #### options ###
 #enable crypto (set ON either here or from command line with -DSTOR_CRYPTO=ON
 #Note: setting it from here will likely require to reset (or delete) CMakeCache.txt
-option(STOR_CRYPTO "Enable database encrpytion facilities" ON)
+option(STOR_CRYPTO "Enable database encrpytion facilities" OFF)
 
 ### targets setup ###
 

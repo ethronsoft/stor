@@ -43,8 +43,6 @@ namespace esft{
         private:
             std::shared_ptr<access_manager> _am;
 
-            size_t _thread_pool_size;
-
             std::string _crypted_file_name_ext;
 
             std::function<int(const std::string &,const std::string &)> _crypto_funct;

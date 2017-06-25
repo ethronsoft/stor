@@ -15,7 +15,8 @@ namespace esft{
     namespace stor{
 
         db_crypt::db_crypt(mode m, const std::shared_ptr<access_manager> &am):
-        _am{am},_thread_pool_size{10}
+        _am{am}
+	//,_thread_pool_size{10}
         {
             switch (m){
                 case mode::DECRYPT:{

@@ -4,6 +4,7 @@ import subprocess
 import os
 
 def build_dep(root_path, force=False):
+	print root_path
 	build_script = os.path.join(root_path,"build.py")
 	bin_dir = os.path.join(root_path,"bin")
 	
@@ -17,7 +18,7 @@ def build_dep(root_path, force=False):
 		else:
 			return
 	
-	subprocess.check_call("python {0} -i {1}".format(os.path.join(root_path,"build.py"), root_path))
+	subprocess.check_call("python {0} -i {1}".format(os.path.join(root_path,"build.py"), root_path), shell=True)
 	
 def cmake_entry(name, path):
 		return "set({0}_ROOT_DIR \"{1}\")\n".format(name,path.replace("\\","/"))
@@ -31,10 +32,6 @@ if __name__ == "__main__":
 	parser.add_argument("-wssl", "--with-ssl", action="store_true", required=False,
 						help="build openssl libraries")
 	args = vars(parser.parse_args())
-	#multiplatform dependencies
-	mp_deps = []
-	#platform-specific dependencies
-	pl_deps = ["leveldb"]
 	
 	dependencies = {
 		"multiplatform": ["catch", "rapidjson", "boost.uuid"],

@@ -26,6 +26,7 @@ if __name__=="__main__":
 	parser.add_argument("-i","--install-path", type=str, required=True, default=".")
 	args = vars(parser.parse_args())
 	install_path = os.path.abspath(args["install_path"])
+	print root, install_path
 	try:
 		build(root)
 		finalize(root,install_path)
