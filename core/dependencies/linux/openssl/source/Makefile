@@ -4,7 +4,7 @@
 ## Makefile for OpenSSL
 ##
 
-VERSION=1.0.2k
+VERSION=1.0.2l
 MAJOR=1
 MINOR=0.2
 SHLIB_VERSION_NUMBER=1.0.0
@@ -59,7 +59,7 @@ OPENSSLDIR=/usr/local/ssl
 # equal 4.
 # PKCS1_CHECK - pkcs1 tests.
 
-CC= gcc
+CC= /usr/bin/cc
 CFLAG= -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -m64 -DL_ENDIAN -O3 -Wall
 DEPFLAG= -DOPENSSL_NO_EC_NISTP_64_GCC_128 -DOPENSSL_NO_GMP -DOPENSSL_NO_JPAKE -DOPENSSL_NO_LIBUNBOUND -DOPENSSL_NO_MD2 -DOPENSSL_NO_RC5 -DOPENSSL_NO_RFC3779 -DOPENSSL_NO_SCTP -DOPENSSL_NO_SSL_TRACE -DOPENSSL_NO_SSL2 -DOPENSSL_NO_STORE -DOPENSSL_NO_UNIT_TEST -DOPENSSL_NO_WEAK_SSL_CIPHERS
 PEX_LIBS= 
@@ -73,7 +73,7 @@ NM= nm
 PERL= /usr/bin/perl
 TAR= tar
 TARFLAGS= --no-recursion
-MAKEDEPPROG= gcc
+MAKEDEPPROG=makedepend
 LIBDIR=lib
 
 # We let the C compiler driver to take care of .s files. This is done in
@@ -425,6 +425,14 @@ clean:	libclean
 	do \
 	rm -fr $$i/*; \
 	done
+
+distclean: clean
+	-$(RM) `find . -name .git -prune -o -type l -print`
+	$(RM) apps/CA.pl
+	$(RM) test/evptests.txt test/newkey.pem test/testkey.pem test/testreq.pem
+	$(RM) tools/c_rehash
+	$(RM) crypto/opensslconf.h
+	$(RM) Makefile Makefile.bak
 
 makefile.one: files
 	$(PERL) util/mk1mf.pl >makefile.one; \

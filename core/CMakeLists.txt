@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.5)
 project(stor)
 
 #project version
@@ -165,7 +165,8 @@ if(STOR_CRYPTO)
 			${openssl_ROOT_DIR}/bin)
 	SET(TEST_LINKS ${TEST_LINKS}
 			ssl
-			crypto)
+			crypto
+			dl)
 endif(STOR_CRYPTO)
 
 #targets

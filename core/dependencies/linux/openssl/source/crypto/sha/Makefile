@@ -135,7 +135,7 @@ dclean:
 	mv -f Makefile.new $(MAKEFILE)
 
 clean:
-	rm -f *.s *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+	rm -f *.s *.S *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
@@ -160,7 +160,6 @@ sha512.o: ../../e_os.h ../../include/openssl/bio.h
 sha512.o: ../../include/openssl/buffer.h ../../include/openssl/crypto.h
 sha512.o: ../../include/openssl/e_os2.h ../../include/openssl/err.h
 sha512.o: ../../include/openssl/lhash.h ../../include/openssl/opensslconf.h
-sha512.o: ../../include/openssl/lhash.h ../../include/openssl/opensslconf.hTOP
 sha512.o: ../../include/openssl/opensslv.h ../../include/openssl/ossl_typ.h
 sha512.o: ../../include/openssl/safestack.h ../../include/openssl/sha.h
 sha512.o: ../../include/openssl/stack.h ../../include/openssl/symhacks.h
