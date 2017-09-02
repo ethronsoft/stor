@@ -13,8 +13,10 @@ namespace esft{
     namespace stor{
 
         class node;
+        class iterator;
 
         class const_iterator {
+            friend class node;
         public:
 
             /**
@@ -38,9 +40,34 @@ namespace esft{
             const_iterator(rapidjson::Value::ConstMemberIterator it, rapidjson::Document *doc);
 
             /**
+             * @brief Conversion from iterator constructor
+             */
+            const_iterator(const iterator &o);
+
+            /**
+             * @brief Conversion from iterator assignment
+             */
+            const_iterator &operator=(const iterator &o);
+
+            /**
              * @brief Move constructor
              */
             const_iterator(const_iterator &&o);
+
+            /**
+             * @brief Copy constructor
+             */
+            const_iterator(const const_iterator &o);
+
+            /**
+             * @brief member-wise swap 
+             */
+            friend void swap(const_iterator &lh, const_iterator &rh);
+
+            /**
+             * @brief assignment operator
+             */
+            const_iterator &operator=(const_iterator o);
 
             /**
              * @brief Destructor

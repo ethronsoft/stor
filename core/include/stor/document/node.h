@@ -7,11 +7,13 @@
 
 #include <cstdint>
 #include <iostream>
+#include <vector>
 #include <rapidjson/document.h>
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/writer.h>
 #include <stor/document/iterator.h>
 #include <stor/document/const_iterator.h>
+#include <stor/exceptions/document_exception.h>
 
 namespace esft{
     namespace stor{
@@ -40,7 +42,11 @@ namespace esft{
             virtual ~node();
 
             /**
-             * @brief Copy constructor
+             * @brief Shallow Copy constructor.
+             *
+             * For deep copy, use json()\json(string)
+             * serialization/deserialziation mechanism
+             * or copy(node&)
              */
             node(const node &o);
 
@@ -50,7 +56,11 @@ namespace esft{
             node(node &&o);
 
             /**
-             * @brief Copy assignment
+             * @brief Shallow Copy assignment
+             *
+             * For deep copy, use json()\json(string)
+             * serialization/deserialziation mechanism
+             * or copy(node&)
              */
             node &operator=(const node &o);
 
@@ -173,7 +183,7 @@ namespace esft{
              */
             virtual double as_double() const;
 
-            /** @brief Attempts to return the underlying data as C String.
+            /** @brief Attempts to return the underlying data as a string.
              *
              * This function may only be called on a value node, which is
              * a node that is not an object node nor an array node.
@@ -181,10 +191,31 @@ namespace esft{
              * ie: node = "hello"       -> ok
              *     node = {"a":"hello"} -> not ok
              *
-             * @return data as C String
+             * @return data as C++ String
              * @throws document_exception if node is not of type value.
              */
             virtual std::string as_string() const;
+
+            /** @brief Attempts to return the underlying data as a C string
+             * paired with its actual length.
+             *
+             * The actual length refers to the entire string, which may be exceed the first
+             * \0 character encountered. Having this length returned is necessary,
+             * as JSON can contain \0 (escaped as \u0000, different from \\0 required by C),
+             * according to RFC 4627.
+             * If you know that the returned string will be a normal C string, then
+             * just invoke esft_stor_node_as_string
+             *
+             * This function may only be called on a value node, which is
+             * a node that is not an object node nor an array node.
+             * In JSON terms, it can only be used for leaf elements.
+             * ie: node = "hello"       -> ok
+             *     node = {"a":"hello"} -> not ok
+             *
+             * @return data as C String with its length
+             * @throws document_exception if node is not of type value.
+             */
+            virtual std::pair<const char *, std::size_t> as_cstring() const;
 
             /** @brief Attempts to return the underlying data as Boolean.
              *
@@ -375,8 +406,8 @@ namespace esft{
              */
             virtual node &add(const char * v);
 
-            /** @brief Add all items derefenenced from forward_iterator forw_it
-             *  to array node
+            /** @brief Add all items dereferenced from forward_iterator forw_it
+             *  to array node.
              *
              * @param begin iterator pointing to beginning of range
              * @param end   iterator pointing to one after end of range.
@@ -385,7 +416,17 @@ namespace esft{
              * @throws document_exception if node is not of type array
              */
             template<typename forw_it>
-            void add(forw_it begin, forw_it end);
+            node &add(forw_it begin, forw_it end);
+
+            /** @brief Add all items from the vector @p v to array node.
+             *
+             * @param v vector of items
+             *
+             * @return this node
+             * @throws document_exception if node is not of type array
+             */
+            template<typename item>
+            node &add(const std::vector<item> &v);
 
             /** @brief Add array to array node
              *
@@ -450,9 +491,54 @@ namespace esft{
             virtual bool empty() const;
 
             /**
+             * @brief Remove the child node at key @p key.
+             *
+             * @return If operation succeded, returns true, else false
+             *
+             * @throws @ref document_exception if called on a value node
+             */
+            virtual bool remove(const std::string &key);
+
+            /**
+             * @brief removes the member iterator @p it points to and returns the iterator
+             * to item coming after the one deleted. If @p it is equal to cend(),
+             * the behaviour is undefined.
+             *
+             * @return next iterator
+             */
+            const_iterator remove(const_iterator it);
+
+            /**
+             * @brief removes the members in the range [first, last) and returns
+             * the item coming after the one deleted.
+             *
+             * @return next iterator
+             */
+            const_iterator remove(const_iterator first, const_iterator last);
+
+            /**
+             * @brief Removes all the children of this node
+             *
+             * @throws @ref document_exception if called on a value node
+             */
+            virtual void remove_all() const;
+
+            /**
              * @brief Return string JSON represeantation of the this node and descendants.
              */
             virtual std::string json() const;
+
+            /**
+             * @brief replaces this node with the node resulting from parsing @p json
+             *
+             * @throws @ref document_exception if provided JSON is invalid
+             */
+            virtual void json(const std::string &jsn);
+
+            /**
+             * @brief deep copies the node @p v onto this node.
+             */
+            virtual void copy(const node &v);
 
             /**
              * @brief Write this node and descendants into std::ostream.
@@ -530,11 +616,20 @@ namespace esft{
         };
 
         template<typename forw_it>
-        inline void node::add(forw_it begin, forw_it end)
+        inline node &node::add(forw_it begin, forw_it end)
         {
+            if (_underlying->GetType() != rapidjson::kArrayType){
+                throw document_exception{"invalid request"};
+            }
             for (; begin != end; ++begin){
                 add(*begin);
             }
+            return *this;
+        }
+
+        template<typename item>
+        inline node & node::add(const std::vector<item> &v) {
+            return add<typename std::vector<item>::const_iterator>(v.cbegin(),v.cend());
         }
 
         inline std::ostream &operator<<(std::ostream&os, const node &n)

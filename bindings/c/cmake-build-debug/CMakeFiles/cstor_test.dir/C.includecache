@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/cstor/errors/errors.h
+
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/src/cstor/errors/errors.c
+cstor/errors/errors.h
+-
+

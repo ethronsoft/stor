@@ -19,7 +19,6 @@ def build_dep(root_path, force=False):
 				subprocess.check_call("python {0}".format(clean_script), shell=True)
 		else:
 			return
-	
 	subprocess.check_call("python {0} -i {1}".format(os.path.join(root_path,"build.py"), root_path), shell=True)
 	
 def cmake_entry(name, path):

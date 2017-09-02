@@ -3,10 +3,10 @@
 //
 
 #include <sstream>
-#include <stor/exceptions/document_exception.h>
 #include <stor/document/iterator.h>
 #include <stor/document/const_iterator.h>
 #include <stor/document/node.h>
+#include <stor/document/document.h>
 
 namespace esft{
     namespace stor{
@@ -131,6 +131,14 @@ namespace esft{
             return std::string(_underlying->GetString(),_underlying->GetStringLength());
         }
 
+        std::pair<const char *, std::size_t> node::as_cstring() const {
+            if ((_underlying->GetType() == rapidjson::kArrayType) |
+                (_underlying->GetType() == rapidjson::kObjectType)){
+                throw document_exception{"invalid request"};
+            }
+            return std::make_pair(_underlying->GetString(),_underlying->GetStringLength());
+        }
+
         bool node::as_bool() const{
             if ((_underlying->GetType() == rapidjson::kArrayType) |
                 (_underlying->GetType() == rapidjson::kObjectType)){
@@ -204,11 +212,12 @@ namespace esft{
         }
         void node::operator=(const std::string &v)
         {
-            if ((_underlying->GetType() == rapidjson::kArrayType) |
-                (_underlying->GetType() == rapidjson::kObjectType)){
-                throw document_exception{"invalid request"};
-            }
-            _underlying->SetString(v.c_str(),v.size(),_doc->GetAllocator());
+//            if ((_underlying->GetType() == rapidjson::kArrayType) |
+//                (_underlying->GetType() == rapidjson::kObjectType)){
+//                throw document_exception{"invalid request"};
+//            }
+//            _underlying->SetString(v.c_str(),v.size(),_doc->GetAllocator());
+            return (*this) = v.c_str();
         }
 
         void node::operator=(const char *v)
@@ -224,11 +233,15 @@ namespace esft{
             if (_underlying->GetType() != rapidjson::kObjectType ){
                 throw document_exception{"invalid request"};
             }
-            _underlying->AddMember(
-                    rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
-                    rapidjson::Value(v),
-                    _doc->GetAllocator()
-            );
+            if (has(key)){
+                (*this)[key] = v;
+            }else{
+                _underlying->AddMember(
+                        rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
+                        rapidjson::Value(v),
+                        _doc->GetAllocator()
+                );
+            }
             return *this;
         }
 
@@ -236,11 +249,15 @@ namespace esft{
             if (_underlying->GetType() != rapidjson::kObjectType ){
                 throw document_exception{"invalid request"};
             }
-            _underlying->AddMember(
-                    rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
-                    rapidjson::Value(v),
-                    _doc->GetAllocator()
-            );
+            if (has(key)){
+                (*this)[key] = v;
+            }else{
+                _underlying->AddMember(
+                        rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
+                        rapidjson::Value(v),
+                        _doc->GetAllocator()
+                );
+            }
             return *this;
         }
 
@@ -248,11 +265,15 @@ namespace esft{
             if (_underlying->GetType() != rapidjson::kObjectType ){
                 throw document_exception{"invalid request"};
             }
-            _underlying->AddMember(
-                    rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
-                    rapidjson::Value(v),
-                    _doc->GetAllocator()
-            );
+            if (has(key)){
+                (*this)[key] = v;
+            }else{
+                _underlying->AddMember(
+                        rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
+                        rapidjson::Value(v),
+                        _doc->GetAllocator()
+                );
+            }
             return *this;
         }
 
@@ -260,35 +281,35 @@ namespace esft{
             if (_underlying->GetType() != rapidjson::kObjectType ){
                 throw document_exception{"invalid request"};
             }
-            _underlying->AddMember(
-                    rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
-                    rapidjson::Value(v),
-                    _doc->GetAllocator()
-            );
+            if (has(key)){
+                (*this)[key] = v;
+            }else{
+                _underlying->AddMember(
+                        rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
+                        rapidjson::Value(v),
+                        _doc->GetAllocator()
+                );
+            }
             return *this;
         }
 
         node  &node::put(const std::string &key, const std::string &v){
-            if (_underlying->GetType() != rapidjson::kObjectType ){
-                throw document_exception{"invalid request"};
-            }
-            _underlying->AddMember(
-                    rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
-                    rapidjson::Value(v.c_str(),v.length(),_doc->GetAllocator()),
-                    _doc->GetAllocator()
-            );
-            return *this;
+            return put(key,v.c_str());
         }
 
         node &node::put(const std::string &key, const char *v){
             if (_underlying->GetType() != rapidjson::kObjectType ){
                 throw document_exception{"invalid request"};
             }
-            _underlying->AddMember(
-                    rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
-                    rapidjson::Value(v,_doc->GetAllocator()),
-                    _doc->GetAllocator()
-            );
+            if (has(key)){
+                (*this)[key] = v;
+            }else{
+                _underlying->AddMember(
+                        rapidjson::Value(key.c_str(),key.length(),_doc->GetAllocator()),
+                        rapidjson::Value(v,_doc->GetAllocator()),
+                        _doc->GetAllocator()
+                );
+            }
             return *this;
         }
 
@@ -425,9 +446,43 @@ namespace esft{
             }else{
                 throw document_exception{"invalid request"};
             }
+        }
 
+        bool node::remove(const std::string &key) {
+            if (_underlying->GetType() == rapidjson::kObjectType){
+                return _underlying->RemoveMember(key.c_str());
+            }else{
+                throw document_exception{"invalid request"};
+            }
+        }
 
+        const_iterator node::remove(const_iterator it) {
+            if (it._ith._tag == const_iterator::type::VALUE){
+                return const_iterator(_underlying->Erase(it._ith._it.vit),_doc);
+            }else{
+                return const_iterator(_underlying->EraseMember(it._ith._it.mit),_doc);
+            }
+        }
 
+        const_iterator node::remove(const_iterator first, const_iterator last) {
+            if (first._ith._tag != last._ith._tag){
+                throw document_exception{"iterators must both refer to the same type of node"};
+            }
+            if (first._ith._tag == const_iterator::type::VALUE){
+                return const_iterator(_underlying->Erase(first._ith._it.vit, last._ith._it.vit),_doc);
+            }else{
+                return const_iterator(_underlying->EraseMember(first._ith._it.mit, last._ith._it.mit),_doc);
+            }
+        }
+
+        void node::remove_all() const {
+            if (_underlying->GetType() == rapidjson::kObjectType){
+                _underlying->RemoveAllMembers();
+            }else if (_underlying->GetType() == rapidjson::kArrayType){
+                _underlying->Clear();
+            }else{
+                throw document_exception{"invalid request"};
+            }
         }
 
         bool node::empty() const{
@@ -440,6 +495,14 @@ namespace esft{
             rapidjson::Writer<rapidjson::StringBuffer> w{sb};
             _underlying->Accept(w);
             return sb.GetString();
+        }
+
+        void node::json(const std::string &jsn) {
+            copy(document(jsn,document::identifier{0}));
+        }
+
+        void node::copy(const node &v) {
+            _underlying->CopyFrom(*v._underlying,_doc->GetAllocator());
         }
 
         std::ostream &node::write_to_stream(std::ostream&os) const{

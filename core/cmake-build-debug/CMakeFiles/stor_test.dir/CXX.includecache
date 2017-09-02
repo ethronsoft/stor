@@ -5971,6 +5971,8 @@ cstdint
 -
 iostream
 -
+vector
+-
 rapidjson/document.h
 -
 rapidjson/ostreamwrapper.h
@@ -5980,6 +5982,8 @@ rapidjson/writer.h
 stor/document/iterator.h
 -
 stor/document/const_iterator.h
+-
+stor/exceptions/document_exception.h
 -
 
 ../include/stor/exceptions/access_exception.h
@@ -6209,6 +6213,8 @@ stor/exceptions/document_exception.h
 -
 stor/document/const_iterator.h
 -
+stor/document/iterator.h
+-
 
 C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/document.cpp
 chrono
@@ -6239,13 +6245,13 @@ stor/exceptions/document_exception.h
 C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/document/node.cpp
 sstream
 -
-stor/exceptions/document_exception.h
--
 stor/document/iterator.h
 -
 stor/document/const_iterator.h
 -
 stor/document/node.h
+-
+stor/document/document.h
 -
 
 C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/access_manager.cpp

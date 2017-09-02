@@ -1,75 +1,104 @@
 #include <stor/document/iterator.h>
 #include <stor/exceptions/document_exception.h>
 
-namespace esft{
+namespace esft {
 
-namespace stor{
+    namespace stor {
 
-    iterator::iterator(rapidjson::Value::ValueIterator it, rapidjson::Document *doc):
-        _ith{iterator::type::VALUE,{nullptr}}, _doc{doc}
-    {
-        _ith._it.vit = it;
-    }
+        iterator::iterator(rapidjson::Value::ValueIterator it, rapidjson::Document *doc) :
+                _ith{iterator::type::VALUE, {nullptr}}, _doc{doc} {
+            _ith._it.vit = it;
+        }
 
-    iterator::iterator(rapidjson::Value::MemberIterator it, rapidjson::Document *doc):
-        _ith{iterator::type::MEMBER,{nullptr}}, _doc{doc}
-    {
-        _ith._it.mit = it;
-    }
+        iterator::iterator(rapidjson::Value::MemberIterator it, rapidjson::Document *doc) :
+                _ith{iterator::type::MEMBER, {nullptr}}, _doc{doc} {
+            _ith._it.mit = it;
+        }
 
-    iterator::iterator(iterator &&o):_ith{o._ith._tag,{nullptr}} , _doc{o._doc}
-    {
-        switch(o._ith._tag){
-        case iterator::type::MEMBER:
-            {
-                _ith._it.mit = o._ith._it.mit;
+        iterator::iterator(iterator &&o) :
+                _ith{o._ith._tag, {nullptr}}, _doc{o._doc} {
+            switch (o._ith._tag) {
+                case iterator::type::MEMBER: {
+                    _ith._it.mit = o._ith._it.mit;
+                    o._ith._it.mit = {};
+                }
+                case iterator::type::VALUE: {
+                    _ith._it.vit = o._ith._it.vit;
+                    o._ith._it.vit = {};
+                }
             }
-        case iterator::type::VALUE:
-            {
-                _ith._it.vit = o._ith._it.vit;
+            o._doc = nullptr;
+        }
+        
+        iterator::iterator(const iterator &o) :
+                _ith{o._ith._tag, {nullptr}}, _doc{o._doc} {
+            switch (o._ith._tag) {
+                case iterator::type::MEMBER: {
+                    _ith._it.mit = o._ith._it.mit;
+                }
+                case iterator::type::VALUE: {
+                    _ith._it.vit = o._ith._it.vit;
+                }
             }
         }
-        o._doc = nullptr;
-    }
-
-    iterator iterator::operator++(){
-
-        switch(_ith._tag){
-            case iterator::type::MEMBER:
-                return iterator(++_ith._it.mit, _doc);
-            case iterator::type::VALUE:
-                return iterator(++_ith._it.vit, _doc);
-           default:
-                 throw std::exception{};
-        }
-    }
-
-    node iterator::operator*(){
-        switch(_ith._tag){
-            case iterator::type::VALUE:
-            {
-                rapidjson::Value *v = (_ith._it.vit);
-                return node(v,_doc);
+        
+        void swap(iterator &lh, iterator &rh) {
+            if (lh._ith._tag != rh._ith._tag){
+                throw document_exception{"cannot swap two iterators of different underlying node type"};
             }
-            case iterator::type::MEMBER:
-            {
-                rapidjson::Value *v = &_ith._it.mit->value;
-                return node(v,_doc);
+            switch (lh._ith._tag) {
+                case iterator::type::MEMBER: {
+                    auto &&tmp = std::move(rh._ith._it.mit);
+                    rh._ith._it.mit = std::move(lh._ith._it.mit);
+                    lh._ith._it.mit = std::move(tmp);
+                }
+                case iterator::type::VALUE: {
+                    auto &&tmp = std::move(rh._ith._it.vit);
+                    rh._ith._it.vit = std::move(lh._ith._it.vit);
+                    lh._ith._it.vit = std::move(tmp);
+                }
             }
-            default:
-                throw std::exception{};
+            std::swap(lh._doc,rh._doc);
         }
-    }
 
-        std::string iterator::key() const
-        {
-            switch (_ith._tag){
+        iterator &iterator::operator=(iterator o) {
+            swap(*this,o);
+            return *this;
+        }
+
+        iterator iterator::operator++() {
+
+            switch (_ith._tag) {
+                case iterator::type::MEMBER:
+                    return iterator(++_ith._it.mit, _doc);
                 case iterator::type::VALUE:
-                {
+                    return iterator(++_ith._it.vit, _doc);
+                default:
+                    throw std::exception{};
+            }
+        }
+
+        node iterator::operator*() {
+            switch (_ith._tag) {
+                case iterator::type::VALUE: {
+                    rapidjson::Value *v = (_ith._it.vit);
+                    return node(v, _doc);
+                }
+                case iterator::type::MEMBER: {
+                    rapidjson::Value *v = &_ith._it.mit->value;
+                    return node(v, _doc);
+                }
+                default:
+                    throw std::exception{};
+            }
+        }
+
+        std::string iterator::key() const {
+            switch (_ith._tag) {
+                case iterator::type::VALUE: {
                     throw document_exception{"value not does not have a key"};
                 }
-                case iterator::type::MEMBER:
-                {
+                case iterator::type::MEMBER: {
                     return _ith._it.mit->name.GetString();
                 }
                 default:
@@ -77,30 +106,26 @@ namespace stor{
             }
         }
 
-    bool iterator::operator==(const iterator &rh) const
-    {
-        switch(_ith._tag){
-            case iterator::type::MEMBER:
-            {
-                if (rh._ith._tag != iterator::type::MEMBER) throw document_exception{"mismatching iterators."};
-                return _ith._it.mit == rh._ith._it.mit;
+        bool iterator::operator==(const iterator &rh) const {
+            switch (_ith._tag) {
+                case iterator::type::MEMBER: {
+                    if (rh._ith._tag != iterator::type::MEMBER) throw document_exception{"mismatching iterators."};
+                    return _ith._it.mit == rh._ith._it.mit;
+                }
+                case iterator::type::VALUE: {
+                    if (rh._ith._tag != iterator::type::VALUE) throw document_exception{"mismatching iterators."};
+                    return _ith._it.vit == rh._ith._it.vit;
+                }
+                default:
+                    throw std::exception{};
             }
-            case iterator::type::VALUE:
-            {
-                if (rh._ith._tag != iterator::type::VALUE) throw document_exception{"mismatching iterators."};
-                return _ith._it.vit == rh._ith._it.vit;
-            }
-            default:
-                throw std::exception{};
         }
+
+        bool iterator::operator!=(const iterator &rh) const {
+            return !(*this == rh);
+        }
+
+
     }
-
-    bool iterator::operator!=(const iterator &rh) const{
-        return !(*this == rh);
-    }
-
-
-
-}
 
 }

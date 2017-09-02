@@ -284,18 +284,6 @@ namespace esft {
             std::string _name;
 
             /**
-             * version of collection.
-             * Increased once for every 'persist' operation to store
-             */
-            int _version;
-
-            /**
-             * flag to check if version has already been increased.
-             * prevent more increases to version while true
-             */
-            bool _version_increased;
-
-            /**
              * pointer to parent store.
              */
             store *_store;

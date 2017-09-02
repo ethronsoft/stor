@@ -42,6 +42,8 @@ TEST_CASE("document parsing json","[json_parse]"){
         CHECK(d.has("e"));
         CHECK(d["e"].is_string());
         CHECK(std::string(d["e"].as_string()) == "hello");
+        auto p = d["e"].as_cstring();
+        CHECK(strcmp("hello", p.first) == 0);
     }
     
     SECTION("array parsing"){
@@ -169,6 +171,122 @@ TEST_CASE("document creation","[creation]"){
         }
     }
 
+    SECTION("deep copy object"){
+        document d = document{R"( {"a":1, "b":2} )"};
+        document d2 = document{R"( {"c": 2, "c":3} )"};
+
+        REQUIRE(d.json() != d2.json());
+        d.copy(d2);
+        REQUIRE(d.json() == d2.json());
+        //deep copy
+        d.put("z",5);
+        CHECK(d.has("z"));
+        CHECK_FALSE(d2.has("z"));
+
+    }
+
+    SECTION("deep copy array"){
+        document d = document{R"( [1,2,3] )"};
+        document d2 = document{R"( [4,5,6] )"};
+
+        auto d_sz = d.size();
+        auto d2_sz = d2.size();
+        REQUIRE(d.json() != d2.json());
+        d.copy(d2);
+        REQUIRE(d.json() == d2.json());
+        //deep copy
+        d.add(10);
+        CHECK(d.size() == d_sz+1);
+        CHECK(d2.size()== d2_sz);
+    }
+
+    SECTION("deep copy change type"){
+        document d = document::as_object();
+        document d2 = document::as_array();
+
+        d.json("[]");
+        CHECK(d.is_array());
+        d2.json("{}");
+        CHECK(d2.is_object());
+        d.json("5");
+        CHECK(d.is_num());
+    }
+
+}
+
+TEST_CASE("document modification", "[modification]"){
+
+
+    SECTION("modifying by replacement"){
+        std::string s = R"( {"a":1,"b":[true, { "z":2 }, 3]} )";
+        document d{s};
+
+        REQUIRE(d["a"].as_int() == 1);
+        d["a"] = 2;
+        CHECK(d["a"].as_int() == 2);
+
+        REQUIRE(d["b"][0].as_bool() == true);
+        d["b"][0] = false;
+        CHECK(d["b"][0].as_bool() == false);
+
+        REQUIRE(d["b"][1]["z"].as_int() == 2);
+        d["b"][1].put("z",5);
+        int a = d["b"][1]["z"].as_int();
+        REQUIRE(d["b"][1]["z"].as_int() == 5);
+    }
+
+    SECTION("modifying by removal"){
+        document d1 = document::as_object();
+        REQUIRE(d1.empty());
+        d1.put("a", 1).put("b", 2)
+                .with_array("c").add(std::vector<int>{1, 2, 3});
+        REQUIRE(d1.size() == 3);
+        d1.remove("a");
+        CHECK_FALSE(d1.has("a"));
+        CHECK(d1.size() == 2);
+        d1.remove_all();
+        CHECK(d1.empty());
+
+        document d2 = document::as_array();
+        REQUIRE(d2.empty());
+        d2.add(std::vector<int>{1, 2, 3});
+        REQUIRE(d2.size() == 3);
+        d2.remove_all();
+        CHECK(d2.empty());
+        
+        //iterator removal
+        //object
+        d1.put("a", 1).put("b", 2);
+        
+        auto it = d1.cbegin();
+        for (std::size_t len = d1.size(); it != d1.cend(); --len){
+            it = d1.remove(it);
+            CHECK(d1.size() == len-1);
+        }
+        CHECK(it == d1.cend());
+
+        d1.put("a", 1).put("b", 2);
+        auto last = d1.remove(d1.cbegin(),d1.cend());
+        CHECK(last == d1.cend());
+        CHECK(d1.empty());
+        //array
+        d2.add(std::vector<int>{1, 2, 3});
+        auto it2 = d2.cbegin();
+        for (std::size_t len = d2.size(); it2 != d2.cend(); --len){
+            it2 = d2.remove(it2);
+            CHECK(d2.size() == len-1);
+        }
+        CHECK(it2 == d2.cbegin());
+
+        d2.add(std::vector<int>{1, 2, 3});
+        auto last2 = d2.remove(d2.begin(),d2.end());
+        CHECK(last2 == d2.cend());
+        CHECK(d2.empty());
+        
+        //value
+        d1.put("a", 1);
+        CHECK_THROWS_AS(d1["a"].remove(d1["a"].cbegin()),document_exception);
+    }
 }
 
 TEST_CASE("document streams","[streams]"){

@@ -209,7 +209,6 @@ namespace esft{
             if (json.empty()){
                 document new_info = document::as_object();
                 new_info.put("name",collection_name)
-                              .put("version",0)
                               .with_array("indices");
                 collection c(this,new_info,_onclose);
                 put(c);
@@ -227,7 +226,7 @@ namespace esft{
             leveldb::WriteOptions wo;
             wo.sync = !_async;
             document info = document::as_object();
-            info.put("name",c.name()).put("version",c._version);
+            info.put("name",c.name());
             node indices = info.with_array("indices");
             for (const auto &indx: c._indices){
                 indices.add(indx.str());
@@ -244,19 +243,6 @@ namespace esft{
             return del.ok();
         }
 
-        int store::version(const std::string &collection_name) const
-        {
-         //   std::unique_lock{_mutex};
-            std::string json;
-
-            leveldb::ReadOptions ro;
-            _db->Get(ro,collection_name,&json);
-            if (!json.empty()){
-                return document(json)["version"].as_int();
-            } else{
-                return std::numeric_limits<int>::min();
-            }
-        }
 
         const std::string &store::home() const{
             return _path;

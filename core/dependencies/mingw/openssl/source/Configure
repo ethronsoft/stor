@@ -1688,6 +1688,7 @@ while (<IN>)
 	{
 	chomp;
 	$sdirs = 1 if /^SDIRS=/;
+	$/= "\r\n";
 	if ($sdirs) {
 		my $dir;
 		foreach $dir (@skip) {

@@ -30,8 +30,6 @@ TEST_CASE("stor_test catalog test","[catalog_test]"){
 
     CHECK(db.has(c.name()));
 
-    CHECK(db.version("test_collection") == 0);
-
     db.remove(c.name());
 
     CHECK(!db.has(c.name()));
@@ -42,31 +40,6 @@ TEST_CASE("stor_test catalog test","[catalog_test]"){
 
 }
 
-TEST_CASE("collection version change test","[collection_versioning_test]"){
-    std::string path = stor_test::home();
-
-    stor::store db{path,"test",true};
-
-    SECTION("test manual persistance"){
-        stor::collection c = db["test_version_collection_manual"];
-        CHECK(db.version("test_version_collection_manual") == 0);
-        c.add_index(stor::index_path("test_index"));
-        c.persist();
-        CHECK(db.version("test_version_collection_manual") == 1);
-    }
-
-    SECTION("test multiple increments"){
-        stor::collection c = db["test_multi_version_collection"];
-        //multiple changes should only increase version by 1, for each persistance cycle
-        CHECK(db.version("test_multi_version_collection") == 0);
-        c.add_index(stor::index_path("test_indx1"));
-        c.add_index(stor::index_path("test_indx2"));
-        c.clear_indices();
-        c.persist();
-        CHECK(db.version("test_multi_version_collection") == 1);
-    }
-
-}
 
 TEST_CASE("directory visitor test","[directory_visitor_test]"){
     leveldb::Options opt;

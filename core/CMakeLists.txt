@@ -72,24 +72,24 @@ if(WIN32)
 	if(STOR_CRYPTO)
 		execute_process(
 				COMMAND
-				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p mingw --with-ssl
+				python ${stor_SOURCE_DIR}/dependencies/build.py -p mingw --with-ssl
 		)
 	else()
 		execute_process(
 				COMMAND
-				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p mingw
+				python ${stor_SOURCE_DIR}/dependencies/build.py -p mingw
 		)
 	endif(STOR_CRYPTO)
 
-	if (NOT EXISTS ${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
+	if (NOT EXISTS ${stor_SOURCE_DIR}/dependencies/dependencies.cmake)
 		message(FATAL_ERROR "dependencies.cmake generation failed")
 	endif()
-	include(${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
+	include(${stor_SOURCE_DIR}/dependencies/dependencies.cmake)
 
 	SET(TEST_LINKS
 			leveldb
 			shlwapi
-			pthread)
+			pthread )
 
 elseif(APPLE)
 	add_definitions(-DUNIX -DOSX)
@@ -98,18 +98,18 @@ elseif(APPLE)
 	if(STOR_CRYPTO)
 		execute_process(
 				COMMAND
-				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p osx --with-ssl
+				python ${stor_SOURCE_DIR}/dependencies/build.py -p osx --with-ssl
 		)
 	else()
 		execute_process(
 				COMMAND
-				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p osx
+				python ${stor_SOURCE_DIR}/dependencies/build.py -p osx
 		)
 	endif(STOR_CRYPTO)
-	if (NOT EXISTS ${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
+	if (NOT EXISTS ${stor_SOURCE_DIR}/dependencies/dependencies.cmake)
 		message(FATAL_ERROR "dependencies.cmake generation failed")
 	endif()
-	include(${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
+	include(${stor_SOURCE_DIR}/dependencies/dependencies.cmake)
 
 	SET(TEST_LINKS
 			leveldb
@@ -122,22 +122,24 @@ elseif (UNIX)
 	if(STOR_CRYPTO)
 		execute_process(
 				COMMAND
-				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p linux --with-ssl
+				python ${stor_SOURCE_DIR}/dependencies/build.py -p linux --with-ssl
 		)
 	else()
 		execute_process(
 				COMMAND
-				python ${CMAKE_SOURCE_DIR}/dependencies/build.py -p linux
+				python ${stor_SOURCE_DIR}/dependencies/build.py -p linux
 		)
 	endif(STOR_CRYPTO)
-	if (NOT EXISTS ${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
+	if (NOT EXISTS ${stor_SOURCE_DIR}/dependencies/dependencies.cmake)
 		message(FATAL_ERROR "dependencies.cmake generation failed")
 	endif()
-	include(${CMAKE_SOURCE_DIR}/dependencies/dependencies.cmake)
+	include(${stor_SOURCE_DIR}/dependencies/dependencies.cmake)
 
 	SET(TEST_LINKS
 			leveldb
-			pthread)
+			pthread
+			dl
+			)
 
 endif()
 
@@ -156,7 +158,6 @@ SET(STOR_LINK_DIRS
 		)
 
 #options handling
-
 if(STOR_CRYPTO)
 	add_definitions(-DSTOR_CRYPTO)
 	SET(STOR_INCLUDE_DIRS ${STOR_INCLUDE_DIRS}
@@ -165,8 +166,7 @@ if(STOR_CRYPTO)
 			${openssl_ROOT_DIR}/bin)
 	SET(TEST_LINKS ${TEST_LINKS}
 			ssl
-			crypto
-			dl)
+			crypto)
 endif(STOR_CRYPTO)
 
 #targets

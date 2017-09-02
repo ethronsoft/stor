@@ -6,7 +6,7 @@ import shutil
 
 def build(root):
 	os.chdir(os.path.join(root,"source"))
-	subprocess.check_call("perl Configure mingw64 no-shared no-asm")
+	subprocess.check_call("perl Configure mingw64 no-shared no-asm", shell=True)
 	subprocess.check_call("mingw32-make.exe build_libs", shell=True)
 
 def clean(root):

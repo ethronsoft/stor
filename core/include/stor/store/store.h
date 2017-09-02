@@ -110,15 +110,6 @@ namespace esft{
             bool remove(const std::string &collection_name);
 
             /**
-             * @brief Return version number of collection with the given name or
-             * the minimum integer available if not.
-             *
-             * @returns version number of collection with the given name or
-             * the minimum integer available if not.
-             */
-            int version(const std::string &collection_name) const;
-
-            /**
              * @brief Return root of store
              *
              * @returns root of store

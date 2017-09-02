@@ -1,0 +1,2 @@
+C:\TDM-GCC-64\bin\ar.exe qc libcstor.a  CMakeFiles/cstor.dir/src/cstor/document/cdocument.cpp.obj CMakeFiles/cstor.dir/src/cstor/errors/errors.c.obj CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj
+C:\TDM-GCC-64\bin\ranlib.exe libcstor.a

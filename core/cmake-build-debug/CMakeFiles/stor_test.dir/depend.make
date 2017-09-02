@@ -667,6 +667,7 @@ CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../dependencies/multiplatfor
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../dependencies/multiplatform/rapidjson/include/rapidjson/stringbuffer.h
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../dependencies/multiplatform/rapidjson/include/rapidjson/writer.h
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../include/stor/document/const_iterator.h
+CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../include/stor/document/node.h
 CMakeFiles/stor_test.dir/src/document/node.cpp.obj: ../include/stor/exceptions/document_exception.h
@@ -711,6 +712,7 @@ CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/docu
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/store/and_instruction.h
 CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj: ../include/stor/store/collection.h
@@ -764,6 +766,7 @@ CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/document/
 CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/exceptions/store_exception.h
 CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/collection.cpp.obj: ../include/stor/store/collection.h
@@ -831,6 +834,7 @@ CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/docum
 CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -881,6 +885,7 @@ CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/docum
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -931,6 +936,7 @@ CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/docu
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -975,6 +981,7 @@ CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../include/stor/document/
 CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../include/stor/exceptions/store_exception.h
 CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../include/stor/store/index_path.h
 CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj: ../src/store/index_path.cpp
@@ -1014,6 +1021,7 @@ CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/docum
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -1064,6 +1072,7 @@ CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/docu
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -1114,6 +1123,7 @@ CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/docu
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -1173,6 +1183,7 @@ CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/docum
 CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -1224,6 +1235,7 @@ CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/document/const
 CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/exceptions/store_exception.h
 CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/query.cpp.obj: ../include/stor/store/and_instruction.h
@@ -1278,6 +1290,7 @@ CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/document/const
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/exceptions/store_exception.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/src/store/store.cpp.obj: ../include/stor/store/collection.h
@@ -1331,6 +1344,7 @@ CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../include/stor/documen
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj: ../test/src/document_test.cpp
 
 CMakeFiles/stor_test.dir/test/src/main.cpp.obj: ../dependencies/multiplatform/catch/include/catch/catch.hpp
@@ -1371,6 +1385,7 @@ CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/document/document.h
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/document/node.h
+CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/store/collection.h
 CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj: ../include/stor/store/eq_instruction.h
@@ -1424,6 +1439,7 @@ CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/document/d
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/document/iterator.h
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/document/node.h
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/exceptions/access_exception.h
+CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/exceptions/document_exception.h
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/exceptions/store_exception.h
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/store/access_manager.h
 CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj: ../include/stor/store/collection.h

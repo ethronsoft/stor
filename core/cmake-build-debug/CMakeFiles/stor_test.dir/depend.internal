@@ -668,6 +668,7 @@ CMakeFiles/stor_test.dir/src/document/node.cpp.obj
  ../dependencies/multiplatform/rapidjson/include/rapidjson/stringbuffer.h
  ../dependencies/multiplatform/rapidjson/include/rapidjson/writer.h
  ../include/stor/document/const_iterator.h
+ ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
  ../include/stor/exceptions/document_exception.h
@@ -712,6 +713,7 @@ CMakeFiles/stor_test.dir/src/store/and_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/and_instruction.h
  ../include/stor/store/collection.h
@@ -765,6 +767,7 @@ CMakeFiles/stor_test.dir/src/store/collection.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/exceptions/store_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
@@ -832,6 +835,7 @@ CMakeFiles/stor_test.dir/src/store/eq_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -882,6 +886,7 @@ CMakeFiles/stor_test.dir/src/store/gt_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -932,6 +937,7 @@ CMakeFiles/stor_test.dir/src/store/gte_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -976,6 +982,7 @@ CMakeFiles/stor_test.dir/src/store/index_path.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/exceptions/store_exception.h
  ../include/stor/store/index_path.h
  C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/src/store/index_path.cpp
@@ -1015,6 +1022,7 @@ CMakeFiles/stor_test.dir/src/store/lt_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -1065,6 +1073,7 @@ CMakeFiles/stor_test.dir/src/store/lte_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -1115,6 +1124,7 @@ CMakeFiles/stor_test.dir/src/store/neq_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -1174,6 +1184,7 @@ CMakeFiles/stor_test.dir/src/store/or_instruction.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -1225,6 +1236,7 @@ CMakeFiles/stor_test.dir/src/store/query.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/exceptions/store_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/and_instruction.h
@@ -1279,6 +1291,7 @@ CMakeFiles/stor_test.dir/src/store/store.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/exceptions/store_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
@@ -1332,6 +1345,7 @@ CMakeFiles/stor_test.dir/test/src/document_test.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/test/src/document_test.cpp
 CMakeFiles/stor_test.dir/test/src/main.cpp.obj
  ../dependencies/multiplatform/catch/include/catch/catch.hpp
@@ -1372,6 +1386,7 @@ CMakeFiles/stor_test.dir/test/src/stor_test/query_test.cpp.obj
  ../include/stor/document/document.h
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h
  ../include/stor/store/eq_instruction.h
@@ -1425,6 +1440,7 @@ CMakeFiles/stor_test.dir/test/src/store_test.cpp.obj
  ../include/stor/document/iterator.h
  ../include/stor/document/node.h
  ../include/stor/exceptions/access_exception.h
+ ../include/stor/exceptions/document_exception.h
  ../include/stor/exceptions/store_exception.h
  ../include/stor/store/access_manager.h
  ../include/stor/store/collection.h

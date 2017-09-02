@@ -1,0 +1,8 @@
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/CMakeFiles/cstor.dir
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/CMakeFiles/cstor_test.dir
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/deps/CMakeFiles/stor.dir
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/deps/CMakeFiles/stor_test.dir
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/deps/CMakeFiles/edit_cache.dir
+C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/deps/CMakeFiles/rebuild_cache.dir
