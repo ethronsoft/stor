@@ -14,10 +14,16 @@ def cleanup(root):
 	
 def finalize(root,install_path):
 	bin_dir = os.path.join(install_path,"bin")
+	inc_dir = os.path.join(install_path, "include")
 	if os.path.exists(bin_dir):
 		shutil.rmtree(bin_dir, ignore_errors=True)
+	if os.path.exists(inc_dir):
+		shutil.rmtree(inc_dir, ignore_errors=True)
 	os.makedirs(bin_dir)
 	shutil.copy(os.path.join(root,"source","libleveldb.a"),bin_dir)
+	shutil.copytree(os.path.join(root,"source","include"),inc_dir)
+	open(os.path.join(install_path,".built"),"w")
+
 
 if __name__=="__main__":
 	parser = argparse.ArgumentParser()

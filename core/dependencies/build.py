@@ -6,15 +6,17 @@ import os
 def build_dep(root_path, force=False):
 	print root_path
 	build_script = os.path.join(root_path,"build.py")
-	bin_dir = os.path.join(root_path,"bin")
+	clean_script = os.path.join(root_path, "clean.py")
+	is_built = os.path.join(root_path,".built")
 	
 	#proceed if a build.py file is found
 	if not os.path.exists(build_script): return
 	
 	#do not re-build if already there or if not forced
-	if os.path.exists(bin_dir):
+	if os.path.exists(is_built):
 		if force:
-			shutil.rmtree(bin_dir,ignore_errors=True)
+			if os.path.exists(clean_script):
+				subprocess.check_call("python {0}".format(clean_script), shell=True)
 		else:
 			return
 	
