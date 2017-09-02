@@ -1,4 +1,5 @@
 **/.idea
 **/dependencies/**/bin
 **/dependencies/dependencies.cmake
-core/cmake-build
+**/dependencies/*/openssl/include
+**/cmake-build
