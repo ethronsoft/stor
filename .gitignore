@@ -2,7 +2,7 @@
 **/dependencies/**/bin
 **/dependencies/dependencies.cmake
 **/dependencies/*/openssl/include
-**/cmake-build
+**/cmake-build*
 **/build
 **/dist
 **/*egg*
