@@ -3,3 +3,6 @@
 **/dependencies/dependencies.cmake
 **/dependencies/*/openssl/include
 **/cmake-build
+**/build
+**/dist
+**/*egg*
