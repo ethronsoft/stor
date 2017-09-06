@@ -19,19 +19,23 @@ include(${stor_SOURCE_DIR}/dependencies/dependencies.cmake )
 
 #sources
 set(SOURCE_FILES
-        include/cstor/internal/opaque_types.h
+        include/internal/opaque_types.h
         include/cstor/document/cdocument.h
         include/cstor/document/cnode.h
         src/cstor/document/cdocument.cpp
+        include/cstor/errors/errors.h
         src/cstor/errors/errors.c
         src/cstor/document/cnode.cpp
-        include/cstor/store/cstore.h include/cstor/store/ccollection.h)
+        include/cstor/store/cstore.h
+        include/cstor/store/ccollection.h
+        src/cstor/store/cstore.cpp
+        src/cstor/store/ccollection.cpp)
 
 #directories
 SET(CSTOR_INCLUDE_DIRS
         include
         test/include
-        ../../core/include
+        ${stor_SOURCE_DIR}//include
         ${catch_ROOT_DIR}/include
         ${leveldb_ROOT_DIR}/include
         ${rapidjson_ROOT_DIR}/include
@@ -49,13 +53,14 @@ SET(CSTOR_TEST_LIBRARIES
 
 #platform specific configurations
 if(WIN32)
+    add_definitions(-DWIN32 -DTEMP_DIR="C:/Temp/")
     SET(CSTOR_TEST_LIBRARIES ${CSTOR_TEST_LIBRARIES}
             shlwapi)
 elseif(APPLE)
-    add_definitions(-DUNIX -DOSX)
+    add_definitions(-DUNIX -DOSX -DTEMP_DIR="/tmp/")
 
 elseif(UNIX)
-    add_definitions(-DUNIX)
+    add_definitions(-DUNIX -DTEMP_DIR="/tmp/")
     SET(CSTOR_TEST_LIBRARIES ${CSTOR_TEST_LIBRARIES}
             dl)
 endif()
@@ -76,12 +81,14 @@ endif(STOR_CRYPTO)
 include_directories(${CSTOR_INCLUDE_DIRS})
 link_directories(${CSTOR_LINK_DIRS})
 
-
-add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES} include/cstor/errors/errors.h)
+#shared lib
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} ${CSTOR_TEST_LIBRARIES})
 
 #test
 add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
         test/main.cpp
-        test/document_test.cpp)
+        test/document_test.cpp
+        test/store_test.cpp)
 
 target_link_libraries(${PROJECT_NAME}_test ${CSTOR_TEST_LIBRARIES})

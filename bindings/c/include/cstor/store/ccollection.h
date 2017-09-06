@@ -17,28 +17,38 @@ typedef struct esft_stor_collection_t  esft_stor_collection_t;
 
 typedef struct esft_stor_document_t  esft_stor_document_t;
 
-typedef struct esft_stor_collection_name_t{
-    const char *value;
-} esft_stor_collection_name_t;
-
-typedef struct esft_stor_collection_query_result{
+typedef struct esft_stor_collection_query_result_t{
     size_t len;
-    esft_stor_document_t *values;
-};
+    esft_stor_document_t * *values;
+} esft_stor_collection_query_result_t;
 
 
-esft_stor_collection_name_t esft_stor_collection_name(esft_stor_collection_t *c,
-                                                      esft_stor_error_t *err);
+const char * esft_stor_collection_name(esft_stor_collection_t *c);
 
-void esft_stor_collection_name_dispose(esft_stor_collection_name_t *);
+bool esft_stor_collection_index_add(esft_stor_collection_t *c,
+                                    const char * index_path);
 
-esft_stor_document_t *esft_stor_collection_document(const char * doc_id,
-                                                    esft_stor_error_t *err);
+bool esft_stor_collection_index_remove_all(esft_stor_collection_t *c);
 
-void esft_stor_collection_document_remove(const char * doc_id);
+void esft_stor_collection_document_put(esft_stor_collection_t *c,
+                                       esft_stor_document_t *doc,
+                                       esft_stor_error_t *err);
 
-esft_stor_collection_query_result esft_stor_collection_query(const char *query,
+bool esft_stor_collection_document_exists(esft_stor_collection_t *c,
+                                          const char *doc_id);
+
+esft_stor_document_t *esft_stor_collection_document_get(esft_stor_collection_t *c,
+                                                        const char *doc_id,
+                                                        esft_stor_error_t *err);
+
+bool esft_stor_collection_document_remove(esft_stor_collection_t *c,
+                                          const char * doc_id);
+
+esft_stor_collection_query_result_t esft_stor_collection_query(esft_stor_collection_t *c,
+                                                             const char *query,
                                                              esft_stor_error_t *err);
+
+void esft_stor_collection_query_result_dispose(esft_stor_collection_query_result_t *res);
 
 void esft_stor_collection_delete(esft_stor_collection_t *c);
 

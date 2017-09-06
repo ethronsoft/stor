@@ -131,32 +131,90 @@ CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj.provides: CMakeFiles/cstor
 CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj.provides.build: CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj
 
 
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj: CMakeFiles/cstor.dir/flags.make
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj: CMakeFiles/cstor.dir/includes_CXX.rsp
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj: ../src/cstor/store/cstore.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\cstor.dir\src\cstor\store\cstore.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\src\cstor\store\cstore.cpp
+
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.i"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\src\cstor\store\cstore.cpp > CMakeFiles\cstor.dir\src\cstor\store\cstore.cpp.i
+
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.s"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\src\cstor\store\cstore.cpp -o CMakeFiles\cstor.dir\src\cstor\store\cstore.cpp.s
+
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.requires:
+
+.PHONY : CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.requires
+
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.provides: CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.provides.build
+.PHONY : CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.provides
+
+CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.provides.build: CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj
+
+
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj: CMakeFiles/cstor.dir/flags.make
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj: CMakeFiles/cstor.dir/includes_CXX.rsp
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj: ../src/cstor/store/ccollection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\cstor.dir\src\cstor\store\ccollection.cpp.obj -c C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\src\cstor\store\ccollection.cpp
+
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.i"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\src\cstor\store\ccollection.cpp > CMakeFiles\cstor.dir\src\cstor\store\ccollection.cpp.i
+
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.s"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\src\cstor\store\ccollection.cpp -o CMakeFiles\cstor.dir\src\cstor\store\ccollection.cpp.s
+
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.requires:
+
+.PHONY : CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.requires
+
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.provides: CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.provides.build
+.PHONY : CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.provides
+
+CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.provides.build: CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj
+
+
 # Object files for target cstor
 cstor_OBJECTS = \
 "CMakeFiles/cstor.dir/src/cstor/document/cdocument.cpp.obj" \
 "CMakeFiles/cstor.dir/src/cstor/errors/errors.c.obj" \
-"CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj"
+"CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj" \
+"CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj" \
+"CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj"
 
 # External object files for target cstor
 cstor_EXTERNAL_OBJECTS =
 
-libcstor.a: CMakeFiles/cstor.dir/src/cstor/document/cdocument.cpp.obj
-libcstor.a: CMakeFiles/cstor.dir/src/cstor/errors/errors.c.obj
-libcstor.a: CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj
-libcstor.a: CMakeFiles/cstor.dir/build.make
-libcstor.a: CMakeFiles/cstor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libcstor.a"
-	$(CMAKE_COMMAND) -P CMakeFiles\cstor.dir\cmake_clean_target.cmake
+libcstor.dll: CMakeFiles/cstor.dir/src/cstor/document/cdocument.cpp.obj
+libcstor.dll: CMakeFiles/cstor.dir/src/cstor/errors/errors.c.obj
+libcstor.dll: CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj
+libcstor.dll: CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj
+libcstor.dll: CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj
+libcstor.dll: CMakeFiles/cstor.dir/build.make
+libcstor.dll: deps/libstor.a
+libcstor.dll: CMakeFiles/cstor.dir/linklibs.rsp
+libcstor.dll: CMakeFiles/cstor.dir/objects1.rsp
+libcstor.dll: CMakeFiles/cstor.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Edd\Workspace\c++\ethronsoft\stor\bindings\c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libcstor.dll"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\cstor.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/cstor.dir/build: libcstor.a
+CMakeFiles/cstor.dir/build: libcstor.dll
 
 .PHONY : CMakeFiles/cstor.dir/build
 
 CMakeFiles/cstor.dir/requires: CMakeFiles/cstor.dir/src/cstor/document/cdocument.cpp.obj.requires
 CMakeFiles/cstor.dir/requires: CMakeFiles/cstor.dir/src/cstor/errors/errors.c.obj.requires
 CMakeFiles/cstor.dir/requires: CMakeFiles/cstor.dir/src/cstor/document/cnode.cpp.obj.requires
+CMakeFiles/cstor.dir/requires: CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj.requires
+CMakeFiles/cstor.dir/requires: CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj.requires
 
 .PHONY : CMakeFiles/cstor.dir/requires
 

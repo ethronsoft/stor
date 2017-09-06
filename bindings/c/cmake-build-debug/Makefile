@@ -251,6 +251,66 @@ src/cstor/errors/errors.c.s:
 	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/src/cstor/errors/errors.c.s
 .PHONY : src/cstor/errors/errors.c.s
 
+src/cstor/store/ccollection.obj: src/cstor/store/ccollection.cpp.obj
+
+.PHONY : src/cstor/store/ccollection.obj
+
+# target to build an object file
+src/cstor/store/ccollection.cpp.obj:
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.obj
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/src/cstor/store/ccollection.cpp.obj
+.PHONY : src/cstor/store/ccollection.cpp.obj
+
+src/cstor/store/ccollection.i: src/cstor/store/ccollection.cpp.i
+
+.PHONY : src/cstor/store/ccollection.i
+
+# target to preprocess a source file
+src/cstor/store/ccollection.cpp.i:
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.i
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/src/cstor/store/ccollection.cpp.i
+.PHONY : src/cstor/store/ccollection.cpp.i
+
+src/cstor/store/ccollection.s: src/cstor/store/ccollection.cpp.s
+
+.PHONY : src/cstor/store/ccollection.s
+
+# target to generate assembly for a file
+src/cstor/store/ccollection.cpp.s:
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/ccollection.cpp.s
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/src/cstor/store/ccollection.cpp.s
+.PHONY : src/cstor/store/ccollection.cpp.s
+
+src/cstor/store/cstore.obj: src/cstor/store/cstore.cpp.obj
+
+.PHONY : src/cstor/store/cstore.obj
+
+# target to build an object file
+src/cstor/store/cstore.cpp.obj:
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.obj
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/src/cstor/store/cstore.cpp.obj
+.PHONY : src/cstor/store/cstore.cpp.obj
+
+src/cstor/store/cstore.i: src/cstor/store/cstore.cpp.i
+
+.PHONY : src/cstor/store/cstore.i
+
+# target to preprocess a source file
+src/cstor/store/cstore.cpp.i:
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.i
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/src/cstor/store/cstore.cpp.i
+.PHONY : src/cstor/store/cstore.cpp.i
+
+src/cstor/store/cstore.s: src/cstor/store/cstore.cpp.s
+
+.PHONY : src/cstor/store/cstore.s
+
+# target to generate assembly for a file
+src/cstor/store/cstore.cpp.s:
+	$(MAKE) -f CMakeFiles\cstor.dir\build.make CMakeFiles/cstor.dir/src/cstor/store/cstore.cpp.s
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/src/cstor/store/cstore.cpp.s
+.PHONY : src/cstor/store/cstore.cpp.s
+
 test/document_test.obj: test/document_test.cpp.obj
 
 .PHONY : test/document_test.obj
@@ -305,6 +365,33 @@ test/main.cpp.s:
 	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/test/main.cpp.s
 .PHONY : test/main.cpp.s
 
+test/store_test.obj: test/store_test.cpp.obj
+
+.PHONY : test/store_test.obj
+
+# target to build an object file
+test/store_test.cpp.obj:
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/test/store_test.cpp.obj
+.PHONY : test/store_test.cpp.obj
+
+test/store_test.i: test/store_test.cpp.i
+
+.PHONY : test/store_test.i
+
+# target to preprocess a source file
+test/store_test.cpp.i:
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/test/store_test.cpp.i
+.PHONY : test/store_test.cpp.i
+
+test/store_test.s: test/store_test.cpp.s
+
+.PHONY : test/store_test.s
+
+# target to generate assembly for a file
+test/store_test.cpp.s:
+	$(MAKE) -f CMakeFiles\cstor_test.dir\build.make CMakeFiles/cstor_test.dir/test/store_test.cpp.s
+.PHONY : test/store_test.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -326,12 +413,21 @@ help:
 	@echo ... src/cstor/errors/errors.obj
 	@echo ... src/cstor/errors/errors.i
 	@echo ... src/cstor/errors/errors.s
+	@echo ... src/cstor/store/ccollection.obj
+	@echo ... src/cstor/store/ccollection.i
+	@echo ... src/cstor/store/ccollection.s
+	@echo ... src/cstor/store/cstore.obj
+	@echo ... src/cstor/store/cstore.i
+	@echo ... src/cstor/store/cstore.s
 	@echo ... test/document_test.obj
 	@echo ... test/document_test.i
 	@echo ... test/document_test.s
 	@echo ... test/main.obj
 	@echo ... test/main.i
 	@echo ... test/main.s
+	@echo ... test/store_test.obj
+	@echo ... test/store_test.i
+	@echo ... test/store_test.s
 .PHONY : help
 
 

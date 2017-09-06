@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stor/document/document.h>
 #include <cstor/document/cdocument.h>
-#include <cstor/internal/opaque_types.h>
+#include <internal/opaque_types.h>
 #include <cstor/document/cnode.h>
 
 

@@ -3,7 +3,9 @@
 //
 
 #include <cstor/document/cnode.h>
-#include <cstor/internal/opaque_types.h>
+#include <internal/opaque_types.h>
+#include <cstring>
+#include <cassert>
 
 extern "C" {
 

@@ -5,13 +5,13 @@
 # compile CXX with C:/TDM-GCC-64/bin/g++.exe
 C_FLAGS = -g  
 
-C_DEFINES = 
+C_DEFINES = -DTEMP_DIR=\"C:/Temp/\" -DWIN32 -Dcstor_EXPORTS
 
 C_INCLUDES = @CMakeFiles/cstor.dir/includes_C.rsp
 
 CXX_FLAGS =  -std=c++11 -Wall  -g  
 
-CXX_DEFINES = 
+CXX_DEFINES = -DTEMP_DIR=\"C:/Temp/\" -DWIN32 -Dcstor_EXPORTS
 
 CXX_INCLUDES = @CMakeFiles/cstor.dir/includes_CXX.rsp
 

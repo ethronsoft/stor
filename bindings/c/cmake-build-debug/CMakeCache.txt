@@ -193,8 +193,8 @@ STOR_CRYPTO:BOOL=OFF
 //Value Computed by CMake
 cstor_BINARY_DIR:STATIC=C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug
 
-//Dependencies for target
-cstor_LIB_DEPENDS:STATIC=
+//Dependencies for the target
+cstor_LIB_DEPENDS:STATIC=general;stor;general;leveldb;general;pthread;general;shlwapi;
 
 //Value Computed by CMake
 cstor_SOURCE_DIR:STATIC=C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c

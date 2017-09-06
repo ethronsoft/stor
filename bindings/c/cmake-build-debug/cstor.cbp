@@ -18,15 +18,17 @@
 				</MakeCommands>
 			</Target>
 			<Target title="cstor">
-				<Option output="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/libcstor.a" prefix_auto="0" extension_auto="0"/>
+				<Option output="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/libcstor.dll" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug"/>
 				<Option object_output="./"/>
-				<Option type="2"/>
+				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DWIN32"/>
+					<Add option="-DTEMP_DIR=&quot;C:/Temp/&quot;"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/test/include"/>
-					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/../../core/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
@@ -48,15 +50,17 @@
 				</MakeCommands>
 			</Target>
 			<Target title="cstor/fast">
-				<Option output="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/libcstor.a" prefix_auto="0" extension_auto="0"/>
+				<Option output="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug/libcstor.dll" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/cmake-build-debug"/>
 				<Option object_output="./"/>
-				<Option type="2"/>
+				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DWIN32"/>
+					<Add option="-DTEMP_DIR=&quot;C:/Temp/&quot;"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/test/include"/>
-					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/../../core/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
@@ -84,9 +88,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DWIN32"/>
+					<Add option="-DTEMP_DIR=&quot;C:/Temp/&quot;"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/test/include"/>
-					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/../../core/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
@@ -114,9 +120,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DWIN32"/>
+					<Add option="-DTEMP_DIR=&quot;C:/Temp/&quot;"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/test/include"/>
-					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/../../core/include"/>
+					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/catch/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/mingw/leveldb/include"/>
 					<Add directory="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/dependencies/multiplatform/rapidjson/include"/>
@@ -288,9 +296,6 @@
 		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include/cstor/errors/errors.h">
 			<Option target="cstor"/>
-		</Unit>
-		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include/cstor/internal/opaque_types.h">
-			<Option target="cstor"/>
 			<Option target="cstor_test"/>
 		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include/cstor/store/ccollection.h">
@@ -298,6 +303,10 @@
 			<Option target="cstor_test"/>
 		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include/cstor/store/cstore.h">
+			<Option target="cstor"/>
+			<Option target="cstor_test"/>
+		</Unit>
+		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/include/internal/opaque_types.h">
 			<Option target="cstor"/>
 			<Option target="cstor_test"/>
 		</Unit>
@@ -313,10 +322,21 @@
 			<Option target="cstor"/>
 			<Option target="cstor_test"/>
 		</Unit>
+		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/src/cstor/store/ccollection.cpp">
+			<Option target="cstor"/>
+			<Option target="cstor_test"/>
+		</Unit>
+		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/src/cstor/store/cstore.cpp">
+			<Option target="cstor"/>
+			<Option target="cstor_test"/>
+		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/test/document_test.cpp">
 			<Option target="cstor_test"/>
 		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/test/main.cpp">
+			<Option target="cstor_test"/>
+		</Unit>
+		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/bindings/c/test/store_test.cpp">
 			<Option target="cstor_test"/>
 		</Unit>
 		<Unit filename="C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/include/stor/document/const_iterator.h">

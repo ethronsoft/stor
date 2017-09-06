@@ -15,6 +15,7 @@ typedef enum esft_stor_error_t{
     out_of_memory,
     document_error,
     io_error,
+    store_error,
     query_error,
     access_error
 } esft_stor_error_t;

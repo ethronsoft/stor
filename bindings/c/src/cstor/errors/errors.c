@@ -23,6 +23,8 @@ const char *esft_stor_error_string(esft_stor_error_t t) {
             return "Document error";
         case io_error:
             return "IO error";
+        case store_error:
+            return "Store error";
         case query_error:
             return "Query error";
         case access_error:
