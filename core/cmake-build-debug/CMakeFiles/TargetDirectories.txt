@@ -1,4 +1,0 @@
-C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor.dir
-C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/stor_test.dir
-C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Edd/Workspace/c++/ethronsoft/stor/core/cmake-build-debug/CMakeFiles/rebuild_cache.dir
