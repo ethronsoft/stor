@@ -1,4 +1,7 @@
+import os
+import glob
 from ctypes import *
+
 
 
 class esft_cstor_json_struct(Structure):
@@ -20,9 +23,26 @@ class Cstor(object):
         self.__setup__()
 
     @classmethod
-    def load(klass):
-        libcstor = cdll.LoadLibrary("libcstor")
-        return klass(libcstor)
+    def load_from_path(cls, libcstor_path):
+        libcstor = cdll.LoadLibrary(libcstor_path)
+        return cls(libcstor)
+
+    @classmethod
+    def load(cls):
+        up = lambda x: os.path.dirname(x)
+        root_dir = up(up(up(os.path.abspath(__file__))))
+        deps_dir = os.path.join(root_dir, "deps")
+        dep_name = ""
+        if os.path.exists(deps_dir):
+            m = glob.glob(os.path.join(deps_dir,"libcstor*"))
+            if m:
+                dep_name = m[0]
+        if dep_name:
+            libcstor = cdll.LoadLibrary(dep_name)
+        else:
+            libcstor = cdll.LoadLibrary("libcstor")
+
+        return cls(libcstor)
 
     def __setup__(self):
         self.invoke.esft_stor_node_json.restype = esft_cstor_json_struct

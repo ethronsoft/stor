@@ -5,5 +5,9 @@ setup(
     version="0.0.1",
     packages=["ethronsoft","ethronsoft/pystor"],
     namespace_packages = ['ethronsoft'],
-    license=open("LICENSE.txt").read()
+    license=open("LICENSE.txt").read(),
+    setup_requires=['pytest-runner'],
+    tests_require=[
+        'pytest'
+    ]
 )

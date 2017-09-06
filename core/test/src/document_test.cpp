@@ -125,6 +125,8 @@ TEST_CASE("document creation","[creation]"){
         CHECK(d["e"].is_string());
         CHECK(std::string(d["e"].as_string()) == "hello");
 
+        CHECK_FALSE(d.has("zz"));
+
         CHECK(d.has("z"));
         CHECK(d["z"].is_object());
         CHECK(d["z"]["zz"].is_int());

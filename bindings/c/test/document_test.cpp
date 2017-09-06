@@ -8,7 +8,7 @@
 #include <string.h>
 #include <cstor/document/cdocument.h>
 
-TEST_CASE("construction from json string") {
+TEST_CASE("construction from json string", "[document]") {
     esft_stor_error_t err = esft_stor_error_init();
 
     SECTION("correct object") {
@@ -104,7 +104,7 @@ TEST_CASE("construction from json string") {
 
 }
 
-TEST_CASE("construction from empty node") {
+TEST_CASE("construction from empty node", "[document]") {
     esft_stor_error_t err = esft_stor_error_init();
     SECTION("object node") {
         esft_stor_document_t *doc = esft_stor_document_create_as_object(&err);
@@ -133,7 +133,7 @@ TEST_CASE("construction from empty node") {
     }
 }
 
-TEST_CASE("value read/write") {
+TEST_CASE("value read/write", "[document]") {
     esft_stor_error_t err = esft_stor_error_init();
 
     SECTION("object int") {
@@ -437,5 +437,37 @@ TEST_CASE("value read/write") {
         esft_stor_document_delete(doc);
     }
 
+
+}
+
+TEST_CASE("existence", "[document]"){
+    esft_stor_error_t err = esft_stor_error_init();
+
+    esft_stor_document_t *doc = esft_stor_document_create("{\"""a\""":1,\"""b\""": {\"""z\""": 3}}", &err);
+    REQUIRE_FALSE(err);
+    esft_stor_node_t *root = esft_stor_document_root(doc, &err);
+    if (err){
+        esft_stor_document_delete(doc);
+        FAIL();
+    }
+    CHECK(esft_stor_node_is_object(root));
+
+    CHECK(esft_stor_node_object_has(root,"a"));
+    CHECK(esft_stor_node_object_has(root,"b"));
+    CHECK_FALSE(esft_stor_node_object_has(root,"z"));
+
+    esft_stor_node_t *node_b = esft_stor_node_object_get(root, "b", &err);
+    if (err){
+        esft_stor_node_delete(root);
+        esft_stor_document_delete(doc);
+        FAIL();
+    }
+
+    CHECK(esft_stor_node_object_has(node_b, "z"));
+    CHECK_FALSE(esft_stor_node_object_has(node_b, "a"));
+
+    esft_stor_node_delete(node_b);
+    esft_stor_node_delete(root);
+    esft_stor_document_delete(doc);
 
 }

@@ -13,7 +13,7 @@ class NodeType(Enum):
     ARRAY = 2,
     INT = 3,
     LONG = 4,
-    STR = 5,
+    STRING = 5,
     FLOAT = 6,
     BOOL = 7,
     NULL = 8
@@ -31,7 +31,6 @@ class Node(object):
     """
 
     def __init__(self, cstor_functs, cstor_node):
-        print "Node __init__"
         self.__cstor = cstor_functs
         self.__node = cstor_node
         self.__type = self.__get_ctype(self.__node)
@@ -57,7 +56,7 @@ class Node(object):
         elif self.__cstor.invoke.esft_stor_node_is_bool(cnode):
             res = NodeType.BOOL
         elif self.__cstor.invoke.esft_stor_node_is_string(cnode):
-            res = NodeType.STR
+            res = NodeType.STRING
         elif self.__cstor.invoke.esft_stor_node_is_null(cnode):
             res = NodeType.NULL
         else:
@@ -84,7 +83,7 @@ class Node(object):
         elif isinstance(val, bool):
             res = NodeType.BOOL
         elif isinstance(val, basestring):
-            res = NodeType.STR
+            res = NodeType.STRING
         elif val is None:
             res = NodeType.NULL
         else:
@@ -96,7 +95,6 @@ class Node(object):
         deletes the cnode via cstor API
         """
         self.__cstor.invoke.esft_stor_node_delete(self.__node)
-        print "Node __del__"
 
     def __len__(self):
         """
@@ -127,7 +125,6 @@ class Node(object):
         if isinstance(item, slice):
             if self.__type != NodeType.ARRAY:
                 raise Exception("Invalid __getitem__ arg: NodeType is not ARRAY")
-            print "__getitem__ slice"
             start = item.start if item.start else 0
             stop = item.stop if item.stop else len(self)
             step = item.step if item.step else 1
@@ -172,7 +169,15 @@ class Node(object):
         :param value:
         :return:
         """
-        print "__setitem__"
+        pass
+
+    @property
+    def type(self):
+        """
+        Returns the NodeType of this node
+        :return: NodeType
+        """
+        return self.__type
 
     @property
     def value(self):
@@ -185,7 +190,7 @@ class Node(object):
         :return: representation of the value of the Node.
         """
         if self.__type == NodeType.OBJECT or self.__type == NodeType.ARRAY:
-            return json.loads(self.json())
+            return json.loads(self.to_json())
         elif self.__type == NodeType.NULL:
             return None
         elif self.__type == NodeType.INT:
@@ -196,7 +201,7 @@ class Node(object):
             return self.__cstor.invoke.esft_stor_node_as_double(self.__node).value
         elif self.__type == NodeType.BOOL:
             return self.__cstor.invoke.esft_stor_node_as_bool(self.__node).value
-        elif self.__type == NodeType.STR:
+        elif self.__type == NodeType.STRING:
             return self.__cstor.invoke.esft_stor_node_as_string(self.__node).value
         else:
             raise TypeError("Invalid NodeType")
@@ -210,7 +215,13 @@ class Node(object):
 
         :param value: value to set this Node value to
         """
-        pass
+        value_type = self.__get_ptype(value)
+        err = c_int(self.__cstor.invoke.esft_stor_error_init())
+        self.__cstor.invoke.esft_stor_node_from_json(self.__node, json.dumps(value), byref(err))
+        if err:
+            str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
+            raise Exception("Could not set node value. Error: " + str_err.value)
+        self.__type = value_type
 
     def __contains__(self, item):
         """
@@ -221,17 +232,18 @@ class Node(object):
         :return: True of item is in the Node, False if not
         """
         if self.__type == NodeType.OBJECT:
-            return self.__cstor.invoke.esft_stor_node_object_has(self.__node, c_char_p(item))
+            return isinstance(item, basestring) and \
+                   c_bool(self.__cstor.invoke.esft_stor_node_object_has(self.__node, c_char_p(item))).value
         elif self.__type == NodeType.ARRAY:
-            children = self.__getitem__(slice(None, None, None))
-            for child in children:
-                if item == child:
+            for i in range(len(self)):
+                if item == self[i].value:
                     return True
+        elif self._type == NodeType.STRING:
+            return item in self.value
         else:
-            raise TypeError("__contains__ can only be invoked on OBJECT or ARRAY Node")
+            raise TypeError("__contains__ can only be invoked on OBJECT, ARRAY or STRING Node")
 
-    @property
-    def json(self):
+    def to_json(self):
         """
         Returns the JSON representation of this Node
         :return: JSON of this Node
@@ -241,26 +253,15 @@ class Node(object):
         self.__cstor.invoke.esft_stor_json_dispose(byref(tmp))
         return res
 
-    @json.setter
-    def json(self, value):
+    def from_json(self, value):
         """
         Changes the value of this Node with the value represented by the JSON @p value
         :param value: JSON to change this Node value to
         """
         err = c_int(self.__cstor.invoke.esft_stor_error_init())
-        self.__cstor.invoke.esft_stor_node_from_json(self.__node, value, byref(err))
+        self.__cstor.invoke.esft_stor_node_from_json(self.__node, c_char_p(value), byref(err))
         if err:
             raise Exception("Failed updating the node value with the provided JSON")
-
-    def __copy__(self):
-        """
-        Produces a shallow copy of the Node.
-        The copies will all point to the same cnode.
-        :return: shallow copy of Node
-        """
-        n = type(self)()
-        n.__dict__.update(self.__dict__)
-        return n
 
     def __deepcopy__(self, memo):
         """
@@ -268,7 +269,7 @@ class Node(object):
         The copies will point to different cnodes.
         :return: deep copy of Node
         """
-        return Document(self.__cstor, self.json())
+        return Document(self.__cstor, self.to_json())
 
 
 class Document(Node):
@@ -313,26 +314,4 @@ class Document(Node):
         """
         return self.__id
 
-
-if __name__ == "__main__":
-    cstor = Cstor.load()
-
-    n = Document(cstor, "[1,2,3]")
-    print n.id
-    print n.json
-    n.json = json.dumps([3, 4, 5])
-    print n.id
-    print n.json
-    print "a" in n
-    print "b" in n
-    print n[0].json
-    print n[:1]
-    try:
-        print n[1.0]
-    except Exception as e:
-        print e
-    try:
-        print n["a"]
-    except Exception as e:
-        print e
 
