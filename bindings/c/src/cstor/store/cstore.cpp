@@ -5,8 +5,10 @@
 #include <internal/opaque_types.h>
 #include <cstor/store/cstore.h>
 #include <cstor/store/ccollection.h>
+#include <stor/store/store.h>
 #include <stor/exceptions/store_exception.h>
 #include <stor/exceptions/access_exception.h>
+
 
 extern "C" {
 
@@ -81,8 +83,10 @@ esft_stor_collection_t *esft_stor_store_collection(esft_stor_store_t *store,
     esft_stor_collection_t *res = nullptr;
     try{
         res = new esft_stor_collection_t{};
-        auto coll = (*store->rep)[collection_name];
-        res->rep = new esft::stor::collection{std::move(coll)};
+        //create collection if non existing
+        auto &coll = (*store->rep)[collection_name];
+        res->name = coll.name();
+        res->rep_p = store->rep;
         return res;
     }catch(const esft::stor::store_exception &){
         *e = io_error;

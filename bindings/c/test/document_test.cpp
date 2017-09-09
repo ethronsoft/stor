@@ -471,3 +471,27 @@ TEST_CASE("existence", "[document]"){
     esft_stor_document_delete(doc);
 
 }
+
+TEST_CASE("keys retrieval", "[document]"){
+    esft_stor_error_t err = esft_stor_error_init();
+
+    esft_stor_document_t *doc = esft_stor_document_create("{\"""a\""":1,\"""b\""": 1}", &err);
+    REQUIRE_FALSE(err);
+    esft_stor_node_t *root = esft_stor_document_root(doc, &err);
+    if (err){
+        esft_stor_document_delete(doc);
+        FAIL();
+    }
+
+    size_t elems_num = esft_stor_node_size(root);
+    size_t keys_num = 0;
+    char **keys = esft_stor_node_object_keys(root,&keys_num);
+    CHECK(keys_num == elems_num);
+    for (size_t i = 0; i < keys_num; ++i){
+        CHECK((strcmp(keys[i],"a") || strcmp(keys[i], "b")));
+    }
+    esft_stor_node_object_keys_delete(keys,keys_num);
+
+    esft_stor_node_delete(root);
+    esft_stor_document_delete(doc);
+}

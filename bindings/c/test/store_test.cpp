@@ -135,17 +135,18 @@ TEST_CASE("collection query document"){
         esft_stor_document_delete(doc);
     }
     const char *query = "{\"""$eq\""": {\"""a\""": 1}}";
-    esft_stor_collection_query_result_t query_res = esft_stor_collection_query(c,query,&err);
+    size_t len = 0;
+    esft_stor_document_t ** query_res = esft_stor_collection_query(c,query,&len,&err);
     if (err){
         esft_stor_collection_delete(c);
         esft_stor_store_delete(db);
         FAIL();
     }
-    CHECK(query_res.len == 1);
-    CHECK(strcmp(esft_stor_document_id(query_res.values[0]),esft_stor_document_id(doc)) == 0);
+    CHECK(len == 1);
+    CHECK(strcmp(esft_stor_document_id(query_res[0]),esft_stor_document_id(doc)) == 0);
 
     esft_stor_collection_delete(c);
     esft_stor_store_delete(db);
     esft_stor_document_delete(doc);
-    esft_stor_collection_query_result_dispose(&query_res);
+    esft_stor_collection_query_result_delete(query_res, len);
 }

@@ -6,16 +6,7 @@
 #define ESNPL_STOR_COLLECTION_H
 
 #include <stor/document/document.h>
-#include <stor/store/store.h>
 #include <stor/store/index_path.h>
-#include <stor/store/onclose.h>
-#include <stor/store/query.h>
-#include <stor/store/eq_instruction.h>
-#include <stor/store/gt_instruction.h>
-#include <stor/store/gte_instruction.h>
-#include <stor/store/neq_instruction.h>
-#include <stor/store/lt_instruction.h>
-#include <stor/store/lte_instruction.h>
 #include <leveldb/db.h>
 #include <leveldb/options.h>
 #include <unordered_set>
@@ -70,16 +61,6 @@ namespace esft {
             collection &operator=(const collection &o) = delete;
 
             /**
-             * @brief Move constructor.
-             */
-            collection(collection &&o);
-
-            /**
-             * @brief Move Assignment.
-             */
-            collection &operator=(collection &&o);
-
-            /**
              * @brief Destructor
              */
             ~collection();
@@ -92,6 +73,13 @@ namespace esft {
             bool clear_indices();
 
             /**
+             * @brief Returns a set of all the indices currently in use
+             *
+             * @return indices in use
+             */
+            const std::unordered_set<index_path> &indices() const;
+
+            /**
              * @brief Add index to 'path' to allow lookup
              * during query operations
              *
@@ -99,18 +87,15 @@ namespace esft {
              */
             void add_index(const index_path &path);
 
+            template<typename indices_container>
+            void add_indices(indices_container &&ic);
+
             /**
              * @brief Return name of collection
              *
              * @returns name of collection
              */
             const std::string &name() const;
-
-            /**
-             * @brief Stores any structural changes made to this collection
-             * in the store it belongs to
-             */
-            void persist();
 
             /**
              * @brief Insert/Update document 'doc' in the collection
@@ -178,16 +163,31 @@ namespace esft {
              */
             void inflate(std::istream &i);
 
-        private:
+        protected:
 
             /**
              * @brief Constructor.
              *
              * @param s pointer to parent store
              * @param info document containing initializing values for collection
-             * @parm oc shared_ptr to onclose object
              */
-            collection(store *s, document &info, std::shared_ptr<onclose> oc);
+            collection(store *s, document &info);
+
+            /**
+             * @brief Move Constructor.
+             */
+            collection(collection &&o);
+
+            /**
+             * @brief Move Assignment.
+             */
+            collection &operator=(collection &&o);
+
+            /**
+             * @brief Stores any structural changes made to this collection
+             * in the store it belongs to
+             */
+            void persist();
 
             /**
              * @brief Register insertion of document key:value id:json in batch
@@ -271,12 +271,7 @@ namespace esft {
              */
             std::unordered_set<std::string> process(const lte_instruction &i, const leveldb::ReadOptions &ro) const;
 
-
-            /**
-             * shared_ptr to onclose object.
-             * When last shared_ptr gets destroyed, onclose trigger its operation
-             */
-            std::shared_ptr<onclose> _onclose;
+        private:
 
             /**
              * name of collection
@@ -304,6 +299,22 @@ namespace esft {
             std::unordered_set<index_path> _indices;
 
         };
+
+        template <typename indices_container>
+        inline void collection::add_indices(indices_container &&ic) {
+            bool modified = false;
+            //targetting begin/end let's us take in intializer_lists too
+            for (auto it = ic.begin(); it != ic.end(); ++it){
+                auto path = *it;
+                if (_indices.count(path) == 0) {
+                    _indices.insert(path);
+                    modified = true;
+                }
+            }
+            if (modified){
+                persist();
+            }
+        }
     }
 }
 

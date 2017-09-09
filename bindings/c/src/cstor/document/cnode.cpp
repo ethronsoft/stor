@@ -196,42 +196,46 @@ bool esft_stor_node_object_has(esft_stor_node_t *node,
     return false;
 }
 
-esft_stor_node_keys_t esft_stor_node_object_keys(esft_stor_node_t *node,
-                                                 esft_stor_error_t *e){
-    esft_stor_node_keys_t res;
+
+char ** esft_stor_node_object_keys(esft_stor_node_t *node,
+                                   size_t *out_len){
+    assert(node->rep->is_object());
+    char ** res = nullptr;
+    size_t sz = 0;
     try{
-        res.len = node->rep->size();
-        if (res.len > 0){
-            res.values = new char*[res.len];
-            std::size_t i = 0;
+        sz = node->rep->size();
+        *out_len = sz;
+        if (sz > 0){
+            res = new char*[sz];
+            std::vector<std::string> keys(sz);
+            size_t i = 0;
             for (auto it = node->rep->cbegin(); it != node->rep->cend(); ++it){
-                assert(i < res.len);
-                const std::string &key = it.key();
-                res.values[i] = new char[key.size() + 1];
-                strcpy(res.values[i],key.c_str());
-                i++;
+                keys[i] = it.key();
+                ++i;
             }
+            //no errors, we can allocate and copy over
+            for (std::size_t i = 0; i < sz; ++i){
+                res[i] = new char[keys[i].size() + 1];
+                strcpy(res[i],keys[i].c_str());
+            }
+            return res;
         }
-        return res;
-    }catch (const esft::stor::document_exception &){
-        *e = document_error;
-    }catch (const std::bad_alloc &){
-        *e = out_of_memory;
     }catch (...){
-        *e = generic_error;
+        //delete any string allocated
+        esft_stor_node_object_keys_delete(res,sz);
+        *out_len = 0;
     }
-    esft_stor_node_object_keys_dispose(&res);
-    return res;
+    return nullptr;
 }
 
-void esft_stor_node_object_keys_dispose(esft_stor_node_keys_t *keys){
-    if (keys && keys->values && keys->len > 0 ){
-        for (std::size_t i = 0; i < keys->len; ++i){
-            delete keys->values[i];
+void esft_stor_node_object_keys_delete(char **keys, size_t len){
+    if (keys){
+        for (size_t i = 0; i < len; ++i){
+            delete[] keys[i];
         }
-        delete[] keys->values;
+        delete[] keys;
     }
-    keys->len = 0;
+
 }
 
 bool esft_stor_node_is_null(esft_stor_node_t *node){

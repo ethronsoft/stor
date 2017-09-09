@@ -16,11 +16,6 @@ extern "C" {
 
 typedef struct esft_stor_node_t esft_stor_node_t;
 
-typedef struct esft_stor_node_keys_t {
-    size_t len;
-    char   **values;
-} esft_stor_node_keys_t;
-
 typedef struct esft_stor_json_t {
     size_t len; /** in case json contains unescaped \0 **/
     char * value;
@@ -46,7 +41,7 @@ bool esft_stor_node_is_int(esft_stor_node_t *node);
  * The @p node must be a value node, such that
  * esft_stor_node_is_int(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  * 
  * @return int value of node
  */
@@ -64,7 +59,7 @@ bool esft_stor_node_is_long(esft_stor_node_t *node);
  * The @p node must be a value node, such that
  * esft_stor_node_is_long(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  * 
  * @return long value of node
  */
@@ -82,7 +77,7 @@ bool esft_stor_node_is_double(esft_stor_node_t *node);
  * The @p node must be a value node, such that
  * esft_stor_node_is_double(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  * 
  * @return double value of node
  */
@@ -100,7 +95,7 @@ bool esft_stor_node_is_bool(esft_stor_node_t *node);
  * The @p node must be a value node, such that
  * esft_stor_node_is_bool(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  * 
  * @return bool value of node
  */
@@ -120,7 +115,7 @@ bool esft_stor_node_is_string(esft_stor_node_t *node);
  * The @p node must be a value node, such that
  * esft_stor_node_is_string(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  *
  * @return string value of node
  */
@@ -141,7 +136,7 @@ const char *esft_stor_node_as_string(esft_stor_node_t *node);
  * The @p node must be a value node, such that
  * esft_stor_node_is_string(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  * 
  * @return string value of node
  */
@@ -168,7 +163,7 @@ bool esft_stor_node_is_object(esft_stor_node_t *node);
  * The @p node must be an object node, such that
  * esft_stor_node_is_object(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  *
  * @return node at key @p key or NULL
  */
@@ -183,7 +178,7 @@ esft_stor_node_t *esft_stor_node_object_get(esft_stor_node_t *node,
  * The @p node must be an object node, such that
  * esft_stor_node_is_object(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  *
  * @return true if object contains member with key @p key, false if not
  */
@@ -191,19 +186,21 @@ bool esft_stor_node_object_has(esft_stor_node_t *node,
                                const char *key);
 
 /**
- * @brief returns the list of keys for object node @p node. If
- * the operation fails, returns an empty key list (a list with len == 0
- * and values == NULL) and sets the error code accordingly.
+ * @brief Returns newly allocated array of strings to hold the keys for object node @p node
+ * and sets the number of keys in @p out_len.
  *
- * @returns list of keys or empty list
+ * If the operation fails, a value of 0 is set into @p out_len and NULL is returned
+ *
+ * @returns array of string representing an object node members' keys.
  */
-esft_stor_node_keys_t esft_stor_node_object_keys(esft_stor_node_t *node,
-                                                 esft_stor_error_t *err);
+char ** esft_stor_node_object_keys(esft_stor_node_t *node,
+                                                 size_t *out_len);
 
 /**
- * @brief disposes of a key list object, turning it into an empty list.
+ * @brief deletes the @p len strings contained in keys and
+ * then deletes the array itself
  */
-void esft_stor_node_object_keys_dispose(esft_stor_node_keys_t *keys);
+void esft_stor_node_object_keys_delete(char **keys, size_t len);
 
 /**
  * @brief checks whether underlying value of the node is an array
@@ -218,7 +215,7 @@ bool esft_stor_node_is_array(esft_stor_node_t *node);
  * The @p node must be an array node, such that
  * esft_stor_node_is_array(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  */
 size_t esft_stor_node_size(esft_stor_node_t *node);
 
@@ -229,7 +226,7 @@ size_t esft_stor_node_size(esft_stor_node_t *node);
  * The @p node must be an array node, such that
  * esft_stor_node_is_array(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * or assertion fail, if assertions are enabled.
+ * 
  *
  * @return node at key @p key or NULL
  */
@@ -239,7 +236,7 @@ esft_stor_node_t *esft_stor_node_array_get(esft_stor_node_t *node,
 
 /**
  * @brief returns the JSON representation of the node @p node
- * If operation fails, returns NULL.
+ * If operation fails, returns an empty json object (len == 0).
  *
  * @return JSON representation of node
  */

@@ -66,7 +66,7 @@ set(SOURCE_FILES
 
 #platform specific configurations
 if(WIN32)
-	add_definitions(-DWIN32)
+	add_definitions(-DWIN32 -DTEMP_DIR="C:/Temp/")
 
 	#dependencies injection
 	if(STOR_CRYPTO)
@@ -92,7 +92,7 @@ if(WIN32)
 			pthread )
 
 elseif(APPLE)
-	add_definitions(-DUNIX -DOSX)
+	add_definitions(-DUNIX -DOSX -DTEMP_DIR=/tmp/)
 
 	#dependencies injection
 	if(STOR_CRYPTO)
@@ -116,7 +116,7 @@ elseif(APPLE)
 			pthread)
 
 elseif (UNIX)
-	add_definitions(-DUNIX)
+	add_definitions(-DUNIX -DTEMP_DIR=/tmp/)
 
 	#dependencies injection
 	if(STOR_CRYPTO)

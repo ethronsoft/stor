@@ -11,7 +11,6 @@
 #include <leveldb/env.h>
 #include <leveldb/db.h>
 #include <leveldb/options.h>
-#include <stor/store/collection.h>
 #include <stor/store/onclose.h>
 #include <stor/store/access_manager.h>
 
@@ -73,12 +72,7 @@ namespace esft{
             /**
              * @brief Move constructor.
              */
-            store(store &&o);
-
-            /**
-             * @brief Move assignment.
-             */
-            store &operator=(store && o);
+            store(store && o);
 
             /**
              * @brief Destructor.
@@ -90,7 +84,7 @@ namespace esft{
              *
              * @returns new or existing collection with given name.
              */
-            collection operator[](const std::string &collection_name);
+            collection &operator[](const std::string &collection_name);
 
             /**
              * @brief Check if a collection exists with the given name
@@ -105,7 +99,9 @@ namespace esft{
             void put(const collection &c);
 
             /**
-             * @brief Remove a collection in the store
+             * @brief Remove a collection in the store.
+             * Any reference of the collection deleted
+             * is invalidated.
              */
             bool remove(const std::string &collection_name);
 
@@ -134,15 +130,11 @@ namespace esft{
         private:
 
             /**
-             * shared_ptr to onclose (object that performs an action
+             * unique_ptr to onclose (object that performs an action
              * when destructed)
              *
-             * shared_ptr makes it possible for this operation to be executed
-             * only when the last of such pointers has been destroyed.
-             * These pointers are distributed to all open collections. So only
-             * when the last store resource is being disposed of, will the operation run.
              */
-            std::shared_ptr<onclose> _onclose;
+            std::unique_ptr<onclose> _onclose;
 
             /**
              * store root
@@ -188,6 +180,13 @@ namespace esft{
              * flag to determine whether store is in asynchronous or synchronous mode
              */
             bool _async;
+
+            /**
+             * map of collection that have been created/requested since this object instantiation.
+             * It does not necessarily represent the entire set of collections, as some may
+             * not have been queried since this object instantiation.
+             */
+            std::unordered_map<std::string, std::unique_ptr<collection>> _collections;
         };
 
     }

@@ -8,7 +8,8 @@
 #include <stor/store/store.h>
 #include <stor/store/db_crypt.h>
 #include <leveldb/write_batch.h>
-#include <leveldb/env.h>
+#include <stor/store/collection.h>
+
 
 namespace esft{
     namespace stor{
@@ -92,7 +93,7 @@ namespace esft{
                         opt.env->DeleteDir(path);
                     }
                 };
-                _onclose = std::make_shared<onclose>(onclose{_path,onclose_operation});
+                _onclose = std::unique_ptr<onclose>(new onclose{_path,onclose_operation});
             }
 
 
@@ -164,7 +165,7 @@ namespace esft{
                         _handler_copy();
                     }
                 };
-                _onclose = std::make_shared<onclose>(onclose{_path,onclose_operation});
+                _onclose = std::unique_ptr<onclose>(new onclose{_path,onclose_operation});
             }
         }
 
@@ -173,7 +174,8 @@ namespace esft{
                 _onclose{std::move(o._onclose)},
         _path{std::move(o._path)}, _name{std::move(o._name)},
         _db{o._db}, _opt{o._opt},_temp{o._temp}, _am{std::move(o._am)},
-                _async{o._async}
+                _async{o._async},
+                _collections{std::move(o._collections)}
         {
             o._db = nullptr;
             o._async = true;
@@ -192,31 +194,36 @@ namespace esft{
         {
             std::string json;
             _db->Get(leveldb::ReadOptions{},collection_name,&json);
-            return !json.empty();
+            bool collection_dir_exists = _opt.env->FileExists(home()+collection_name);
+            return !json.empty() && collection_dir_exists;
         }
 
-        collection store::operator[](const std::string &collection_name){
+        collection &store::operator[](const std::string &collection_name){
 
             //do not overwrite system info
             if (collection_name == "db_info") throw store_exception{"db_info name is reserved."};
 
-
-            std::string json;
-            leveldb::ReadOptions ro;
-            leveldb::Status read = _db->Get(ro,collection_name,&json);
-            //if (!read.ok()) throw store_exception{"failure reading collection info."};
-            //if collection doesn't exist in catalog, create default
-            if (json.empty()){
-                document new_info = document::as_object();
-                new_info.put("name",collection_name)
-                              .with_array("indices");
-                collection c(this,new_info,_onclose);
-                put(c);
-                return c;
-            }else{
-                document stored_info{json};
-                return collection(this,stored_info,_onclose);
+            if (_collections.count(collection_name) == 0)
+            {
+                std::string json;
+                leveldb::ReadOptions ro;
+                leveldb::Status read = _db->Get(ro,collection_name,&json);
+                //if (!read.ok()) throw store_exception{"failure reading collection info."};
+                //if collection doesn't exist in catalog, create default
+                if (json.empty()){
+                    document new_info = document::as_object();
+                    new_info.put("name",collection_name)
+                            .with_array("indices");
+                    std::unique_ptr<collection> c(new collection(this,new_info));
+                    put(*c);
+                    _collections[collection_name] = std::move(c);
+                }else{
+                    document stored_info{json};
+                    std::unique_ptr<collection> c(new collection(this,stored_info));
+                    _collections[collection_name] = std::move(c);
+                }
             }
+            return *_collections.at(collection_name);
         }
 
         void store::put(const collection &c)
@@ -238,9 +245,33 @@ namespace esft{
         bool store::remove(const std::string &collection_name)
         {
             leveldb::WriteOptions wo;
-            wo.sync = !_async;
-            leveldb::Status del = _db->Delete(wo,collection_name);
-            return del.ok();
+            leveldb::ReadOptions ro;
+            wo.sync = true; //force sync
+            //we are about to delete collection. Which means that everything related
+            //to it will be destroyed, included the reference returned by collection.name()
+            //We have no guarantee that @p collection_name is provided by collection.name()
+            //so if we are going to delete the collection, we will first take make a copy of
+            //the name
+            auto clean_up = [this, &wo, &ro](const std::string &coll_name){
+                _db->Delete(wo,coll_name);
+                leveldb::DestroyDB(home() + coll_name, _opt);
+                _opt.env->DeleteDir(home() + coll_name);
+                return true;
+            };
+            if (_collections.count(collection_name) > 0){
+                std::string copied_name = collection_name;
+                _collections.erase(copied_name);
+                return clean_up(copied_name);
+            }else{
+                //it could exist even if it wasn't loaded
+                //in _collections
+                std::string tmp;
+                _db->Get(ro,collection_name,&tmp);
+                if (!tmp.empty()){
+                    return clean_up(collection_name);
+                }
+            }
+            return false;
         }
 
 

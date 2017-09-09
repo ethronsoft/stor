@@ -18,30 +18,27 @@
 
 using namespace esft;
 
-TEST_CASE("stor_test catalog test","[catalog_test]"){
+TEST_CASE("stor_test catalog test","[store_test]"){
 
     std::string path = stor_test::home();
+    leveldb::Options opt;
+    leveldb::Env &env = *opt.env;
 
     stor::store db{path,"test",true};
 
     CHECK(db.home() ==  path + "test/");
 
-    stor::collection c = db["test_collection"];
-
+    auto &c = db["test_collection"];
+    CHECK(env.FileExists(db.home() + c.name()));
     CHECK(db.has(c.name()));
 
+    auto name = c.name();/** copy before deleting collection **/
     db.remove(c.name());
-
-    CHECK(!db.has(c.name()));
-
-    db.put(c);
-
-    CHECK(db.has(c.name()));
-
+    CHECK_FALSE(env.FileExists(db.home() + name));
+    CHECK(!db.has(name));
 }
 
-
-TEST_CASE("directory visitor test","[directory_visitor_test]"){
+TEST_CASE("directory visitor test","[store_test]"){
     leveldb::Options opt;
     leveldb::Env &env = *opt.env;
 
@@ -81,7 +78,7 @@ TEST_CASE("directory visitor test","[directory_visitor_test]"){
 
 }
 
-TEST_CASE("db encryption test","[db_encryption_test]"){
+TEST_CASE("db encryption test","[store_test]"){
     leveldb::Options opt;
     leveldb::Env &env = *opt.env;
 
@@ -201,7 +198,7 @@ TEST_CASE("db encryption test","[db_encryption_test]"){
 
 }
 
-TEST_CASE("db decryption test","[db_decryption_test]"){
+TEST_CASE("db decryption test","[store_test]"){
     leveldb::Options opt;
     leveldb::Env &env = *opt.env;
 
@@ -320,11 +317,10 @@ TEST_CASE("db decryption test","[db_decryption_test]"){
     env.DeleteDir(stor_test::home() + "decryption_test");
 }
 
-TEST_CASE("document addition-removal test","[mod_doc_test]"){
+TEST_CASE("document addition-removal test","[store_test]"){
     stor::store db{stor_test::home(), "test_db",true};
-    stor::collection c = db["test_collection"];
+    auto &c = db["test_collection"];
     c.add_index("a");
-    c.persist();
 
     stor::document d{R"( {"a":1} )"};
     auto id = d.id();
@@ -340,10 +336,10 @@ TEST_CASE("document addition-removal test","[mod_doc_test]"){
     CHECK_FALSE(c.has(id));
 }
 
-TEST_CASE("get document by id test","[get_by_id_test]"){
+TEST_CASE("get document by id test","[store_test]"){
     stor::store db{stor_test::home(), "query_test",true};
 
-    stor::collection c = db["test_collection"];
+    auto &c = db["test_collection"];
 
     stor::document d1 = stor::document::as_object();
     d1.put("a",1);
@@ -357,11 +353,11 @@ TEST_CASE("get document by id test","[get_by_id_test]"){
     REQUIRE(dz.id() == d1.id());
 }
 
-TEST_CASE("query not equality test","[neq_query_test]"){
+TEST_CASE("query not equality test","[store_test]"){
 
     stor::store db{stor_test::home(), "query_test",true};
 
-    stor::collection c = db["eq_test_collection"];
+    auto &c = db["eq_test_collection"];
 
     //fill documents with some
     stor::document d1 = stor::document::as_object();
@@ -374,10 +370,7 @@ TEST_CASE("query not equality test","[neq_query_test]"){
     d2.put("z",true);
     d2.with("sub").put("b","baa");
 
-    c.add_index("a");
-    c.add_index("z");
-    c.add_index("sub.b");
-    c.persist();
+    c.add_indices(std::vector<stor::index_path>{"a","z","sub.b"});
 
     c.put(d1);
     c.put(d2);
@@ -400,11 +393,11 @@ TEST_CASE("query not equality test","[neq_query_test]"){
     }
 }
 
-TEST_CASE("query equality test","[eq_query_test]"){
+TEST_CASE("query equality test","[store_test]"){
 
     stor::store db{stor_test::home(), "query_test",true};
 
-    stor::collection c = db["eq_test_collection"];
+    auto &c = db["eq_test_collection"];
 
     //fill documents with some
     stor::document d1 = stor::document::as_object();
@@ -416,11 +409,8 @@ TEST_CASE("query equality test","[eq_query_test]"){
     d2.put("a",2);
     d2.put("z",true);
     d2.with("sub").put("b","baa");
-
-    c.add_index("a");
-    c.add_index("z");
-    c.add_index("sub.b");
-    c.persist();
+    
+    c.add_indices(std::vector<stor::index_path>{"a","z","sub.b"});
 
     c.put(d1);
     c.put(d2);
@@ -469,10 +459,10 @@ TEST_CASE("query equality test","[eq_query_test]"){
     }
 }
 
-TEST_CASE("query greater than test","[gt_query_test]"){
+TEST_CASE("query greater than test","[store_test]"){
     stor::store db{stor_test::home(), "query_test",true};
 
-    stor::collection c = db["gt_test_collection"];
+    auto &c = db["gt_test_collection"];
 
     stor::document d = stor::document::as_object();
     d.put("a",-10);
@@ -489,10 +479,8 @@ TEST_CASE("query greater than test","[gt_query_test]"){
     stor::document d3 = stor::document::as_object();
     d3.put("a",900);
     d3.put("b","d");
-
-    c.add_index("a");
-    c.add_index("b");
-    c.persist();
+    
+    c.add_indices(std::vector<stor::index_path>{"a","b"});
 
     c.put(d);
     c.put(d1);
@@ -553,10 +541,10 @@ TEST_CASE("query greater than test","[gt_query_test]"){
 
 }
 
-TEST_CASE("query less than test","[lt_query_test]"){
+TEST_CASE("query less than test","[store_test]"){
     stor::store db{stor_test::home(), "query_test",true};
 
-    stor::collection c = db["gt_test_collection"];
+    auto &c = db["gt_test_collection"];
 
     stor::document d = stor::document::as_object();
     d.put("a",-10);
@@ -573,10 +561,8 @@ TEST_CASE("query less than test","[lt_query_test]"){
     stor::document d3 = stor::document::as_object();
     d3.put("a",900);
     d3.put("b","d");
-
-    c.add_index("a");
-    c.add_index("b");
-    c.persist();
+    
+    c.add_indices(std::vector<stor::index_path>{"a","b"});
 
     c.put(d);
     c.put(d1);
@@ -637,10 +623,10 @@ TEST_CASE("query less than test","[lt_query_test]"){
 
 }
 
-TEST_CASE("query or test","[or_query_test]"){
+TEST_CASE("query or test","[store_test]"){
     stor::store db{stor_test::home(), "query_test",true};
 
-    stor::collection c = db["or_test_collection"];
+    auto &c = db["or_test_collection"];
 
     //fill documents with some
     stor::document d1 = stor::document::as_object();
@@ -652,11 +638,8 @@ TEST_CASE("query or test","[or_query_test]"){
     d2.put("a",2);
     d2.put("z",true);
     d2.with("sub").put("b","baa");
-
-    c.add_index("a");
-    c.add_index("z");
-    c.add_index("sub.b");
-    c.persist();
+    
+    c.add_indices(std::vector<stor::index_path>{"a","z", "sub.b"});
 
     c.put(d1);
     c.put(d2);
@@ -713,11 +696,11 @@ TEST_CASE("query or test","[or_query_test]"){
 
 }
 
-TEST_CASE("query and test","[and_query_test]"){
+TEST_CASE("query and test","[store_test]"){
 
     stor::store db{stor_test::home(), "query_test",true};
 
-    stor::collection c = db["and_test_collection"];
+    auto &c = db["and_test_collection"];
 
     //fill documents with some
     stor::document d1 = stor::document::as_object();
@@ -729,11 +712,8 @@ TEST_CASE("query and test","[and_query_test]"){
     d2.put("a",2);
     d2.put("z",true);
     d2.with("sub").put("b","baa");
-
-    c.add_index("a");
-    c.add_index("z");
-    c.add_index("sub.b");
-    c.persist();
+    
+    c.add_indices(std::vector<stor::index_path>{"a","z", "sub.b"});
 
     c.put(d1);
     c.put(d2);
@@ -782,13 +762,12 @@ TEST_CASE("query and test","[and_query_test]"){
 
 }
 
-TEST_CASE("inflate deflate test","[inflate_deflate_test]") {
+TEST_CASE("inflate deflate test","[store_test]") {
 
     stor::store db{stor_test::home(), "fldb", true};
 
-    stor::collection c = db["coll"];
+    auto &c = db["coll"];
     c.add_index("a");
-    c.persist();
 
     {
         std::ofstream ofs{stor_test::home() + "xflate.txt"};
@@ -800,9 +779,8 @@ TEST_CASE("inflate deflate test","[inflate_deflate_test]") {
     {
         std::ofstream ofs{stor_test::home() + "xflate2.txt"};
         std::ifstream ifs{stor_test::home() + "xflate.txt"};
-        stor::collection c1 = db["coll2"];
+        auto &c1 = db["coll2"];
         c1.add_index("a");
-        c1.persist();
         c.inflate(ifs);
         c.deflate(ofs,false);
     }
@@ -822,4 +800,18 @@ TEST_CASE("inflate deflate test","[inflate_deflate_test]") {
     leveldb::Env &e = *opt.env;
     e.DeleteFile(stor_test::home() + "xflate.txt");
     e.DeleteFile(stor_test::home() + "xflate2.txt");
+}
+
+TEST_CASE("collection indices query test","[store_test]"){
+    stor::store db{stor_test::home(), "fldb", true};
+
+    auto &c = db["coll"];
+    c.add_index("a");
+    c.add_indices(std::vector<std::string>{"b", "c"});
+    std::unordered_set<stor::index_path> _indices{"a","b","c"};
+
+    for (const auto &p : c.indices()){
+        CHECK(_indices.count(p) > 0);
+    }
+
 }

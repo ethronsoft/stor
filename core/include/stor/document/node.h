@@ -21,10 +21,15 @@ namespace esft{
         class iterator;
         class const_iterator;
 
-        /** @brief Node represents an interface to a specific element in the underyling JSON data tree.
+        /** @brief node represents an interface to a specific element in the underlying JSON data tree.
          *
-         *  Node is a thin wrapper of an underlying JSON data node and
-         *  exposes the functions used to create or alter JSON data.
+         *  node is a thin wrapper of an underlying JSON data node, only made of weak pointers
+         *  to such data and exposes the functions used to create or alter JSON data. For this reason,
+         *  nodes can cheaply be returned by value.
+         *  ATTENTION:
+         *  Because the owner of the underlying JSON tree is esft::stor::document,
+         *  a single node existence depends on the existence of document. For this
+         *  reason, a node instance must not be used after its document owner has ceased to exist.
          *
          *  Some functions are only usable if the underlying data is either of type
          *  value, object or array, or a combination of them.

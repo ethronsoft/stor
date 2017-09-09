@@ -4,6 +4,15 @@
 #include <leveldb/filter_policy.h>
 #include <sstream>
 #include <set>
+#include <stor/store/store.h>
+#include <stor/store/query.h>
+#include <stor/store/eq_instruction.h>
+#include <stor/store/gt_instruction.h>
+#include <stor/store/gte_instruction.h>
+#include <stor/store/neq_instruction.h>
+#include <stor/store/lt_instruction.h>
+#include <stor/store/lte_instruction.h>
+
 
 
 namespace esft {
@@ -18,8 +27,8 @@ namespace esft {
             std::string next_smallest(const std::string &s);
         }
 
-        collection::collection(store *s, document &info, std::shared_ptr<onclose> oc) :
-                _onclose{oc}, _store{s} {
+        collection::collection(store *s, document &info) :
+                _store{s} {
             if (!info.has("name")) throw store_exception{"missing collection name"};
             _name = info["name"].as_string();
 
@@ -43,7 +52,6 @@ namespace esft {
         }
 
         collection::collection(collection &&o) :
-                _onclose{std::move(o._onclose)},
                 _name{std::move(o._name)},
                 _store{o._store}, _db{o._db}, _opt{o._opt},
                 _indices{std::move(o._indices)} {
@@ -58,7 +66,6 @@ namespace esft {
             _db = o._db;
             _opt = o._opt;
             _indices = std::move(o._indices);
-            _onclose = std::move(o._onclose);
 
             o._opt.filter_policy = nullptr;
             o._db = nullptr;
@@ -105,13 +112,19 @@ namespace esft {
                 _indices.clear();
             }
 
+            persist();
             return st.ok();
         }
 
         void collection::add_index(const index_path &path) {
             if (_indices.count(path) == 0) {
                 _indices.insert(path);
+                persist();
             }
+        }
+
+        const std::unordered_set<index_path>& collection::indices() const {
+            return _indices;
         }
 
         bool collection::put(const document &doc) {
@@ -603,7 +616,7 @@ namespace esft {
             //The following must hold: there is no string Z such that s < Z < X
             std::string res = s;
             if (s.empty()) {
-                //return the smallesta available char
+                //return the smallest available char
                 res += char(1);
             } else {
                 //advance last character of string

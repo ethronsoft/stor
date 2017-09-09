@@ -11,11 +11,7 @@ namespace esft{
     namespace stor_test{
 
         inline std::string home(){
-                #ifdef WIN32
-                            return "C:/Temp/";
-                #else
-                            return "/tmp/";
-                #endif
+                return TEMP_DIR;
         }
 
     }

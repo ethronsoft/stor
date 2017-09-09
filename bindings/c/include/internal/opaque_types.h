@@ -17,7 +17,8 @@ struct esft_stor_document_t     { esft::stor::document *rep; };
 
 struct esft_stor_node_t         { esft::stor::node     *rep; };
 
-struct esft_stor_collection_t   { esft::stor::collection *rep; };
+struct esft_stor_collection_t   { esft::stor::store *rep_p; /** no ownership **/
+                                  std::string name           ;};
 
 struct esft_stor_store_t        { esft::stor::store *rep; };
 

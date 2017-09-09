@@ -29,7 +29,9 @@ set(SOURCE_FILES
         include/cstor/store/cstore.h
         include/cstor/store/ccollection.h
         src/cstor/store/cstore.cpp
-        src/cstor/store/ccollection.cpp)
+        src/cstor/store/ccollection.cpp
+        include/cstor/utility/utility.h
+        src/cstor/utility/utility.c)
 
 #directories
 SET(CSTOR_INCLUDE_DIRS

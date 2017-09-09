@@ -1,6 +1,4 @@
-import sys, os
 import copy
-
 from ethronsoft.pystor.document import *
 
 def test_copy():
@@ -19,11 +17,10 @@ def test_object():
     assert doc.to_json() == "{}"
     assert doc.value == {}
 
-    obj = {"a": 1, "b": {"z": [1,2,3]}}
+    obj = {"a": "hello", "b": {"z": [1L,2.0,True]}}
 
     doc.value = obj
     assert doc.value == obj
-    print doc.value
     assert json.loads(doc.to_json()) == obj
 
     assert len(doc) == 2
@@ -32,15 +29,22 @@ def test_object():
     assert 1 not in doc
     assert "a" in doc
     assert "b" in doc
-    assert "motherfucker" in doc
-
+    assert "z" not in doc
     assert "z" in doc["b"]
     assert 1 in doc["b"]["z"]
     assert 4 not in doc["b"]["z"]
 
-    assert doc["a"].value == 1
+    assert doc["a"].value == "hello"
+    doc["a"] = "hello, world!"
+    assert doc["a"].value == "hello, world!"
     assert doc["b"].value == obj["b"]
     assert doc["b"]["z"].value == obj["b"]["z"]
+
+    keys = obj.keys()
+    assert keys == doc.keys()
+    for key in doc:
+        assert key in doc
+
 
 def test_array():
     doc = Document(Cstor.load(), "[]")
@@ -50,28 +54,57 @@ def test_array():
     assert doc.to_json() == "[]"
     assert doc.value == []
 
-    doc.value = [1, 2, "a"]
-    assert doc.value == [1, 2, "a"]
-    assert json.loads(doc.to_json()) == [1, 2, "a"]
+    arr = [1.0, 2L, "a", False, 5]
 
-    assert len(doc) == 3
-    assert 1 in doc
+    doc.value = arr
+    assert doc.value == arr
+    assert json.loads(doc.to_json()) == arr
+
+    assert len(doc) == len(arr)
+    assert 1.0 in doc
     assert 4 not in doc
     assert "a" in doc
     assert "b" not in doc
+    assert False in doc
+    assert 2L in doc
+    assert 5 in doc
 
-    assert doc[0].value == 1
-    assert doc[1].value == 2
+    assert doc[0].value == 1.0
+    assert doc[1].value == 2L
     assert doc[2].value == "a"
+    assert doc[3].value is False
+    assert doc[4].value == 5
 
+    for item in doc:
+        assert item.value in arr
 
 
 def test_value():
-    doc = Document(Cstor.load(), "1")
+    doc = Document(Cstor.load(), "null")
+    assert doc.type == NodeType.NULL
     assert doc is not None
     assert len(doc.id) > 0
-    assert doc.to_json() == "1"
+
+    doc.value = 1
+    assert doc.type == NodeType.INT
     assert doc.value == 1
+
+    doc.value = 1L
+    assert doc.type == NodeType.LONG
+    assert doc.value == 1L
+
+    doc.value = 1.0
+    assert doc.type == NodeType.FLOAT
+    assert doc.value == 1.0
+
+    doc.value = True
+    assert doc.type == NodeType.BOOL
+    assert doc.value is True
+
+    doc.value = "hello"
+    assert doc.type == NodeType.STRING
+    assert doc.value == "hello"
+
 
 
 
