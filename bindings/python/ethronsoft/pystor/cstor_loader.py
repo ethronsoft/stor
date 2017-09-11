@@ -87,8 +87,12 @@ class Cstor(object):
         self.invoke.esft_stor_collection_document_exists.restype = c_bool
         self.invoke.esft_stor_collection_document_remove.restype = c_bool
         self.invoke.esft_stor_collection_query.restype = POINTER(c_void_p)
+        self.invoke.esft_stor_collection_index_list.restype = POINTER(c_char_p)
 
         self.invoke.esft_stor_collection_query.argtypes = [c_void_p, c_char_p, POINTER(c_uint), POINTER(c_int)]
+        self.invoke.esft_stor_collection_indices_add.argtypes = [c_void_p, POINTER(c_char_p), c_uint]
+        self.invoke.esft_stor_collection_index_list.argtypes = [c_void_p, POINTER(c_uint), POINTER(c_int)]
+        self.invoke.esft_stor_collection_index_list_delete.argtypes = [POINTER(c_char_p), c_uint]
 
         #store
         self.invoke.esft_stor_store_collection_remove.restype = c_bool

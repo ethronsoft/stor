@@ -53,20 +53,34 @@ def test_db_collection_doc_get_by_id():
     assert doc.id == doc.id
     assert doc.value == doc.value
 
-# def test_db_collection_add_index():
-#    TODO
+def test_db_collection_add_index():
+    tmp = tempfile.gettempdir()
+    db = Store(Cstor.load(), db_home=tmp, db_name="test_db", temp=True)
+    coll = db["test_collection"]
+    doc = Document(Cstor.load(), json.dumps({"a": 1}))
+    coll.put(doc)
+    coll.add_index("a")
+    assert coll.indices() == ["a"]
 
-# def test_db_collection_doc_query():
-#    TODO
-#     tmp = tempfile.gettempdir()
-#     db = Store(Cstor.load(), db_home=tmp, db_name="test_db", temp=True)
-#     coll = db["test_collection"]
-#     coll.add_index("a")
-#     obj = {"a": 1, "b": 2}
-#     doc = Document(Cstor.load(), json.dumps(obj))
-#     coll.put(doc)
-#     res = coll.find(json.dumps({"$eq": {"a": 1}}))
-#     assert len(res) == 1
-#     assert res[0].value == obj
+def test_db_collection_add_indices():
+    tmp = tempfile.gettempdir()
+    db = Store(Cstor.load(), db_home=tmp, db_name="test_db", temp=True)
+    coll = db["test_collection"]
+    doc = Document(Cstor.load(), json.dumps({"a": 1, "b": 2, "z": {"a": True}}))
+    coll.put(doc)
+    coll.add_indices(["a", "b", "z.a"])
+    assert set(coll.indices()) == set(["a", "b", "z.a"])
+
+def test_db_collection_doc_query():
+    tmp = tempfile.gettempdir()
+    db = Store(Cstor.load(), db_home=tmp, db_name="test_db", temp=True)
+    coll = db["test_collection"]
+    coll.add_index("a")
+    obj = {"a": 1, "b": 2}
+    doc = Document(Cstor.load(), json.dumps(obj))
+    coll.put(doc)
+    res = coll.find(json.dumps({"$eq": {"a": 1}}))
+    assert len(res) == 1
+    assert res[0].value == obj
 
 

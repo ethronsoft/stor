@@ -308,6 +308,9 @@ class Document(Node):
 
     @classmethod
     def from_cdocument(cls, cstor_functs, cdoc):
+        """
+        Creates a document from an existing cdocument object
+        """
         err = c_int(cstor_functs.invoke.esft_stor_error_init())
         cnode = cstor_functs.invoke.esft_stor_document_root(cdoc, byref(err))
         if err.value:
@@ -325,7 +328,10 @@ class Document(Node):
         return self
 
     def __del__(self):
-        print "doc __del__"
+        """
+        deletes the cdocument via cstor API
+        """
+        self.__cstor.invoke.esft_stor_document_delete(self.__doc)
         super(Document, self).__del__()
 
     def __setup(self, json):
