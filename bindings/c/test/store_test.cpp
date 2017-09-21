@@ -121,6 +121,22 @@ TEST_CASE("collection query document"){
         esft_stor_store_delete(db);
         FAIL();
     }
+    const char * indices[]{"a", "b"};
+    esft_stor_collection_indices_add(c, indices, 2);
+
+    size_t res_len = 0;
+    char **indices_res = esft_stor_collection_index_list(c, &res_len, &err);
+    if (err){
+        esft_stor_collection_delete(c);
+        esft_stor_store_delete(db);
+        FAIL();
+    }
+    CHECK(res_len == 2);
+    for (size_t i = 0; i < res_len; ++i){
+        CHECK((strcmp(indices[0], indices_res[i]) == 0 ||
+                      strcmp(indices[1], indices_res[i]) == 0));
+    }
+    esft_stor_collection_index_list_delete(indices_res,res_len);
 
     esft_stor_document_t *doc = esft_stor_document_create("{\"""a\""":1,\"""b\""": 2}", &err);
     if(err){

@@ -31,7 +31,7 @@ set(SOURCE_FILES
         src/cstor/store/cstore.cpp
         src/cstor/store/ccollection.cpp
         include/cstor/utility/utility.h
-        src/cstor/utility/utility.c)
+        src/cstor/utility/utility.c include/cstor/utility/export.h)
 
 #directories
 SET(CSTOR_INCLUDE_DIRS
@@ -86,6 +86,7 @@ link_directories(${CSTOR_LINK_DIRS})
 #shared lib
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${CSTOR_TEST_LIBRARIES})
+target_compile_definitions(${PROJECT_NAME} PUBLIC -DCSTOR_API_EXPORT -DCSTOR_API_EXPORT_BUILD)
 
 #test
 add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}

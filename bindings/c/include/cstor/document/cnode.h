@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <cstor/errors/errors.h>
+#include <cstor/utility/export.h>
 
 
 #ifdef __cplusplus
@@ -27,14 +28,14 @@ typedef struct esft_stor_json_t {
  *
  * @return true if number, false if not
  */
-bool esft_stor_node_is_num(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_num(esft_stor_node_t *node);
 
 /**
  * @brief checks whether underlying value of the node is an int
  *
  * @return true if int, false if not
  */
-bool esft_stor_node_is_int(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_int(esft_stor_node_t *node);
 
 /**
  * @brief returns the int representation of the node.
@@ -45,14 +46,14 @@ bool esft_stor_node_is_int(esft_stor_node_t *node);
  * 
  * @return int value of node
  */
-int esft_stor_node_as_int(esft_stor_node_t *node);
+CSTOR_API int esft_stor_node_as_int(esft_stor_node_t *node);
 
 /**
  * @brief checks whether underlying value of the node is a long
  *
  * @return true if long, false if not
  */
-bool esft_stor_node_is_long(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_long(esft_stor_node_t *node);
 
 /**
  * @brief returns the long representation of the node.
@@ -63,14 +64,14 @@ bool esft_stor_node_is_long(esft_stor_node_t *node);
  * 
  * @return long value of node
  */
-long long esft_stor_node_as_long(esft_stor_node_t *node);
+CSTOR_API long long esft_stor_node_as_long(esft_stor_node_t *node);
 
 /**
  * @brief checks whether underlying value of the node is a double
  *
  * @return true if double, false if not
  */
-bool esft_stor_node_is_double(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_double(esft_stor_node_t *node);
 
 /**
  * @brief returns the double representation of the node.
@@ -81,14 +82,14 @@ bool esft_stor_node_is_double(esft_stor_node_t *node);
  * 
  * @return double value of node
  */
-double esft_stor_node_as_double(esft_stor_node_t *node);
+CSTOR_API double esft_stor_node_as_double(esft_stor_node_t *node);
 
 /**
  * @brief checks whether underlying value of the node is a bool
  *
  * @return true if bool, false if not
  */
-bool esft_stor_node_is_bool(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_bool(esft_stor_node_t *node);
 
 /**
  * @brief returns the bool representation of the node.
@@ -99,14 +100,14 @@ bool esft_stor_node_is_bool(esft_stor_node_t *node);
  * 
  * @return bool value of node
  */
-bool esft_stor_node_as_bool(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_as_bool(esft_stor_node_t *node);
 
 /**
  * @brief checks whether underlying value of the node is a string
  *
  * @return true if string, false if not
  */
-bool esft_stor_node_is_string(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_string(esft_stor_node_t *node);
 
 
 /**
@@ -115,11 +116,12 @@ bool esft_stor_node_is_string(esft_stor_node_t *node);
  * The @p node must be a value node, such that
  * esft_stor_node_is_string(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * 
+ *
+ * TRANSFER OWNERSHIP ON SUCCESS: NO
  *
  * @return string value of node
  */
-const char *esft_stor_node_as_string(esft_stor_node_t *node);
+CSTOR_API const char *esft_stor_node_as_string(esft_stor_node_t *node);
 
 
 /**
@@ -137,24 +139,26 @@ const char *esft_stor_node_as_string(esft_stor_node_t *node);
  * esft_stor_node_is_string(node *) == true. Calling this
  * function otherwise results in undefined behaviour
  * 
- * 
+ *
+ * TRANSFER OWNERSHIP ON SUCCESS: NO
+ *
  * @return string value of node
  */
-const char *esft_stor_node_as_stringl(esft_stor_node_t *node, size_t *str_len);
+CSTOR_API const char *esft_stor_node_as_stringl(esft_stor_node_t *node, size_t *str_len);
 
 /**
  * @brief checks whether underlying value of the node is a null object
  *
  * @return true if null, false if not
  */
-bool esft_stor_node_is_null(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_null(esft_stor_node_t *node);
 
 /**
  * @brief checks whether underlying value of the node is an object
  *
  * @return true if object, false if not
  */
-bool esft_stor_node_is_object(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_object(esft_stor_node_t *node);
 
 /**
  * @brief returns the node mapped to key @p key in the object node @p node.
@@ -163,11 +167,13 @@ bool esft_stor_node_is_object(esft_stor_node_t *node);
  * The @p node must be an object node, such that
  * esft_stor_node_is_object(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * 
+ *
+ * TRANSFER OWNERSHIP ON SUCCESS: YES
+ * RESOURCE RELEASE FUNCTION: esft_stor_node_delete
  *
  * @return node at key @p key or NULL
  */
-esft_stor_node_t *esft_stor_node_object_get(esft_stor_node_t *node,
+CSTOR_API esft_stor_node_t *esft_stor_node_object_get(esft_stor_node_t *node,
                                             const char *key,
                                             esft_stor_error_t *err);
 
@@ -182,7 +188,7 @@ esft_stor_node_t *esft_stor_node_object_get(esft_stor_node_t *node,
  *
  * @return true if object contains member with key @p key, false if not
  */
-bool esft_stor_node_object_has(esft_stor_node_t *node,
+CSTOR_API bool esft_stor_node_object_has(esft_stor_node_t *node,
                                const char *key);
 
 /**
@@ -191,23 +197,26 @@ bool esft_stor_node_object_has(esft_stor_node_t *node,
  *
  * If the operation fails, a value of 0 is set into @p out_len and NULL is returned
  *
+ * TRANSFER OWNERSHIP ON SUCCESS: YES
+ * RESOURCE RELEASE FUNCTION: esft_stor_node_object_keys_delete
+ *
  * @returns array of string representing an object node members' keys.
  */
-char ** esft_stor_node_object_keys(esft_stor_node_t *node,
+CSTOR_API char ** esft_stor_node_object_keys(esft_stor_node_t *node,
                                                  size_t *out_len);
 
 /**
  * @brief deletes the @p len strings contained in keys and
  * then deletes the array itself
  */
-void esft_stor_node_object_keys_delete(char **keys, size_t len);
+CSTOR_API void esft_stor_node_object_keys_delete(char **keys, size_t len);
 
 /**
  * @brief checks whether underlying value of the node is an array
  *
  * @return true if array, false if not
  */
-bool esft_stor_node_is_array(esft_stor_node_t *node);
+CSTOR_API bool esft_stor_node_is_array(esft_stor_node_t *node);
 
 /**
  * @brief returns the size of the array node @p node.
@@ -217,7 +226,7 @@ bool esft_stor_node_is_array(esft_stor_node_t *node);
  * function otherwise results in undefined behaviour
  * 
  */
-size_t esft_stor_node_size(esft_stor_node_t *node);
+CSTOR_API size_t esft_stor_node_size(esft_stor_node_t *node);
 
 /**
  * @brief returns the node at index @p index in the node array @p node.
@@ -226,11 +235,13 @@ size_t esft_stor_node_size(esft_stor_node_t *node);
  * The @p node must be an array node, such that
  * esft_stor_node_is_array(node *) == true. Calling this
  * function otherwise results in undefined behaviour
- * 
+ *
+ * TRANSFER OWNERSHIP ON SUCCESS: YES
+ * RESOURCE RELEASE FUNCTION: esft_stor_node_delete
  *
  * @return node at key @p key or NULL
  */
-esft_stor_node_t *esft_stor_node_array_get(esft_stor_node_t *node,
+CSTOR_API esft_stor_node_t *esft_stor_node_array_get(esft_stor_node_t *node,
                                            unsigned int index,
                                            esft_stor_error_t *err);
 
@@ -240,7 +251,7 @@ esft_stor_node_t *esft_stor_node_array_get(esft_stor_node_t *node,
  *
  * @return JSON representation of node
  */
-esft_stor_json_t esft_stor_node_json(esft_stor_node_t *node);
+CSTOR_API esft_stor_json_t esft_stor_node_json(esft_stor_node_t *node);
 
 /**
  * @brief sets this node @p node to the node parsed from the the JSON @p json.
@@ -249,7 +260,7 @@ esft_stor_json_t esft_stor_node_json(esft_stor_node_t *node);
  * If operation fails, sets error accordingly
  *
  */
-void esft_stor_node_from_json(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_from_json(esft_stor_node_t *node,
                               const char *json,
                               esft_stor_error_t *err);
 
@@ -260,33 +271,33 @@ void esft_stor_node_from_json(esft_stor_node_t *node,
  * If operation fails, sets error accordingly
  *
  */
-void esft_stor_node_from_node(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_from_node(esft_stor_node_t *node,
                               esft_stor_node_t *copy,
                               esft_stor_error_t *err);
 
 /**
  * @brief disposes of a json object
  */
-void esft_stor_json_dispose(esft_stor_json_t *json);
+CSTOR_API void esft_stor_json_dispose(esft_stor_json_t *json);
 
 
 /**
  * @brief adds an empty object into object node @p node with key @p key
  */
-void esft_stor_node_object_put_obj(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_object_put_obj(esft_stor_node_t *node,
                                    const char *key);
 
 /**
  * @brief adds an empty array into object node @p node with key @p key
  */
-void  esft_stor_node_object_put_array(esft_stor_node_t *node,
+CSTOR_API void  esft_stor_node_object_put_array(esft_stor_node_t *node,
                                       const char *key);
 
 /**
  * @brief puts a <key:value> pair into object node @p node,
  * with key @p key and value @p value of type int
  */
-void esft_stor_node_object_put_int(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_object_put_int(esft_stor_node_t *node,
                                    const char *key, 
                                    int value);
 
@@ -294,7 +305,7 @@ void esft_stor_node_object_put_int(esft_stor_node_t *node,
  * @brief puts a <key:value> pair into object node @p node,
  * with key @p key and value @p value of type long
  */
-void esft_stor_node_object_put_long(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_object_put_long(esft_stor_node_t *node,
                                    const char *key,
                                    long long value);
 
@@ -302,7 +313,7 @@ void esft_stor_node_object_put_long(esft_stor_node_t *node,
  * @brief puts a <key:value> pair into object node @p node,
  * with key @p key and value @p value of type double
  */
-void esft_stor_node_object_put_double(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_object_put_double(esft_stor_node_t *node,
                                    const char *key,
                                    double value);
 
@@ -310,7 +321,7 @@ void esft_stor_node_object_put_double(esft_stor_node_t *node,
  * @brief puts a <key:value> pair into object node @p node,
  * with key @p key and value @p value of type bool
  */
-void esft_stor_node_object_put_bool(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_object_put_bool(esft_stor_node_t *node,
                                    const char *key,
                                    bool value);
 
@@ -318,58 +329,56 @@ void esft_stor_node_object_put_bool(esft_stor_node_t *node,
  * @brief puts a <key:value> pair into object node @p node,
  * with key @p key and value @p value of type const char *
  */
-void esft_stor_node_object_put_string(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_object_put_string(esft_stor_node_t *node,
                                    const char *key,
                                    const char * value);
 
 /**
  * @brief adds an empty object into array node @p node.
  */
-void esft_stor_node_array_add_obj(esft_stor_node_t *node);
+CSTOR_API void esft_stor_node_array_add_obj(esft_stor_node_t *node);
 
 
 /**
  * @brief adds an empty array into node array @p node.
  */
-void esft_stor_node_array_add_array(esft_stor_node_t *node);
+CSTOR_API void esft_stor_node_array_add_array(esft_stor_node_t *node);
 
 
 /**
  * @brief adds int value @p value into array node @p node,
  */
-void esft_stor_node_array_add_int(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_array_add_int(esft_stor_node_t *node,
                                    int value);
 
 /**
  * @brief adds long value @p value into array node @p node,
  */
-void esft_stor_node_array_add_long(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_array_add_long(esft_stor_node_t *node,
                                     long long value);
 
 /**
  * @brief adds double value @p value into array node @p node,
 */
-void esft_stor_node_array_add_double(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_array_add_double(esft_stor_node_t *node,
                                       double value);
 
 /**
  * @brief adds bool value @p value into array node @p node,
 */
-void esft_stor_node_array_add_bool(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_array_add_bool(esft_stor_node_t *node,
                                     bool value);
 
 /**
  * @brief adds string value @p value into array node @p node,
 */
-void esft_stor_node_array_add_string(esft_stor_node_t *node,
+CSTOR_API void esft_stor_node_array_add_string(esft_stor_node_t *node,
                                       const char * value);
-
-
 
 /**
  * @brief deletes the object esft_stor_node_t
  */
-void esft_stor_node_delete(esft_stor_node_t *node);
+CSTOR_API void esft_stor_node_delete(esft_stor_node_t *node);
 
 #ifdef __cplusplus
 }

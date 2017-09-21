@@ -37,17 +37,15 @@ namespace esft{
 
 
         document::document(document &&o):
-        _id{o._id}
+        _id{std::move(o._id)}
         {
             _rjdoc = std::move(o._rjdoc);
-            o._id.clear();
         }
 
         document &document::operator=(document &&o)
         {
-            _id = o._id;
+            _id = std::move(o._id);
             _rjdoc = std::move(o._rjdoc);
-            o._id.clear();
             return *this;
         }
 

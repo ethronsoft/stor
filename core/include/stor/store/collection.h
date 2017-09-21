@@ -87,8 +87,22 @@ namespace esft {
              */
             void add_index(const index_path &path);
 
+            /**
+             * @brief Add all the index_paths provided by @p ic
+             *
+             * @param ic iterable container of index_paths
+             */
             template<typename indices_container>
             void add_indices(indices_container &&ic);
+
+            /**
+             * @brief Add all the index_paths in the range [beg, end)
+             *
+             * @param beg beginning of the range
+             * @param end one after last element to add in the range
+             */
+            template<typename index_path_iter>
+            void add_indices(index_path_iter beg, index_path_iter end);
 
             /**
              * @brief Return name of collection
@@ -300,12 +314,12 @@ namespace esft {
 
         };
 
-        template <typename indices_container>
-        inline void collection::add_indices(indices_container &&ic) {
+        template<typename index_path_iter>
+        inline void collection::add_indices(index_path_iter beg, index_path_iter end) {
             bool modified = false;
             //targetting begin/end let's us take in intializer_lists too
-            for (auto it = ic.begin(); it != ic.end(); ++it){
-                auto path = *it;
+            for (; beg != end; ++beg){
+                auto path = *beg;
                 if (_indices.count(path) == 0) {
                     _indices.insert(path);
                     modified = true;
@@ -315,6 +329,13 @@ namespace esft {
                 persist();
             }
         }
+
+        template <typename indices_container>
+        inline void collection::add_indices(indices_container &&ic) {
+            add_indices(ic.begin(), ic.end());
+        }
+
+
     }
 }
 

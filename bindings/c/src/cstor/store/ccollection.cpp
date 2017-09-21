@@ -28,6 +28,55 @@ bool esft_stor_collection_index_add(esft_stor_collection_t *c,
     return false;
 }
 
+void esft_stor_collection_indices_add(esft_stor_collection_t *c,
+                                      const char **index_paths,
+                                      size_t len){
+    try{
+        (*c->rep_p)[c->name].add_indices(index_paths,index_paths+len);
+    }catch (...) {}
+}
+
+char ** esft_stor_collection_index_list(esft_stor_collection_t *c,
+                                        size_t *result_len,
+                                        esft_stor_error_t *e){
+    char ** res = nullptr;
+    size_t sz = 0;
+    try{
+        auto indices = (*c->rep_p)[c->name].indices();
+        sz = indices.size();
+        *result_len = sz;
+        res = new char*[sz];
+        size_t i = 0;
+        for (const auto &s: indices){
+            auto str_path = s.str();
+            res[i] = new char[str_path.size()+1];
+            strcpy(res[i],str_path.c_str());
+            ++i;
+        }
+        return res;
+    }catch(std::bad_alloc &ex){
+        *e = out_of_memory;
+    }catch(...){
+        *e = generic_error;
+    }
+    *result_len = 0;
+    esft_stor_collection_index_list_delete(res,sz);
+    return res;
+}
+
+
+void esft_stor_collection_index_list_delete(char ** index_paths,
+                                            size_t len){
+    if (index_paths){
+        for (size_t i = 0; i < len; ++i){
+            delete[] index_paths[i];
+        }
+        delete[] index_paths;
+    }
+}
+
+
+
 bool esft_stor_collection_index_remove_all(esft_stor_collection_t *c){
     try{
         return (*c->rep_p)[c->name].clear_indices();
@@ -107,7 +156,7 @@ esft_stor_document_t** esft_stor_collection_query(esft_stor_collection_t *c,
                 res[i] = new esft_stor_document_t{};
                 //set elements are unmodifiable but because we are not going to use the set
                 //afterward, we can force a move-out
-                res[i]->rep = new esft::stor::document(std::move(*const_cast<esft::stor::document *>(&doc)));
+                res[i]->rep = new esft::stor::document(doc.json(),doc.id());
                 i++;
             }
         }

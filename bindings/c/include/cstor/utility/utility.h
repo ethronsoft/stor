@@ -5,6 +5,8 @@
 #ifndef PYSTOR_UTILITY_H
 #define PYSTOR_UTILITY_H
 
+#include "export.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -12,7 +14,7 @@ extern "C" {
 /**
  * @brief deletes an arbitrary block of memory @p m
  */
-void esft_stor_utils_delete(void *m);
+CSTOR_API void esft_stor_utils_delete(void *m);
 
 #ifdef __cplusplus
 }

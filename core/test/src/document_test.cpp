@@ -214,6 +214,23 @@ TEST_CASE("document creation","[creation]"){
         CHECK(d.is_num());
     }
 
+
+    SECTION("object move"){
+        auto d = document{R"( {"a":1, "b":2.0} )"};
+        CHECK(d.is_object());
+        CHECK(d.size() == 2);
+        auto d2 = std::move(d);
+        CHECK(d2.is_object());
+        CHECK(d2.size() == 2);
+        CHECK(d2.has("a"));
+        CHECK(d2["a"].is_int());
+        CHECK(d2.has("b"));
+        CHECK(d2["b"].is_double());
+
+        CHECK(d.is_null());
+    }
+
+
 }
 
 TEST_CASE("document modification", "[modification]"){
