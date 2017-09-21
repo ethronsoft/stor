@@ -22,7 +22,7 @@ class Collection(object):
         self.__cstor.invoke.esft_stor_collection_delete(self.__ccoll)
 
     def __setup(self):
-        self.__name = self.__cstor.invoke.esft_stor_collection_name(self.__ccoll)
+        self.__name = c_char_p(self.__cstor.invoke.esft_stor_collection_name(self.__ccoll)).value
 
     @property
     def name(self):
@@ -49,7 +49,7 @@ class Collection(object):
         """
         if not isinstance(index_path, basestring):
             raise TypeError("add_index expects an index_path string")
-        return self.__cstor.invoke.esft_stor_collection_index_add(self.__ccoll, index_path)
+        return self.__cstor.invoke.esft_stor_collection_index_add(self.__ccoll, c_char_p(index_path))
 
     def add_indices(self, index_paths):
         """
@@ -113,7 +113,7 @@ class Collection(object):
         if doc_id not in self:
             raise KeyError("Document with id " + doc_id + " is not in the collection: " + self.name)
         err = c_int(self.__cstor.invoke.esft_stor_error_init())
-        cdoc = self.__cstor.invoke.esft_stor_collection_document_get(self.__ccoll, c_char_p(doc_id), byref(err))
+        cdoc = c_void_p(self.__cstor.invoke.esft_stor_collection_document_get(self.__ccoll, c_char_p(doc_id), byref(err)))
         return Document.from_cdocument(self.__cstor,cdoc)
 
     def __contains__(self, doc_id):
@@ -124,7 +124,7 @@ class Collection(object):
         """
         if not isinstance(doc_id, basestring):
             raise TypeError("__getitem__ expects a string")
-        return self.__cstor.invoke.esft_stor_collection_document_exists(self.__ccoll, c_char_p(doc_id))
+        return c_bool(self.__cstor.invoke.esft_stor_collection_document_exists(self.__ccoll, c_char_p(doc_id))).value
 
     def remove(self, doc_id):
         """
@@ -246,6 +246,5 @@ class Collection(object):
             str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
             raise Exception("Failed executing query. Error: " + str_err.value)
         res = [Document.from_cdocument(self.__cstor, res_p[i]) for i in range(res_len.value)]
-        self.__cstor.invoke.esft_stor_collection_query_result_delete(res_p, res_len)
         return res
 

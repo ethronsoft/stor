@@ -83,4 +83,3 @@ def test_db_collection_doc_query():
     assert len(res) == 1
     assert res[0].value == obj
 
-

@@ -43,21 +43,21 @@ class Node(object):
         :return: NodeType
         """
         res = None
-        if self.__cstor.invoke.esft_stor_node_is_object(cnode):
+        if c_bool(self.__cstor.invoke.esft_stor_node_is_object(cnode)).value:
             res = NodeType.OBJECT
-        elif self.__cstor.invoke.esft_stor_node_is_array(cnode):
+        elif c_bool(self.__cstor.invoke.esft_stor_node_is_array(cnode)).value:
             res = NodeType.ARRAY
-        elif self.__cstor.invoke.esft_stor_node_is_int(cnode):
+        elif c_bool(self.__cstor.invoke.esft_stor_node_is_int(cnode)).value:
             res = NodeType.INT
-        elif self.__cstor.invoke.esft_stor_node_is_long(cnode):
+        elif c_bool(self.__cstor.invoke.esft_stor_node_is_long(cnode)).value:
             res = NodeType.LONG
-        elif self.__cstor.invoke.esft_stor_node_is_double(cnode):
+        elif c_bool(self.__cstor.invoke.esft_stor_node_is_double(cnode)).value:
             res = NodeType.FLOAT
-        elif self.__cstor.invoke.esft_stor_node_is_bool(cnode):
+        elif c_bool(self.__cstor.invoke.esft_stor_node_is_bool(cnode)).value:
             res = NodeType.BOOL
-        elif self.__cstor.invoke.esft_stor_node_is_string(cnode):
+        elif c_bool(self.__cstor.invoke.esft_stor_node_is_string(cnode)).value:
             res = NodeType.STRING
-        elif self.__cstor.invoke.esft_stor_node_is_null(cnode):
+        elif c_bool(self.__cstor.invoke.esft_stor_node_is_null(cnode)).value:
             res = NodeType.NULL
         else:
             raise Exception("Could not infer NodeType from cnode")
@@ -94,7 +94,6 @@ class Node(object):
         """
         deletes the cnode via cstor API
         """
-        print "node __del__"
         self.__cstor.invoke.esft_stor_node_delete(self.__node)
 
     def __len__(self):
@@ -104,7 +103,7 @@ class Node(object):
         :return: number of elements in composite node OBJECT or ARRAY
         """
         if self.__type == NodeType.OBJECT or self.__type == NodeType.ARRAY:
-            return self.__cstor.invoke.esft_stor_node_size(self.__node)
+            return c_uint(self.__cstor.invoke.esft_stor_node_size(self.__node)).value
         else:
             raise TypeError("__len__ can only be called on a node of NodeType OBJECT or ARRAY")
 
@@ -153,7 +152,7 @@ class Node(object):
             step = item.step if item.step else 1
             res = []
             for i in range(start, stop, step):
-                cnode = self.__cstor.invoke.esft_stor_node_array_get(self.__node, c_int(i), byref(err))
+                cnode = c_void_p(self.__cstor.invoke.esft_stor_node_array_get(self.__node, c_uint(i), byref(err)))
                 if err.value:
                     self.__cstor.invoke.esft_stor_node_delete(cnode)
                     str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
@@ -165,7 +164,7 @@ class Node(object):
                 raise Exception("Invalid __getitem__ arg: NodeType is not ARRAY")
             if item >= len(self):
                 raise IndexError("Array Node index out of range: " + str(item))
-            cnode = self.__cstor.invoke.esft_stor_node_array_get(self.__node, c_int(item), byref(err))
+            cnode = c_void_p(self.__cstor.invoke.esft_stor_node_array_get(self.__node, c_uint(item), byref(err)))
             if err.value:
                 self.__cstor.invoke.esft_stor_node_delete(cnode)
                 str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
@@ -176,7 +175,7 @@ class Node(object):
                 raise TypeError("Invalid __getitem__ arg: NodeType is not OBJECT")
             if item not in self:
                 raise KeyError("Object Node does not have key: " + item)
-            cnode = self.__cstor.invoke.esft_stor_node_object_get(self.__node, c_char_p(item), byref(err))
+            cnode = c_void_p(self.__cstor.invoke.esft_stor_node_object_get(self.__node, c_char_p(item), byref(err)))
             if err.value:
                 self.__cstor.invoke.esft_stor_node_delete(cnode)
                 str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
@@ -214,15 +213,15 @@ class Node(object):
         elif self.__type == NodeType.NULL:
             return None
         elif self.__type == NodeType.INT:
-            return self.__cstor.invoke.esft_stor_node_as_int(self.__node)
+            return c_int(self.__cstor.invoke.esft_stor_node_as_int(self.__node)).value
         elif self.__type == NodeType.LONG:
-            return self.__cstor.invoke.esft_stor_node_as_long(self.__node)
+            return c_longlong(self.__cstor.invoke.esft_stor_node_as_long(self.__node)).value
         elif self.__type == NodeType.FLOAT:
-            return self.__cstor.invoke.esft_stor_node_as_double(self.__node)
+            return c_double(self.__cstor.invoke.esft_stor_node_as_double(self.__node)).value
         elif self.__type == NodeType.BOOL:
-            return self.__cstor.invoke.esft_stor_node_as_bool(self.__node)
+            return c_bool(self.__cstor.invoke.esft_stor_node_as_bool(self.__node)).value
         elif self.__type == NodeType.STRING:
-            return self.__cstor.invoke.esft_stor_node_as_string(self.__node)
+            return c_char_p(self.__cstor.invoke.esft_stor_node_as_string(self.__node)).value
         else:
             raise TypeError("Invalid NodeType")
 
@@ -237,7 +236,7 @@ class Node(object):
         """
         value_type = self.__get_ptype(value)
         err = c_int(self.__cstor.invoke.esft_stor_error_init())
-        self.__cstor.invoke.esft_stor_node_from_json(self.__node, json.dumps(value), byref(err))
+        self.__cstor.invoke.esft_stor_node_from_json(self.__node, c_char_p(json.dumps(value)), byref(err))
         if err:
             str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
             raise Exception("Could not set node value. Error: " + str_err.value)
@@ -312,7 +311,7 @@ class Document(Node):
         Creates a document from an existing cdocument object
         """
         err = c_int(cstor_functs.invoke.esft_stor_error_init())
-        cnode = cstor_functs.invoke.esft_stor_document_root(cdoc, byref(err))
+        cnode = c_void_p(cstor_functs.invoke.esft_stor_document_root(cdoc, byref(err)))
         if err.value:
             cstor_functs.invoke.esft_stor_document_delete(cdoc)
             str_err = c_char_p(cstor_functs.invoke.esft_stor_error_string(err))
@@ -336,7 +335,7 @@ class Document(Node):
 
     def __setup(self, json):
         err = c_int(self.__cstor.invoke.esft_stor_error_init())
-        self.__doc = self.__cstor.invoke.esft_stor_document_create(c_char_p(json), byref(err))
+        self.__doc = c_void_p(self.__cstor.invoke.esft_stor_document_create(c_char_p(json), byref(err)))
         if err.value:
             str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
             raise Exception("Could not intitialize Document. Error: " + str_err.value)
@@ -344,7 +343,7 @@ class Document(Node):
         if not self.__id:
             self.__cstor.invoke.esft_stor_document_delete(self.__doc)
             raise Exception("Document did not return a valid ID")
-        cnode = self.__cstor.invoke.esft_stor_document_root(self.__doc, byref(err))
+        cnode = c_void_p(self.__cstor.invoke.esft_stor_document_root(self.__doc, byref(err)))
         if err.value:
             self.__cstor.invoke.esft_stor_document_delete(self.__doc)
             str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
@@ -358,6 +357,4 @@ class Document(Node):
         :return: UUID
         """
         return self.__id
-
-
 

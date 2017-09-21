@@ -17,6 +17,12 @@ if(WIN32)
             COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_BINARY_DIR}/pydeps/libcstor.dll
             ${CMAKE_SOURCE_DIR}/deps/libcstor.dll)
+elseif(APPLE)
+    add_custom_command(
+            TARGET ${PROJECT_NAME}_setup POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_BINARY_DIR}/pydeps/libcstor.dylib
+            ${CMAKE_SOURCE_DIR}/deps/libcstor.dylib)
 else()
     add_custom_command(
             TARGET ${PROJECT_NAME}_setup POST_BUILD

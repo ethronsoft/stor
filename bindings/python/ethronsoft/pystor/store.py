@@ -1,7 +1,8 @@
+from __future__ import print_function
 from collection import *
 
 def esft_default_encrypt_failure_cb():
-    print "Failed encrypting DB"
+    print("Failed encrypting DB. DB left unencrypted in valid state.")
 
 class Store(object):
     """
@@ -28,27 +29,27 @@ class Store(object):
     def __setup(self, **kwargs):
         err = c_int(self.__cstor.invoke.esft_stor_error_init())
         if not kwargs["password"]:
-            self.__db = self.__cstor.invoke.esft_stor_store_open(c_char_p(kwargs["db_home"]),
+            self.__db = c_void_p(self.__cstor.invoke.esft_stor_store_open(c_char_p(kwargs["db_home"]),
                                                                  c_char_p(kwargs["db_name"]),
                                                                  c_bool(kwargs["temp"]),
-                                                                 byref(err))
+                                                                 byref(err)))
             if err.value:
                 str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
                 raise Exception("Failed intializing db {0} at {1}. Error: {2}".format(kwargs["db_name"],
                                                                                       kwargs["db_home"],str_err.value))
         else:
             enc_callback = ENCRYPT_CALLBACK(kwargs["enc_cb"])
-            self.__db = self.__cstor.invoke.esft_stor_store_open_encrypted(c_char_p(kwargs["db_home"]),
+            self.__db = c_void_p(self.__cstor.invoke.esft_stor_store_open_encrypted(c_char_p(kwargs["db_home"]),
                                                                  c_char_p(kwargs["db_name"]),
                                                                  c_char_p(kwargs["password"]),
                                                                  enc_callback,
-                                                                 byref(err))
+                                                                 byref(err)))
             if err.value:
                 str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
                 raise Exception("Failed intializing encrypted db {0} at {1}. Error: {2}".format(kwargs["db_name"],
                                                                                                 kwargs["db_home"],
                                                                                                 str_err.value))
-        self.__home = self.__cstor.invoke.esft_stor_store_home(self.__db)
+        self.__home = c_char_p(self.__cstor.invoke.esft_stor_store_home(self.__db))
 
     @property
     def home(self):
@@ -56,7 +57,7 @@ class Store(object):
         Returns the path where the store files are allocated
         :return: path of store
         """
-        return self.__home
+        return self.__home.value
 
     @property
     def async(self):
@@ -72,7 +73,7 @@ class Store(object):
         
         :return: True if in async mode, False if not
         """
-        return self.__cstor.invoke.esft_stor_store_is_async(self.__db)
+        return c_bool(self.__cstor.invoke.esft_stor_store_is_async(self.__db)).value
 
     @async.setter
     def async(self, value):
@@ -94,7 +95,7 @@ class Store(object):
         if not isinstance(collection_name, basestring):
             raise TypeError("expected name of a collection as a string")
         err = c_int(self.__cstor.invoke.esft_stor_error_init())
-        ccoll = self.__cstor.invoke.esft_stor_store_collection(self.__db, c_char_p(collection_name), byref(err))
+        ccoll = c_void_p(self.__cstor.invoke.esft_stor_store_collection(self.__db, c_char_p(collection_name), byref(err)))
         if err.value:
             str_err = c_char_p(self.__cstor.invoke.esft_stor_error_string(err))
             raise Exception("Failed getting collection with name {0}. Error: {1}".format(collection_name, str_err.value))
@@ -119,3 +120,4 @@ class Store(object):
         if not isinstance(collection_name, basestring):
             raise TypeError("expected name of a collection as a string")
         return self.__cstor.invoke.esft_stor_store_collection_remove(self.__db, c_char_p(collection_name))
+
