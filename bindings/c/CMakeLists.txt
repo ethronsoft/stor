@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(cstor)
 
 #project version
-set(VERSION 0.0.1)
+set(VERSION 0.9.0)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall ")
 

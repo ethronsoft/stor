@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(pystor)
 
 #project version
-set(VERSION 0.0.1)
+set(VERSION 0.9.0)
 
 option(STOR_CRYPTO "Enable database encrpytion facilities" OFF)
 set( CMAKE_BUILD_TYPE "Release" )

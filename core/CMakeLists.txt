@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(stor)
 
 #project version
-set(VERSION 0.0.1)
+set(VERSION 0.9.0)
 
 #### options ###
 #enable crypto (set ON either here or from command line with -DSTOR_CRYPTO=ON
