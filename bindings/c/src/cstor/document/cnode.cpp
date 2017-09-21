@@ -6,6 +6,7 @@
 #include <internal/opaque_types.h>
 #include <cstring>
 #include <cassert>
+#include <stdint.h>
 
 extern "C" {
 
@@ -316,7 +317,7 @@ void esft_stor_node_object_put_long(esft_stor_node_t *node,
                                     long long value){
     assert(node->rep->is_object());
     try{
-        node->rep->put(key,value);
+        node->rep->put(key, int64_t(value));
     }catch (...) {}
 }
 
@@ -382,7 +383,7 @@ void esft_stor_node_array_add_long(esft_stor_node_t *node,
                                    long long value){
     assert(node->rep->is_array());
     try{
-        node->rep->add(value);
+        node->rep->add(int64_t(value));
     }catch (...) {}
 }
 

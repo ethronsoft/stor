@@ -48,23 +48,26 @@ SET(CSTOR_LINK_DIRS
         ${leveldb_ROOT_DIR}/bin
         )
 
-SET(CSTOR_TEST_LIBRARIES
-        stor
-        leveldb
-        pthread )
-
 #platform specific configurations
 if(WIN32)
     add_definitions(-DWIN32 -DTEMP_DIR="C:/Temp/")
-    SET(CSTOR_TEST_LIBRARIES ${CSTOR_TEST_LIBRARIES}
+    SET(CSTOR_TEST_LIBRARIES
+            stor
+            leveldb
+            pthread
             shlwapi)
 elseif(APPLE)
     add_definitions(-DUNIX -DOSX -DTEMP_DIR="/tmp/")
-
+    SET(CSTOR_TEST_LIBRARIES
+            stor
+            leveldb
+            pthread)
 elseif(UNIX)
     add_definitions(-DUNIX -DTEMP_DIR="/tmp/")
-    SET(CSTOR_TEST_LIBRARIES ${CSTOR_TEST_LIBRARIES}
-            dl)
+    SET(CSTOR_TEST_LIBRARIES
+            stor_static_pic
+            leveldb
+            pthread)
 endif()
 
 # optional directories

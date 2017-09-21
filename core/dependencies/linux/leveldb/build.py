@@ -18,8 +18,9 @@ def finalize(root, install_path):
 		shutil.rmtree(inc_dir, ignore_errors=True)
 	os.makedirs(bin_dir)
 	shutil.copy(os.path.join(root,"source","out-static","libleveldb.a"),bin_dir)
+	# shutil.copy(os.path.join(root,"source","out-shared","libleveldb.so"),bin_dir)
 	shutil.copytree(os.path.join(root,"source","include"),inc_dir)
-	open(os.path.join(install_path,".built"))
+	open(os.path.join(install_path,".built"), "w")
 
 def clean(root):
 	os.chdir(os.path.join(root,"source"))

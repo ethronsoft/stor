@@ -138,7 +138,6 @@ elseif (UNIX)
 	SET(TEST_LINKS
 			leveldb
 			pthread
-			dl
 			)
 
 endif()
@@ -177,6 +176,8 @@ link_directories(${STOR_LINK_DIRS})
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 
+add_library(${PROJECT_NAME}_static_pic STATIC ${SOURCE_FILES})
+
 add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
 		test/src/main.cpp
 		test/src/document_test.cpp
@@ -187,3 +188,5 @@ add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
 		test/src/access_manager_test.cpp)
 
 target_link_libraries(${PROJECT_NAME}_test ${TEST_LINKS})
+
+set_property(TARGET ${PROJECT_NAME}_static_pic PROPERTY POSITION_INDEPENDENT_CODE ON)

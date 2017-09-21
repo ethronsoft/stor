@@ -25,7 +25,7 @@ def finalize(root,install_path):
 	shutil.copy(os.path.join(root,"source","libssl.a"),bin_dir)
 	shutil.copy(os.path.join(root,"source","libcrypto.a"),bin_dir)
 	shutil.copytree(os.path.join(root,"source","include"), inc_dir)
-	open(os.path.join(install_path,".built"))
+	open(os.path.join(install_path,".built"),"w")
 
 if __name__=="__main__":
 	parser = argparse.ArgumentParser()
