@@ -227,7 +227,6 @@ TEST_CASE("document creation","[creation]"){
         CHECK(d2.has("b"));
         CHECK(d2["b"].is_double());
 
-        CHECK(d.is_null());
     }
 
 

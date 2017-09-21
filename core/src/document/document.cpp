@@ -40,12 +40,19 @@ namespace esft{
         _id{std::move(o._id)}
         {
             _rjdoc = std::move(o._rjdoc);
+            set_document(&_rjdoc);
+            set_underlying(&_rjdoc);
         }
 
         document &document::operator=(document &&o)
         {
             _id = std::move(o._id);
             _rjdoc = std::move(o._rjdoc);
+            set_document(&_rjdoc);
+            set_underlying(&_rjdoc);
+
+            o.set_document(nullptr);
+            o.set_underlying(nullptr);
             return *this;
         }
 
