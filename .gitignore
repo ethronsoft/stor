@@ -1,4 +1,5 @@
 **/.idea
+**/dependencies/**/.built
 **/dependencies/**/bin
 **/dependencies/dependencies.cmake
 **/dependencies/*/openssl/include

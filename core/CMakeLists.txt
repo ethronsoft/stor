@@ -92,7 +92,7 @@ if(WIN32)
 			pthread )
 
 elseif(APPLE)
-	add_definitions(-DUNIX -DOSX -DTEMP_DIR=/tmp/)
+	add_definitions(-DUNIX -DOSX -DTEMP_DIR="/tmp/")
 
 	#dependencies injection
 	if(STOR_CRYPTO)
@@ -116,7 +116,7 @@ elseif(APPLE)
 			pthread)
 
 elseif (UNIX)
-	add_definitions(-DUNIX -DTEMP_DIR=/tmp/)
+	add_definitions(-DUNIX -DTEMP_DIR="/tmp/")
 
 	#dependencies injection
 	if(STOR_CRYPTO)
