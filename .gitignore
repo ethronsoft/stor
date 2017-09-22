@@ -3,6 +3,7 @@
 **/dependencies/**/bin
 **/dependencies/dependencies.cmake
 **/dependencies/*/openssl/include
+**/dependencies/*/leveldb/include
 **/cmake-build*
 **/build
 **/dist
