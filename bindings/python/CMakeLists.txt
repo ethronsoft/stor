@@ -16,19 +16,19 @@ if(WIN32)
             TARGET ${PROJECT_NAME}_setup POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_BINARY_DIR}/pydeps/libcstor.dll
-            ${CMAKE_SOURCE_DIR}/deps/libcstor.dll)
+            ${CMAKE_SOURCE_DIR}/ethronsoft/pystor/bin/libcstor.dll)
 elseif(APPLE)
     add_custom_command(
             TARGET ${PROJECT_NAME}_setup POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_BINARY_DIR}/pydeps/libcstor.dylib
-            ${CMAKE_SOURCE_DIR}/deps/libcstor.dylib)
+            ${CMAKE_SOURCE_DIR}/ethronsoft/pystor/bin/libcstor.dylib)
 else()
     add_custom_command(
             TARGET ${PROJECT_NAME}_setup POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_BINARY_DIR}/pydeps/libcstor.so
-            ${CMAKE_SOURCE_DIR}/deps/libcstor.so)
+            ${CMAKE_SOURCE_DIR}/ethronsoft/pystor/bin/libcstor.so)
 endif()
 
 

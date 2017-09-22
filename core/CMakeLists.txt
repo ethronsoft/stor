@@ -138,6 +138,7 @@ elseif (UNIX)
 	SET(TEST_LINKS
 			leveldb
 			pthread
+			dl
 			)
 
 endif()
@@ -163,9 +164,10 @@ if(STOR_CRYPTO)
 			${openssl_ROOT_DIR}/include)
 	SET(STOR_LINK_DIRS ${STOR_LINK_DIRS}
 			${openssl_ROOT_DIR}/bin)
-	SET(TEST_LINKS ${TEST_LINKS}
+	SET(TEST_LINKS
 			ssl
-			crypto)
+			crypto
+			${TEST_LINKS})
 endif(STOR_CRYPTO)
 
 #targets

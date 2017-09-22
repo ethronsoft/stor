@@ -44,8 +44,8 @@ class Cstor(object):
     @classmethod
     def load(cls):
         up = lambda x: os.path.dirname(x)
-        root_dir = up(up(up(os.path.abspath(__file__))))
-        deps_dir = os.path.join(root_dir, "deps")
+        root_dir = up(os.path.abspath(__file__))
+        deps_dir = os.path.join(root_dir, "bin")
         dep_name = ""
         if os.path.exists(deps_dir):
             m = glob.glob(os.path.join(deps_dir,"libcstor*"))

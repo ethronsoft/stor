@@ -4,7 +4,6 @@ import subprocess
 import os
 
 def build_dep(root_path, force=False):
-	print root_path
 	build_script = os.path.join(root_path,"build.py")
 	clean_script = os.path.join(root_path, "clean.py")
 	is_built = os.path.join(root_path,".built")

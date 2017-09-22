@@ -4,9 +4,11 @@ setup(
     name="pystor",
     version="0.9.0",
     author="Ethronsoft",
+    zip_safe=False,
     packages=["ethronsoft","ethronsoft/pystor"],
     namespace_packages = ['ethronsoft'],
     license=open("LICENSE.txt").read(),
+    include_package_data=True,
     install_requires=[
         'enum34'
     ],

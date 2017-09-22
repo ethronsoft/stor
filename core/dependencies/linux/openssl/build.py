@@ -6,7 +6,9 @@ import subprocess
 
 def build(root, install_path):
 	os.chdir(os.path.join(root,"source"))
-	subprocess.check_call("/bin/sh ./config no-shared no-asm", shell=True)
+	#forcing fPIC to allow resulting static lib to be linked
+	#into a shared lib
+	subprocess.check_call("/bin/sh ./config no-shared no-asm -fPIC", shell=True)
 	subprocess.check_call("make build_libs", shell=True)
 
 def finalize(root, install_path):

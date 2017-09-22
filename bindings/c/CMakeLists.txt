@@ -67,7 +67,8 @@ elseif(UNIX)
     SET(CSTOR_TEST_LIBRARIES
             stor_static_pic
             leveldb
-            pthread)
+            pthread
+            dl)
 endif()
 
 # optional directories
@@ -77,9 +78,10 @@ if(STOR_CRYPTO)
             ${openssl_ROOT_DIR}/include)
     SET(CSTOR_LINK_DIRS ${CSTOR_LINK_DIRS}
             ${openssl_ROOT_DIR}/bin)
-    SET(CSTOR_TEST_LIBRARIES ${CSTOR_TEST_LIBRARIES}
+    SET(CSTOR_TEST_LIBRARIES
             ssl
-            crypto)
+            crypto
+            ${CSTOR_TEST_LIBRARIES})
 endif(STOR_CRYPTO)
 
 # targets

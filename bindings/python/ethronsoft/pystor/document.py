@@ -357,4 +357,3 @@ class Document(Node):
         :return: UUID
         """
         return self.__id
-
