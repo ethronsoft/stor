@@ -1,6 +1,7 @@
 import argparse
 import subprocess
 import os
+import sys
 import shutil
 
 def root():
@@ -16,7 +17,11 @@ def build_binaries(root, with_ssl):
     if not os.path.exists(build_dir):
         os.makedirs(build_dir)
     os.chdir(build_dir)
-    subprocess.check_call("cmake -DSTOR_CRYPTO={0} ../".format(ssl_opt), shell=True)
+    cpp_flags = "-m64"
+    c_flags = "-m64"
+    generator = "Unix Makefiles" if (sys.platform != "win32") else "MinGW Makefiles"
+    subprocess.check_call("cmake -DCMAKE_CXX_FLAGS={0} -DCMAKE_C_FLAGS={1} -G \"{2}\" -DSTOR_CRYPTO={3} ../".
+                          format(cpp_flags, c_flags, generator, ssl_opt), shell=True)
     subprocess.check_call("cmake --build . --target pystor_setup", shell=True)
 
 if __name__ == "__main__":
