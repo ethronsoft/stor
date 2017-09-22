@@ -43,14 +43,69 @@ in the respective folder under dependencies/.
     Boost UUID dependencies, extracted with the bcp utility (http://www.boost.org/doc/libs/1_64_0/tools/bcp/doc/html/index.html)
     are also included. If you already have Boost headers on the PATH g++ looks into for headers, then you may remove
     it from the dependencies/build.py and remove boost_uuid_ROOT_DIR from CmakeLists.txt.
-
-    if compiling with STOR_CRYPTO flag, openSSL will also be built. On the MinGW platform, you are likely to get the most trouble.
-	If something goes wrong try to run dependencies/build.py from unix-friendly shell (like git-shell).
-	Perl is a requirement to Configure openssl, so make sure you have it. If you are not able to get openssl/build.py to work,
-	compile openssl through whatever mean you find and put the following files/folders in the dependencies/mingw/openssl folder:
-	- `include` directory that contains the `openssl` folder that contains all openssl headers
-	- `bin` folder that contains libssl.a, libcrypto.a 
-	- `.built` file to tell the dependencies.build.py that the depedency has been built
     
-    When linking libstor.a to your own executable, you may want to take note of the dependencies linked with the `stor_test` target
+    Tip: When linking libstor.a to your own executable, you may want to take note of the dependencies linked with the `stor_test` target
     for each platform and replicate the linking them in your own executable. 
+    
+Install:
+
+esft::stor uses Cmake.
+To build the library, make an out of source directory
+   
+   `mkdir stor_build`
+
+Then setup the project Cmake cache and relative files that will be used during the build
+
+   `chdir stor_build`
+   `cmake [OPT] ../stor`
+   
+   Note:
+   
+     OPT refers to the various CMake options you can use, such as `-G "Unix Makefiles`. This is the place
+     where to use `-DSTOR_CRYPTO` if you plan on using the encrypting facilities of the database.
+
+Then build the desired target
+
+   `cmake --build . --target stor`
+
+And run the tests:
+
+   `cmake --build . --target stor_test`
+   `./stor_test`
+    
+# CSTOR
+CSTOR is the C binding of esft::stor
+
+The sources are located in bindings/c
+
+CSTOR uses Cmake like esft::stor so installation follows the same guideline
+
+The test target is `cstor_test` and the shared library target is `cstor`
+
+    Note:
+    As with esft::stor, you can specify -DSTOR_CRYPTO if desired. 
+
+
+# PYSTOR
+PYSTOR is the Python binding of esft::stor
+
+The sources are located in bindings/python
+
+Install: 
+
+Pystor uses CSTOR as the interface to esft::stor via `ctypes` (https://docs.python.org/2/library/ctypes.html)
+so the shared library libcstor has to be built.
+
+To build libcstor, proceed with setting up cmake as noted above (again, -DSTOR_CRYPTO can be specified)
+and then invoke the cmake target `pystor_setup`
+Alternatively, the script bindinds/python/build.py may be invoked.
+
+After having setup pystor, the shared library libcstor will be placed in the python package and you can proceed
+with invoking the following command
+
+`python setup.py install`
+
+to complete the installation. 
+
+# WIKI
+TODO
