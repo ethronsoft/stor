@@ -8,5 +8,5 @@
 **/dist
 **/*egg*
 **/.cache
-bindings/python/deps/*
+bindings/python/ethronsoft/pystor/bin/*
 bindings/python/**/*.pyc
