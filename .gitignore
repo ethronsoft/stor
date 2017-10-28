@@ -11,3 +11,4 @@
 **/.cache
 bindings/python/ethronsoft/pystor/bin/*
 bindings/python/**/*.pyc
+**/_build
