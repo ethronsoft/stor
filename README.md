@@ -1,3 +1,7 @@
+**For a more complete Documentation**, refer to http://esft-stor.readthedocs.io/en/latest/
+
+_________
+
 # esft::stor
 C++ serverless NoSQL document-store 
 
@@ -107,5 +111,3 @@ with invoking the following command
 
 to complete the installation. 
 
-# WIKI
-TODO
