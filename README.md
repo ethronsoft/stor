@@ -1,5 +1,7 @@
 **For a more complete Documentation**, refer to http://esft-stor.readthedocs.io/en/latest/
 
+**Note**: Pull requests not accepted until February 2018, as this is part of my MSc thesis project.
+          
 _________
 
 # esft::stor
