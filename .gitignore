@@ -10,5 +10,5 @@
 **/*egg*
 **/.cache
 bindings/python/ethronsoft/pystor/bin/*
-bindings/python/**/*.pyc
+**/*.pyc
 **/_build
