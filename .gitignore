@@ -12,3 +12,4 @@
 bindings/python/ethronsoft/pystor/bin/*
 **/*.pyc
 **/_build
+**/__pycache__
