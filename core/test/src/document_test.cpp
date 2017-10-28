@@ -336,9 +336,11 @@ TEST_CASE("document streams","[streams]"){
 TEST_CASE("document uniqueness","[doc_uniqueness]")
 {
     document prev;
-    for (int i = 0; i < 10; ++i){
+    bool ok = true;
+    for (int i = 0; i < 1000; ++i){
         document n;
-        CHECK(n.id() != prev.id());
+        ok &= (n.id() != prev.id());
         prev = std::move(n);
     }
+    CHECK(ok);
 }
