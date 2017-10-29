@@ -61,9 +61,9 @@ Platforms targeted are:
  - Android & iOS (in progress; it just needs CMake toolchain adjustments)
 
 Compilers we tested:
-  - MinGW v.
-  - GNU C++ v. on Ubuntu
-  - Clang v. on Mac OSX
+  - MinGW GCC (by `TDM <http://tdm-gcc.tdragon.net/>`_, 64bit) version 5.1.0 
+  - GCC v. on Ubuntu
+  - Clang v. 600.0.65 (LLVM 6.0) on Mac OSX
 
 
 Dependencies:
