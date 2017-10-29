@@ -91,7 +91,7 @@ Navigation
         if "key" in node or "key2" not in node:
             print node["key"].value
         
-    **From an Array Node**, you can navigate the members node, like you would in a list::
+    **From an Array Node**, you can navigate the member nodes, like you would in a list::
     
         for item in node:
             print item.value
@@ -104,8 +104,8 @@ Navigation
             
     And check in an item is in the Node, like so::
     
-        if "hello" in node or other_item not in node::
-            print "eureka!"
+        if "Graal" in node or other_item not in node::
+            print "Eureka!"
             
 
 Modification
@@ -182,7 +182,7 @@ You can remove a collection, like so::
 CRUD Documents in a Collection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Given a document `doc`, we can add it in a Collection, like so::
+Given a document `doc`, we can add it to a Collection, like so::
 
     my_collection.put(doc)
     

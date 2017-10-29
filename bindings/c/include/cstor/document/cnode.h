@@ -11,6 +11,11 @@
 #include <cstor/utility/export.h>
 
 
+/**
+ * @file cnode.h
+ * @brief C Bindings for node.h
+ **/
+
 #ifdef __cplusplus
 extern "C" {
 #endif

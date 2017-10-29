@@ -31,7 +31,10 @@ namespace esft{
         class store final{
         public:
 
-
+            /**
+             * @brief function type for callback to provide during construction
+             * of an encrypted store, to be notified if encryption failed.
+             */
             typedef std::function<void()> encryption_failure_handler;
 
             /**

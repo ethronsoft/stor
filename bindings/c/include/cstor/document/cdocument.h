@@ -10,6 +10,10 @@
 #include <cstor/document/cnode.h>
 #include <cstor/utility/export.h>
 
+/**
+ * @file cdocument.h
+ * @brief C Bindings for document.h
+ **/
 
 #ifdef __cplusplus
 extern "C" {

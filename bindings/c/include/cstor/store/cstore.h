@@ -7,6 +7,11 @@
 
 #include <cstor/errors/errors.h>
 
+/**
+ * @file cstore.h
+ * @brief C Bindings for store.h
+ **/
+
 #ifdef __cplusplus
 extern "C" {
 #endif

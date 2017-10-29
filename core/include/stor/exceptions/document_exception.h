@@ -16,6 +16,11 @@ namespace esft{
          */
         class document_exception: public std::runtime_error{
         public:
+
+            /**
+             * @brief Contructor
+             * @param msg error message
+             */
             document_exception(const std::string &msg) : runtime_error(msg) { }
         };
     }

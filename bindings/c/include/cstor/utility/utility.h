@@ -7,6 +7,11 @@
 
 #include "export.h"
 
+/**
+ * @file utility.h
+ * @brief General utility functions
+ **/
+
 #ifdef __cplusplus
 extern "C" {
 #endif

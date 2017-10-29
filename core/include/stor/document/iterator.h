@@ -11,6 +11,10 @@ namespace stor{
     class node;
     class const_iterator;
 
+
+    /**
+     * @brief iterator allows to iterate over read-write nodes
+     */
     class iterator {
         friend class node;
         /**

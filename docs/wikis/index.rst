@@ -19,8 +19,9 @@ STOR
     tutorial/cpp
     tutorial/c
     tutorial/py
-
-
+    api/cpp/modules
+    api/c/modules
+    api/py/modules
 
       
 
@@ -31,7 +32,7 @@ STOR is a multiplatform server-less*, embeddable** NoSQL Document Store written 
 
 (*), (**)
 Similar to `SQLite <https://www.sqlite.org/>`_, STOR does not operate in a client-server scenario.
-Rather, you include it/link against it in your project and it works within a single process. 
+Rather, you include it/link to it in your project and it works within a single process. 
 
 The major features are the following:
  - Create/Modify/Delete **JSON Documents**
@@ -94,18 +95,17 @@ Installation
 API Docs
 --------
 
-C++ source documentation:
 
-C source documentation:
-
-Python source documentation:
+ - `STOR API <_static/api/cpp/html/index.html>`_
+ - `C Bindings API <_static/api/c/html/index.html>`_
+ - :ref:`py-api`
 
 Tutorials
 ---------
  
- :ref:`cpp-tut`
- :ref:`c-bindings-tut`
- 
+  - :ref:`cpp-tut`
+  - :ref:`c-bindings-tut`
+  - :ref:`py-tut`
 
  
 

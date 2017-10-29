@@ -23,11 +23,14 @@ namespace esft{
         class or_instruction: public query_instruction{
         public:
 
+            /**
+             * @brief Constructor
+             */
             or_instruction();
 
             virtual std::unordered_set<std::string> execute(const collection &c,const leveldb::ReadOptions &ro) const override;
 
-            virtual void add_child(std::unique_ptr<query_instruction> ptr);
+            virtual void add_child(std::unique_ptr<query_instruction> ptr) override;
 
         private:
             std::vector<std::unique_ptr<query_instruction>> _children;

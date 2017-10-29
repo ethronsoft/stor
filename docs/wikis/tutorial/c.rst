@@ -31,7 +31,7 @@ Generally speaking, the **differences boil down to**:
 .. note::
     
     Memory Ownership Strategy:
-     - Any API that succesfully returns a resource to you, is effectively transfering 
+     - Any API that successfully returns a resource to you, is effectively transferring 
        ownership of that resource to you. Unless the allocation failed and you are returned
        an error code. In that case, any middle-resource created internally is already been cleared
        for you.
@@ -39,7 +39,7 @@ Generally speaking, the **differences boil down to**:
      - If API asks you to provide a resource, you are not transfering ownership to CSTOR.
        You are still responsible for releasing that resource.
     
-    We will provide a list of **ownership-transferring** functions for each sections, with their relative
+    We will provide a list of **ownership-transferring** functions for each section, with their relative
     clean up functions. These functions are also explicitly marked in the API documentation.
 
 .. note::

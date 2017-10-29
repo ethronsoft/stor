@@ -36,18 +36,19 @@ And proceed with "setting up" the python project::
 .. note::
     **Alternatively**, you can do::
         
-        python stor/bindinds/python/build.py
+        python stor/bindings/python/build.py
         
     which will do the above building and setup for you.  
     Consult::
-        python stor/bindinds/python/build.py --help 
+    
+        python stor/bindings/python/build.py --help 
   
 What this setup is doing is simply copy the shared library cstor into
 the python project source, so that it may be packaged with it via `setup.py`
 
 After setup, the python package can be installed normally::
 
-    chdir ../stor/bindinds/python
+    chdir ../stor/bindings/python
     python setup.py install 
 
 .. note::

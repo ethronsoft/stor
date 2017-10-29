@@ -33,6 +33,11 @@ namespace esft {
 
         class lte_instruction;
 
+        /**
+         * @brief collection is a logical partition of a store,
+         * where documents representing similar or correlated entities
+         * can be added.
+         */
         class collection final {
         public:
             friend class store;

@@ -4,7 +4,7 @@ class Collection(object):
     """
     A Collection exposes the interface of ccollection.
     Collections are the components of a store
-    and they are composed by documents
+    and they are composed by documents.
     A collection allows to perform CRUD operations
     over the documents it owns
     """
@@ -38,11 +38,14 @@ class Collection(object):
         Index paths allow the collection to be query-able,
         via collection.find, by that index path.
 
-        index_path syntax:
-        Given a document with JSON:
-        {
-          'a': {'b' :1}
-        }
+        **index_path syntax**
+        
+        Given a document with JSON::
+        
+            {
+              'a': {'b' :1}
+            }
+        
         the index path to query the value 1 would be 'a.b'
 
         :return: True if operation had effect, False if not
@@ -53,7 +56,7 @@ class Collection(object):
 
     def add_indices(self, index_paths):
         """
-        adds all the indices provided in interable @p index_paths
+        adds all the indices provided in interable ``index_paths``
         """
         index_arr_type = len(index_paths) * c_char_p
         index_arr = index_arr_type()
@@ -91,7 +94,7 @@ class Collection(object):
 
     def put(self, doc):
         """
-        Inserts/Replaces Document @p doc into the Collection
+        Inserts/Replaces Document ``doc`` into the Collection
         :param doc: document to insert/replace
         """
         if not isinstance(doc, Document):
@@ -104,11 +107,11 @@ class Collection(object):
 
     def __getitem__(self, doc_id):
         """
-        Returns the Document with id @p doc_id from the Collection. If the Document
+        Returns the Document with id ``doc_id`` from the Collection. If the Document
         does is not in the Collection, raise KeyError.
         :param doc_id: Document id of the Document to return
         :raise: KeyError if doc_id not in the collection
-        :return: Document with id @p doc_id
+        :return: Document with id ``doc_id``
         """
         if doc_id not in self:
             raise KeyError("Document with id " + doc_id + " is not in the collection: " + self.name)
@@ -118,9 +121,9 @@ class Collection(object):
 
     def __contains__(self, doc_id):
         """
-        Checks whether a Document with id @p doc_id is in the Collection
+        Checks whether a Document with id ``doc_id`` is in the Collection
         :param doc_id: Document id of the Document to check for existence
-        :return: True if Document with id @p doc_id exists, False if not
+        :return: True if Document with id ``doc_id`` exists, False if not
         """
         if not isinstance(doc_id, basestring):
             raise TypeError("__getitem__ expects a string")
@@ -128,7 +131,7 @@ class Collection(object):
 
     def remove(self, doc_id):
         """
-        Removes the Document (if it exists) with id @p doc_id from the Collection
+        Removes the Document (if it exists) with id ``doc_id`` from the Collection
         :param doc_id: id of the Document to remove
         :return: True if operation had effect, False if not
         """
@@ -136,99 +139,113 @@ class Collection(object):
 
     def find(self, query_string):
         """
-        Executes query @p query_string against the database and returns a list of
+        Executes query ``query_string`` against the database and returns a list of
         Documents that matched the query.
 
         Query syntax:
 
-        OP can be of type NODE or LEAF
+        OP can be of type NODE or LEAF::
 
-        { "$NODE-OP": [OP, ...., OP] }
-        { "$LEAF-OP": {"INDEX_PATH": "VALUE_AT_INDEX_PATH" }
+             { "$NODE-OP": [OP, ...., OP] }
+             { "$LEAF-OP": {"INDEX_PATH": "VALUE_AT_INDEX_PATH" }
 
         LEAF-OPS:
-         $eq
-         $neq
-         $gt
-         $gte
-         $lt
-         $lte
+        
+         + $eq
+         + $neq
+         + $gt
+         + $gte
+         + $lt
+         + $lte
+         
         NODE-OPS:
-         $and
-         $or
+        
+         + $and
+         + $or
 
         Examples:
 
-        Given
+        Given::
 
-        Document A
-        {
-         'a': 1,
-         'c': 5,
-         'd': 10
-        }
-        and Document B
-        {
-         'b': 2,
-         'c': 5,
-         'd': 10
-        }
+            Document A
+            {
+             'a': 1,
+             'c': 5,
+             'd': 10
+            }
+            
+        and Document B::
+        
+            {
+             'b': 2,
+             'c': 5,
+             'd': 10
+            }
 
-        EQUALITY:
-        >> {'$eq': {'a': 1}}
-        matches Document A
-        >> {'$eq': {'a': 2}}
-        no matches
+        
+        EQUALITY::
+        
+            >> {'$eq': {'a': 1}}
+            matches Document A
+            >> {'$eq': {'a': 2}}
+            no matches
 
-        NON-EQUALITY:
-        >> {'$neq': {'a': 2}}
-        matches Document A
-        >> {'$neq': {'a': 1}}
-        no matches
+        NON-EQUALITY::
+        
+            >> {'$neq': {'a': 2}}
+            matches Document A
+            >> {'$neq': {'a': 1}}
+            no matches
 
-        LESS-THAN
-        >> {'$lt': {'a': 2}}
-        matches Document A
-        >> {'$lt': {'a': 1}}
-        no matches
+        LESS-THAN::
+        
+            >> {'$lt': {'a': 2}}
+            matches Document A
+            >> {'$lt': {'a': 1}}
+            no matches
 
-        LESS-EQUAL-THAN
-        >> {'$lte': {'a': 2}}
-        matches Document A
-        >> {'$lte': {'a': 0}}
-        no matches
+        LESS-EQUAL-THAN::
+        
+            >> {'$lte': {'a': 2}}
+            matches Document A
+            >> {'$lte': {'a': 0}}
+            no matches
 
-        GREATER-THAN
-        >> {'$gt': {'a': 0}}
-        matches Document A
-        >> {'$gt': {'a': 1}}
-        no matches
+        GREATER-THAN::
+        
+            >> {'$gt': {'a': 0}}
+            matches Document A
+            >> {'$gt': {'a': 1}}
+            no matches
 
-        GREATER-EQUAL-THAN
-        >> {'$gte': {'a': 1}}
-        matches Document A
-        >> {'$gte': {'a': 2}}
-        no matches
+        GREATER-EQUAL-THAN::
+        
+            >> {'$gte': {'a': 1}}
+            matches Document A
+            >> {'$gte': {'a': 2}}
+            no matches
 
-        AND:
-        >> {'$and': [{'$eq': {'c': 5}},
-                     {'$eq': {'d': 10}}
-                    ]}
-        matches Documents A and B
-        >> {'$and': [{'$eq': {'a': 1}},
-                     {'$eq': {'d': 10}}
-                    ]}
-        matches Document A
-        >> {'$and': [{'$eq': {'a': 5}},
-                     {'$eq': {'d': 15}}
-                    ]}
-        no matches
+        AND::
+        
+            >> {'$and': [{'$eq': {'c': 5}},
+                         {'$eq': {'d': 10}}
+                        ]}
+            matches Documents A and B
+            >> {'$and': [{'$eq': {'a': 1}},
+                         {'$eq': {'d': 10}}
+                        ]}
+            matches Document A
+            >> {'$and': [{'$eq': {'a': 5}},
+                         {'$eq': {'d': 15}}
+                        ]}
+            no matches
 
-        OR:
-        >> {'$or': [{'$eq': {'a': 1}},
-                     {'$eq': {'b': 2}}
-                    ]}
-        matches Documents A and B
+        OR::
+        
+            >> {'$or': [{'$eq': {'a': 1}},
+                         {'$eq': {'b': 2}}
+                        ]}
+            matches Documents A and B
 
 
         :param query_string:

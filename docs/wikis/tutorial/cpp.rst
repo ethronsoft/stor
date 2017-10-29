@@ -10,7 +10,7 @@ STOR is broken down into two major sections:
  2) The **Store**
  
 We will provide examples here about these sections,
-their constituent classes and operations. 
+their constituent classes, and operations. 
 
 .. note::
     All the examples assume that the following headers are
@@ -40,13 +40,13 @@ Documents are the objects we put into the Store's Collections.
 Think of Documents as **JSON objects with unique identifiers**.
 
 .. note::
-    The C++ Syntax R(" ... "), known as raw string, allows us to build regex-frieldly strings
+    The C++ Syntax R(" ... "), known as raw string, allows us to build regex-friendly strings
     and will take care of the many character escapes that we would otherwise
     need when writing a JSON manually.
     
 .. note::
-    If you don"t care about uniqueness and just want to use a Document as a 
-    JSON, you can. Just don"t add it to a Collection without a unique ID, or you will get an exception.
+    If you don't care about uniqueness and just want to use a Document as a 
+    JSON, you can. Just don't add it to a Collection without a unique ID, or you will get an exception.
 
 A Document is a Node and can be composed of other Nodes.
         
@@ -144,8 +144,8 @@ A Document identifier can be queried, like so::
     
     which uses Boost.UUID.
     You can override that by providing your own 
-    identifier. If you do, it is your responsibilty to guarantee 
-    uniqueness of this identifer when inserting this
+    identifier. If you do, it is your responsibility to guarantee 
+    uniqueness of this identifier when inserting this
     document in a Collection.
 
 Interaction
@@ -158,7 +158,7 @@ we can add, remove and modify constituent Nodes.
 Type Checking
 """""""""""""
 
-Let"s say we have an Object Document::
+Let's say we have an Object Document::
 
     node &n = doc; //not necessary, as Document extend a node, but to make the point.
     n.is_num();    //false
@@ -190,7 +190,7 @@ We can get the value of a Node like this::
     
 .. note::
     node::as_<type>_() function will
-    throw a esft::stor::document_exception if
+    throw an esft::stor::document_exception if
     invoked on a Node of the wrong type.
     
 
@@ -262,7 +262,7 @@ Modification
     
 **If we have an ArrayNode**, then we may add a new node, like so::
 
-    //let"s assume node is an empty array
+    //let's assume node is an empty array
     node.empty();//true
     
     node.add(1);
@@ -343,7 +343,7 @@ We can remove Node Array members, like so::
     return the newly added node with key `key`, so you can fluidly start modifying
     the new node. 
     
-    node::put instead, like node::add above, returns a reference of the current node.
+    node::put instead, like node::add above, returns a reference to the current node.
     So::
     
         node
@@ -435,7 +435,7 @@ You can create/open an unencrypted database, like so::
     
 .. note::
     As noted from the above example, an unencrypted store may 
-    be remove from disk when the corresponding `store` object goes
+    be removed from disk when the corresponding `store` object goes
     out of scope and is destroyed. 
     
 Or if you compiled STOR with -DSTOR_CRYPTO=ON option, you may do::
@@ -456,7 +456,7 @@ a Collection by the name of the collection::
 
     auto &my_collection = my_db["my_collection"];
     
-In the above example, "my_collection" is created if it didn"t exist or 
+In the above example, "my_collection" is created if it didn't exist or 
 is returned if it already existed. To check if a collection exists without
 having to create, you can use::
 
@@ -476,14 +476,14 @@ CRUD Documents in a Collection
 Once we have a Collection, we can **C**\ reate, **R**\ ead, **U**\ pdate, **D**\ elete Documents
 within.
 
-Given some Document `doc`, initialized like shown in the above section, we can *upsert* it
-(update it if it exists, or insert it if it doesn"t), like so::
+Given some Document `doc`, initialized as shown in the above section, we can *upsert* it
+(update it if it exists, or insert it if it doesn't), like so::
 
     my_collection.put(my_doc);
     
 .. note::
     Note how this operation replaces an existing document. This is determined by the doc.id(),
-    which is used as "primary key". This is why it"s important for these IDs to be unique, or 
+    which is used as "primary key". This is why it's important for these IDs to be unique, or 
     data would be lost. 
 
 You can remove it, like so::
@@ -524,9 +524,9 @@ An index role is to point to some field of a Document, so that a Collection may 
 of this field when inserting a Document and use it to facilitate querying of Documents by
 that field.
 
-This of an Index like a "dot separated path" to a field:
+This of an Index like a "dot-separated path" to a field:
 
-Given a Document `doc` with the below JSON represenation::
+Given a Document `doc` with the below JSON representation::
 
     doc = {
                 "a": 1,
@@ -544,7 +544,7 @@ We would be able to query documents by key "a", "b", and "sub" with the followin
 .. note::
 
     In the current implementation, we can only practically index "primitive" fields.
-    What this means is that the index will have to point to a primitve Node within a Document
+    What this means is that the index will have to point to a primitive Node within a Document
     and not an Object or an Array Node. 
     
     i.e.
@@ -562,7 +562,7 @@ We would be able to query documents by key "a", "b", and "sub" with the followin
             index_path("a");
             index_path("b.ba")
             
-    While these won"t::
+    While these won't::
         
             index_path("b");
             index_path("c");
@@ -603,7 +603,7 @@ And queried, like so::
 Supported Query Operations
 """"""""""""""""""""""""""
 
-Below, we will present the currently implementated querying operations. 
+Below, we will present the currently implemented querying operations. 
 The syntax for these operations is influenced by that of `MongoDB <https://docs.mongodb.com/>`_
 
     
@@ -615,7 +615,7 @@ Queries are performed, like so::
     
 Query Objects can be divided into two families of operations::
 
-                 |---Leaf Operations: [ "$eq", "$neq", "$gt", "$gte", "$lt", "$lte" ]
+                 |---Leaf Operations: [ "$eq", "$neq", "$gt', "$gte", "$lt', "$lte" ]
  Operation-------|
                  |---Node Operations: [ "$and", "$or" ]
 
@@ -632,7 +632,7 @@ General Query Syntax:
      
 Now, let's explore some examples.
 
-Let"s use the following JSON represenations of Documents::
+Let's use the following JSON represenations of Documents::
 
   +------------------+------------------+
   |    Document A    |    Document B    |
@@ -646,7 +646,7 @@ Let"s use the following JSON represenations of Documents::
   |}                 |}                 |
   +------------------+------------------+
   
-Let"s assume that both these Documents have been added in the collection `my_collection`
+Let's assume that both these Documents have been added in the collection `my_collection`
 and that the following indices have been registered::
 
     my_collection.add_indices(std::vector<index_path>{"a", "z", "sub.b"});
@@ -684,13 +684,13 @@ Operations:
  - Greater Than::
        
        //returns set with: Document B
-       my_collection.find(R"( {"$gt": {"a": 1}} )");
+       my_collection.find(R"( {"$gt': {"a": 1}} )");
        
        //returns set with: Document A, B
-       my_collection.find(R"( {"$gt": {"a": 0}} )");
+       my_collection.find(R"( {"$gt': {"a": 0}} )");
        
        //returns set with: Nothing
-       >> my_collection.find(R"( {"$gt": {"a": 2}} )");
+       >> my_collection.find(R"( {"$gt': {"a": 2}} )");
        
        
  - Greater-Equal Than::
@@ -707,13 +707,13 @@ Operations:
  - Less Than::
        
        //returns set with: Nothing
-       my_collection.find(R"( {{"$lt": {"a": 1}} )");
+       my_collection.find(R"( {{"$lt': {"a": 1}} )");
        
        //returns set with: Document A
-       my_collection.find(R"( {{"$lt": {"a": 2}} )");
+       my_collection.find(R"( {{"$lt': {"a": 2}} )");
        
        //returns set with: Document A,B
-       my_collection.find(R"( {{"$lt": {"a": 3}} )");
+       my_collection.find(R"( {{"$lt': {"a": 3}} )");
        
        
  - Less-Equal Than::
@@ -779,7 +779,7 @@ We can write the content of a Collection to some std::ostream `os` for backup, l
     bool keep_indices = false;//choose whether you want to backup the indices as well
     my_collection.deflate(os, keep_indices);
     
-And restore it with a std::istream `is` pointing to data created by a previous deflation, like so::
+And restore it with an std::istream `is` pointing to data created by a previous deflation, like so::
 
     my_collection.inflate(is);
     
@@ -796,7 +796,7 @@ Misc
 Sync/Async
 """"""""""
 
-Write operations against a Database collections may happen in a synchronous or asynchrnous fashion,
+Write operations against a Database collections may happen in a synchronous or asynchronous fashion,
 as defined by LevelDB. 
 
 By default, a store is initialized in "async" mode. You can change that by doing::

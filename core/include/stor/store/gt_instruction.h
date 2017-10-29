@@ -21,15 +21,28 @@ namespace esft{
         class gt_instruction: public query_instruction{
         public:
 
+            /**
+             * @brief Constructor
+             * @param path path to value to evaluate for `greater operation`
+             * @param value value to evaluate
+             */
             gt_instruction(index_path &&path, const std::string &value);
 
             virtual std::unordered_set<std::string> execute(const collection &c,const leveldb::ReadOptions &ro) const override;
 
+            /**
+             * @brief returns the document's index path to the target value
+             * @return  document's index path to the target value
+             */
             const index_path &target() const;
 
+            /**
+             * @brief returns the value to evaluate for `greater operation`
+             * @return value to evaluate for `greater operation`
+             */
             const std::string &value() const;
 
-            virtual void add_child(std::unique_ptr<query_instruction> ptr);
+            virtual void add_child(std::unique_ptr<query_instruction> ptr) override;
 
         private:
 

@@ -9,6 +9,11 @@
 #include <cstor/errors/errors.h>
 
 
+/**
+ * @file ccollection.h
+ * @brief C Bindings for collection.h
+ **/
+
 #ifdef __cplusplus
 extern "C" {
 #endif

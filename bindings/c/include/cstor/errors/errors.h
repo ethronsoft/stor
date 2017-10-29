@@ -7,10 +7,18 @@
 
 #include <cstor/utility/export.h>
 
+/**
+ * @file errors.h
+ * @brief Error codes header
+ **/
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/**
+ * @brief Error codes enum
+ */
 typedef enum esft_stor_error_t{
     no_error = 0,
     generic_error,

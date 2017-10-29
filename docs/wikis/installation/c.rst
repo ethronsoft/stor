@@ -15,8 +15,8 @@ The files of interest to build the C version of STOR are in the
 .. note::
     What is happening here is that CSTOR will need to build STOR
     and it will then build a **C dynamic library statically linked 
-    against STOR and dependencies** (STOR and dependencies get compiled as position indipendent code).
-    This will allow user of the C library to only
+    against STOR and dependencies** (STOR and dependencies get compiled as position independent code).
+    This will allow the user of the C library to only
     dynamically link against CSTOR. 
     CMake will take care of this for you, but now you know, in
     case you want to tweak this part. 
@@ -28,7 +28,7 @@ To build the library, make an out of source directory::
    
     mkdir c_stor_build
 
-Then setup the project Cmake cache and relative files that will be used during the build::
+Then set up the project Cmake cache and relative files that will be used during the build::
 
    chdir c_stor_build
    cmake [OPT] ../stor/bindings/c
@@ -41,11 +41,11 @@ Then setup the project Cmake cache and relative files that will be used during t
      This is the place where to use option `-DSTOR_CRYPTO=ON`
      if you plan on using the encrypting facilities of the database.
 
-Then build the shared libray::
+Then build the shared library::
 
    cmake --build . --target cstor
    
-and use it in conjuction with the headers in **stor/bindings/c/include/cstor**
+and use it in conjunction with the headers in **stor/bindings/c/include/cstor**
 
 And run the tests::
 

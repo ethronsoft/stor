@@ -17,6 +17,11 @@ namespace esft{
          */
         class store_exception: public std::runtime_error{
         public:
+
+            /**
+             * @brief Contructor
+             * @param msg error message
+             */
             store_exception(const std::string &msg) : runtime_error(msg) { }
         };
     }

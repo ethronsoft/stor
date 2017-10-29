@@ -15,6 +15,9 @@ namespace esft{
         class node;
         class iterator;
 
+        /**
+         * @brief const_iterator allows to iterate over read-only nodes
+         */
         class const_iterator {
             friend class node;
         public:

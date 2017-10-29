@@ -414,6 +414,7 @@ namespace esft{
             /** @brief Add all items dereferenced from forward_iterator forw_it
              *  to array node.
              *
+             * @tparam forw_it forward iterator to items of an array node
              * @param begin iterator pointing to beginning of range
              * @param end   iterator pointing to one after end of range.
              *
@@ -425,6 +426,7 @@ namespace esft{
 
             /** @brief Add all items from the vector @p v to array node.
              *
+             * @tparam item item of an array node
              * @param v vector of items
              *
              * @return this node
