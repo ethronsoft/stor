@@ -4,6 +4,7 @@ project(stor)
 #project version
 set(VERSION 0.9.0)
 
+
 #### options ###
 #enable crypto (set ON either here or from command line with -DSTOR_CRYPTO=ON
 #Note: setting it from here will likely require to reset (or delete) CMakeCache.txt
@@ -147,6 +148,7 @@ endif()
 SET(STOR_INCLUDE_DIRS
 		include
 		test/include
+		benchmark/include
 		${catch_ROOT_DIR}/include
 		${leveldb_ROOT_DIR}/include
 		${rapidjson_ROOT_DIR}/include
@@ -189,6 +191,16 @@ add_executable(${PROJECT_NAME}_test ${SOURCE_FILES}
 		test/src/stor_test/query_test.cpp
 		test/src/access_manager_test.cpp)
 
+add_executable(${PROJECT_NAME}_benchmark ${SOURCE_FILES}
+		benchmark/src/main.cpp
+		benchmark/include/ext/sqlite3.h
+		benchmark/src/ext/sqlite3.c
+		benchmark/src/stor_benchmark.cpp benchmark/include/stor_benchmark.h benchmark/src/sqlite_benchmark.cpp benchmark/include/sqlite_benchmark.h benchmark/include/utils.h benchmark/src/leveldb_driver.cpp benchmark/include/leveldb_driver.h)
+
 target_link_libraries(${PROJECT_NAME}_test ${TEST_LINKS})
+
+target_link_libraries(${PROJECT_NAME}_benchmark ${TEST_LINKS})
+add_definitions(-DESFT_STOR_VERSION="${VERSION}")
+
 
 set_property(TARGET ${PROJECT_NAME}_static_pic PROPERTY POSITION_INDEPENDENT_CODE ON)

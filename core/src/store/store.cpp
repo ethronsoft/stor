@@ -8,7 +8,6 @@
 #include <stor/store/store.h>
 #include <stor/store/db_crypt.h>
 #include <leveldb/write_batch.h>
-#include <stor/store/collection.h>
 
 
 namespace esft{

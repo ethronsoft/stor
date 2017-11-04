@@ -7,6 +7,7 @@
 
 #include <stor/document/document.h>
 #include <stor/store/index_path.h>
+#include <stor/store/query.h>
 #include <leveldb/db.h>
 #include <leveldb/options.h>
 #include <unordered_set>
@@ -18,9 +19,7 @@ namespace esft {
     namespace stor {
 
         class store;
-
-        class query;
-
+        
         class eq_instruction;
 
         class gt_instruction;

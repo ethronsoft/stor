@@ -6,7 +6,6 @@
 #define ESNPL_STOR_QUERY_H
 
 #include <stor/store/query_instruction.h>
-#include <stor/store/collection.h>
 #include <unordered_set>
 #include <string>
 #include <memory>
@@ -18,6 +17,8 @@ namespace esft{
 
         class query_instruction;
 
+        class collection;
+        
         /**
          * @brief query is responsible for evaluating a query_instruction tree,
          * obtained as a JSON string or document, and return as result relevant

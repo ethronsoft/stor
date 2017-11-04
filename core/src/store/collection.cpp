@@ -5,7 +5,6 @@
 #include <sstream>
 #include <set>
 #include <stor/store/store.h>
-#include <stor/store/query.h>
 #include <stor/store/eq_instruction.h>
 #include <stor/store/gt_instruction.h>
 #include <stor/store/gte_instruction.h>

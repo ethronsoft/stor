@@ -84,11 +84,11 @@ namespace esft{
             //node_key key = get_key(&_rjdoc);
 
             std::ostringstream oss;
-
-            auto duration = system_clock::now().time_since_epoch();
-            auto micro = duration_cast<milliseconds>(duration).count();
-
-            oss << micro;
+//
+//            auto duration = system_clock::now().time_since_epoch();
+//            auto micro = duration_cast<milliseconds>(duration).count();
+//
+//            oss << micro;
 
             boost::uuids::random_generator gen;
             boost::uuids::uuid u = gen();

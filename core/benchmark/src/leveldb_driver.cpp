@@ -1,0 +1,171 @@
+//
+// Created by Edd on 04/11/2017.
+//
+
+#include <leveldb/db.h>
+#include <leveldb/filter_policy.h>
+#include <unordered_set>
+#include <stor/document/document.h>
+#include "leveldb_driver.h"
+#include "utils.h"
+
+
+namespace esft {
+    namespace stor {
+        namespace bmark {
+
+            leveldb_driver::leveldb_driver(std::size_t key_size, std::size_t value_size, std::size_t ops):
+            _home{"_leveldb_benchmark"}, _key_size{key_size}, _value_size{value_size}, _ops{ops}
+            {
+                mkdir(_home);
+            }
+
+            leveldb_driver::~leveldb_driver() {
+                rmdir(_home);
+            }
+
+            std::unordered_map<std::string, double> leveldb_driver::writes() const {
+                std::string db_name = _home + "/bmark_db";
+
+                leveldb::Options opt;
+                opt.create_if_missing = true;
+                opt.filter_policy = leveldb::NewBloomFilterPolicy(10);
+
+                leveldb::DB *db;
+
+                try{
+                    leveldb::Status conn = leveldb::DB::Open(opt, db_name,&db);
+
+                    if (!conn.ok()){
+                        throw std::runtime_error{"Failed opening LevelDB"};
+                    }
+
+                    value_generator kg1(_key_size);
+                    value_generator vg1(_value_size);
+
+                    leveldb::WriteOptions wo;
+                    wo.sync = false;
+                    auto runner = [this, db, &wo, &kg1, &vg1]() {
+                        for (std::size_t i = 0; i < _ops; ++i){
+                            auto s = db->Put(wo,kg1(),json_generator(vg1));
+                        }
+                    };
+
+                    auto elapsed = timer<std::chrono::microseconds>{}(runner);
+
+                    value_generator kg2(_key_size);
+                    value_generator vg2(_value_size);
+                    auto discount_key_gen = timer<std::chrono::microseconds>{}(
+                            [this, &kg2]() {
+                                for (std::size_t i = 0; i < _ops; ++i) {
+                                    auto s = kg2();
+                                }
+                            });
+
+                    auto discount_value_gen = timer<std::chrono::microseconds>{}(
+                            [this, &vg2]() {
+                                for (std::size_t i = 0; i < _ops; ++i) {
+                                    auto s = vg2();
+                                }
+                            });
+
+                    if ((discount_key_gen + discount_value_gen) >= elapsed) {
+                        throw std::runtime_error{"Timer error. discount_key_gen: " + std::to_string(discount_key_gen) +
+                                                 "discount_value_gen: " + std::to_string(discount_value_gen) +
+                                                 ", elapsed: " + std::to_string(elapsed)};
+                    }
+
+                    delete db;
+                    delete opt.filter_policy;
+                    leveldb::DestroyDB(db_name, opt);
+                    rmdir(db_name);
+
+                    auto net = elapsed - discount_key_gen - discount_value_gen;
+                    return result(net,_ops,_key_size+_value_size);
+                }catch (...){
+                    delete db;
+                    delete opt.filter_policy;
+                    leveldb::DestroyDB(db_name, opt);
+                    rmdir(db_name);
+                    throw;
+                }
+            }
+
+            std::unordered_map<std::string, double> leveldb_driver::reads_by_key() const {
+                std::string db_name = _home + "/bmark_db";
+
+                leveldb::Options opt;
+                opt.create_if_missing = true;
+                opt.filter_policy = leveldb::NewBloomFilterPolicy(10);
+
+                leveldb::DB *db;
+
+                try{
+                    leveldb::Status conn = leveldb::DB::Open(opt, db_name,&db);
+
+                    if (!conn.ok()){
+                        throw std::runtime_error{"Failed opening LevelDB"};
+                    }
+
+                    //fill
+                    {
+                        value_generator kg1(_key_size);
+                        value_generator vg1(_value_size);
+
+                        leveldb::WriteOptions wo;
+                        wo.sync = false;
+                        for (std::size_t i = 0; i < _ops; ++i){
+                            auto s = db->Put(wo,kg1(),json_generator(vg1));
+                        }
+                    }
+
+                    value_generator kg1(_key_size);
+                    value_generator vg1(_value_size);
+
+                    leveldb::ReadOptions ro;
+                    ro.snapshot = db->GetSnapshot();
+                    auto runner = [this, db, &ro, &kg1, &vg1]() {
+                        for (std::size_t i = 0; i < _ops; ++i){
+                            std::string json;
+                            std::string id = kg1();
+                            db->Get(ro,id, &json);
+                            std::unordered_set<document> docs;
+                            docs.emplace(json,id);
+                        }
+                        db->ReleaseSnapshot(ro.snapshot);
+                    };
+
+                    auto elapsed = timer<std::chrono::microseconds>{}(runner);
+
+                    value_generator kg2(_key_size);
+                    value_generator vg2(_value_size);
+                    auto discount_key_gen = timer<std::chrono::microseconds>{}(
+                            [this, &kg2]() {
+                                for (std::size_t i = 0; i < _ops; ++i) {
+                                    auto s = kg2();
+                                }
+                            });
+
+                    if (discount_key_gen  >= elapsed) {
+                        throw std::runtime_error{"Timer error. discount_key_gen: " + std::to_string(discount_key_gen) +
+                                                 ", elapsed: " + std::to_string(elapsed)};
+                    }
+
+                    delete db;
+                    delete opt.filter_policy;
+                    leveldb::DestroyDB(db_name, opt);
+                    rmdir(db_name);
+
+                    auto net = elapsed - discount_key_gen;
+                    return result(net,_ops,_key_size+_value_size);
+                }catch (...){
+                    delete db;
+                    delete opt.filter_policy;
+                    leveldb::DestroyDB(db_name, opt);
+                    rmdir(db_name);
+                    throw;
+                }
+            }
+        }
+    }
+}

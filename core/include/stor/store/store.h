@@ -13,6 +13,7 @@
 #include <leveldb/options.h>
 #include <stor/store/onclose.h>
 #include <stor/store/access_manager.h>
+#include <stor/store/collection.h>
 
 namespace esft{
     namespace stor{
@@ -22,8 +23,7 @@ namespace esft{
          * default callback function called if encryption fails
          */
         void default_encryption_failure_handler();
-
-        class collection;
+        
 
         /**
          * @brief store represents a database as a set of collections of documents
