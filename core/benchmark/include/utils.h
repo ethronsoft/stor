@@ -58,15 +58,34 @@ namespace esft {
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
 
+
+            /**
+             * As presented and explained here:
+             * https://stackoverflow.com/questions/40122141/preventing-compiler-optimizations-while-benchmarking
+             */
+            static void escape(void *p) {
+                asm volatile("" : : "g"(p) : "memory");
+            }
+
+            static void clobber() {
+                asm volatile("" : : : "memory");
+            }
+            /**
+             * //////////////////////////////////////////////////////////////////////////////////////////////////
+             */
+
             template<typename duration>
             class timer {
             public:
 
                 template<typename Func, typename... Args>
                 long long int operator()(Func &&f, Args &&... args) const {
-                    auto start = std::chrono::system_clock::now();
-                    f(std::forward<Args>(args)...);
-                    return std::chrono::duration_cast<duration>(std::chrono::system_clock::now() - start).count();
+                    auto start = std::chrono::high_resolution_clock::now();
+                    int rc;
+                    escape(&rc);
+                    rc = f(std::forward<Args>(args)...);
+                    clobber();
+                    return std::chrono::duration_cast<duration>(std::chrono::high_resolution_clock::now() - start).count();
                 }
 
             };

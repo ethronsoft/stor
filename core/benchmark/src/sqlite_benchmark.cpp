@@ -93,7 +93,12 @@ namespace esft {
                         auto step = sqlite3_step(_stmnt);
                         std::unordered_set<document> docs;
                         if (step == SQLITE_ROW) {
-                            std::string id(((const char*)sqlite3_column_text(_stmnt, 0)));
+                            //STOR query function creates a new document and uses
+                            //document::make_id(). Let's do the same here, to make
+                            //STOR and SQLite query performance comparable
+
+                            //std::string id(((const char*)sqlite3_column_text(_stmnt, 0)));
+                            auto id = document::make_id();
                             std::string json(((const char*)sqlite3_column_text(_stmnt, 1)));
                             docs.insert(document(json, id));
                         }
@@ -167,36 +172,16 @@ namespace esft {
                             writes.exec({kg1(), vg1()});
                         }
                         writes.flush();
+                        return 1;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
 
-                    value_generator kg2(_key_size);
-                    value_generator vg2(_value_size);
-                    auto discount_key_gen = timer<std::chrono::microseconds>{}(
-                            [this, &kg2]() {
-                                for (std::size_t i = 0; i < _ops; ++i) {
-                                    auto s = kg2();
-                                }
-                            });
-                    auto discount_value_gen = timer<std::chrono::microseconds>{}(
-                            [this, &vg2]() {
-                                for (std::size_t i = 0; i < _ops; ++i) {
-                                    auto s = vg2();
-                                }
-                            });
-
-                    if ((discount_key_gen + discount_value_gen) >= elapsed) {
-                        throw std::runtime_error{"Timer error. discount_key_gen: " + std::to_string(discount_key_gen) +
-                                                 "discount_value_gen: " + std::to_string(discount_value_gen) +
-                                                 ", elapsed: " + std::to_string(elapsed)};
-                    }
 
                     sqlite3_close(db);
                     rmfile(db_name);
 
-                    auto net = elapsed - discount_key_gen - discount_value_gen;
-                    return result(net, _ops, _key_size + _value_size);
+                    return result(elapsed, _ops, _key_size + _value_size);
                 } catch (...) {
                     if (db) {
                         sqlite3_close(db);
@@ -242,29 +227,15 @@ namespace esft {
                             auto res = reads.exec({kg1()});
                         }
                         reads.flush();
+                        return 1;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
 
-                    value_generator kg2(_key_size);
-                    auto discount_key_gen = timer<std::chrono::microseconds>{}(
-                            [this, &kg2]() {
-                                for (std::size_t i = 0; i < _ops; ++i) {
-                                    auto s = kg2();
-                                }
-                            });
-
-                    if (discount_key_gen >= elapsed) {
-                        throw std::runtime_error{"Timer error. discount_key_gen: " + std::to_string(discount_key_gen) +
-                                                 ", elapsed: " + std::to_string(elapsed)};
-                    }
-
-
                     sqlite3_close(db);
                     rmfile(db_name);
 
-                    auto net = elapsed - discount_key_gen;
-                    return result(net, _ops, _key_size + _value_size);
+                    return result(elapsed, _ops, _key_size + _value_size);
 
                 } catch (...) {
                     if (db) {
@@ -311,29 +282,15 @@ namespace esft {
                             auto res = reads.exec({json_generator(vg1)});
                         }
                         reads.flush();
+                        return 1;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
 
-                    value_generator vg2(_value_size);
-                    auto discount_value_gen = timer<std::chrono::microseconds>{}(
-                            [this, &vg2]() {
-                                for (std::size_t i = 0; i < _ops; ++i) {
-                                    auto s = vg2();
-                                }
-                            });
-
-                    if (discount_value_gen >= elapsed) {
-                        throw std::runtime_error{
-                                "Timer error. discount_value_gen: " + std::to_string(discount_value_gen) +
-                                ", elapsed: " + std::to_string(elapsed)};
-                    }
-
                     sqlite3_close(db);
                     rmfile(db_name);
 
-                    auto net = elapsed - discount_value_gen;
-                    return result(net, _ops, _key_size + _value_size);
+                    return result(elapsed, _ops, _key_size + _value_size);
 
                 } catch (...) {
                     if (db) {

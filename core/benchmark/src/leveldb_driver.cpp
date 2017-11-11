@@ -14,6 +14,10 @@ namespace esft {
     namespace stor {
         namespace bmark {
 
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+
+
             leveldb_driver::leveldb_driver(std::size_t key_size, std::size_t value_size, std::size_t ops):
             _home{"_leveldb_benchmark"}, _key_size{key_size}, _value_size{value_size}, _ops{ops}
             {
@@ -49,39 +53,17 @@ namespace esft {
                         for (std::size_t i = 0; i < _ops; ++i){
                             auto s = db->Put(wo,kg1(),json_generator(vg1));
                         }
+                        return 1;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
-
-                    value_generator kg2(_key_size);
-                    value_generator vg2(_value_size);
-                    auto discount_key_gen = timer<std::chrono::microseconds>{}(
-                            [this, &kg2]() {
-                                for (std::size_t i = 0; i < _ops; ++i) {
-                                    auto s = kg2();
-                                }
-                            });
-
-                    auto discount_value_gen = timer<std::chrono::microseconds>{}(
-                            [this, &vg2]() {
-                                for (std::size_t i = 0; i < _ops; ++i) {
-                                    auto s = vg2();
-                                }
-                            });
-
-                    if ((discount_key_gen + discount_value_gen) >= elapsed) {
-                        throw std::runtime_error{"Timer error. discount_key_gen: " + std::to_string(discount_key_gen) +
-                                                 "discount_value_gen: " + std::to_string(discount_value_gen) +
-                                                 ", elapsed: " + std::to_string(elapsed)};
-                    }
 
                     delete db;
                     delete opt.filter_policy;
                     leveldb::DestroyDB(db_name, opt);
                     rmdir(db_name);
 
-                    auto net = elapsed - discount_key_gen - discount_value_gen;
-                    return result(net,_ops,_key_size+_value_size);
+                    return result(elapsed,_ops,_key_size+_value_size);
                 }catch (...){
                     delete db;
                     delete opt.filter_policy;
@@ -133,31 +115,17 @@ namespace esft {
                             docs.emplace(json,id);
                         }
                         db->ReleaseSnapshot(ro.snapshot);
+                        return 1;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
-
-                    value_generator kg2(_key_size);
-                    value_generator vg2(_value_size);
-                    auto discount_key_gen = timer<std::chrono::microseconds>{}(
-                            [this, &kg2]() {
-                                for (std::size_t i = 0; i < _ops; ++i) {
-                                    auto s = kg2();
-                                }
-                            });
-
-                    if (discount_key_gen  >= elapsed) {
-                        throw std::runtime_error{"Timer error. discount_key_gen: " + std::to_string(discount_key_gen) +
-                                                 ", elapsed: " + std::to_string(elapsed)};
-                    }
 
                     delete db;
                     delete opt.filter_policy;
                     leveldb::DestroyDB(db_name, opt);
                     rmdir(db_name);
 
-                    auto net = elapsed - discount_key_gen;
-                    return result(net,_ops,_key_size+_value_size);
+                    return result(elapsed,_ops,_key_size+_value_size);
                 }catch (...){
                     delete db;
                     delete opt.filter_policy;
@@ -166,6 +134,8 @@ namespace esft {
                     throw;
                 }
             }
+
+#pragma GCC pop_options
         }
     }
 }

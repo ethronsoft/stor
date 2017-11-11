@@ -33,17 +33,23 @@ namespace esft {
 
                 auto uuid_ids = timer<std::chrono::microseconds>{}(
                         [this, &_value_gen1]() {
+                            std::size_t some_value_to_prevent_optimizaton = 0;
                             for (std::size_t i = 0; i < _ops; ++i) {
                                 auto doc = document(json_generator(_value_gen1));
+                                some_value_to_prevent_optimizaton+=doc.id().size();
                             }
+                            return some_value_to_prevent_optimizaton;
                         });
 
                 std::atomic<std::uint64_t> _l;
                 auto incr_ids = timer<std::chrono::microseconds>{}(
                         [this, &_l, &_value_gen2]() {
+                            std::size_t some_value_to_prevent_optimizaton = 0;
                             for (std::size_t i = 0; i < _ops; ++i) {
                                 auto doc = document(json_generator(_value_gen2), std::to_string(_l++));
+                                some_value_to_prevent_optimizaton+=doc.id().size();
                             }
+                            return some_value_to_prevent_optimizaton;
                         });
 
                 return std::unordered_map<std::string, double>{
@@ -68,28 +74,12 @@ namespace esft {
                     for (std::size_t i = 0; i < _ops; ++i) {
                         coll.put(document(json_generator(_value_gen1), kg()));
                     }
+                    return 1;
                 };
 
                 auto elapsed = timer<std::chrono::microseconds>{}(runner);
 
-
-                auto discount_docs_init = timer<std::chrono::microseconds>{}(
-                        [this, &kg, &_value_gen2]() {
-                            for (std::size_t i = 0; i < _ops; ++i) {
-                                auto doc = document(json_generator(_value_gen2), kg());
-                            }
-                        });
-
-
-                if (discount_docs_init >= elapsed) {
-                    throw std::runtime_error{"Timer error. discount_docs_init: " +
-                                             std::to_string(discount_docs_init) +
-                                             ", elapsed: " + std::to_string(elapsed)};
-                }
-
-                //net amount of `duration`-seconds that it took to execute the runner
-                auto net = elapsed - discount_docs_init;
-                return result(net, _ops, _key_size + _value_size);
+                return result(elapsed, _ops, _key_size + _value_size);
             }
 
             std::unordered_map<std::string, double> stor_driver::reads_by_key() const {
@@ -116,29 +106,12 @@ namespace esft {
                         auto key = read_kg();
                         auto d = coll[key];
                     }
+                    return 1;
                 };
 
                 auto elapsed = timer<std::chrono::microseconds>{}(runner);
 
-
-                auto discount_key_gen = timer<std::chrono::microseconds>{}(
-                        [this, &read_kg2]() {
-                            for (std::size_t i = 0; i < _ops; ++i) {
-                                auto s = read_kg2();
-                            }
-                        });
-
-
-                if (discount_key_gen >= elapsed) {
-                    throw std::runtime_error{"Timer error. discount_key_gen: " +
-                                             std::to_string(discount_key_gen) +
-                                             ", elapsed: " + std::to_string(elapsed)};
-                }
-
-
-                //net amount of `duration`-seconds that it took to execute the runner
-                auto net = elapsed - discount_key_gen;
-                return result(net, _ops, _key_size + _value_size);
+                return result(elapsed, _ops, _key_size + _value_size);
 
             }
 
@@ -173,28 +146,12 @@ namespace esft {
                         auto q = query_gen();
                         auto res = coll.find(q);
                     }
+                    return 1;
                 };
 
                 auto elapsed = timer<std::chrono::microseconds>{}(runner);
 
-
-                auto discount_query_gen = timer<std::chrono::microseconds>{}(
-                        [this, &query_gen]() {
-                            for (std::size_t i = 0; i < _ops; ++i) {
-                                auto s = query_gen();
-                            }
-                        });
-
-
-                if (discount_query_gen >= elapsed) {
-                    throw std::runtime_error{"Timer error. discount_query_gen: " +
-                                             std::to_string(discount_query_gen) +
-                                             ", elapsed: " + std::to_string(elapsed)};
-                }
-
-                //net amount of `duration`-seconds that it took to execute the runner
-                auto net = elapsed - discount_query_gen;
-                return result(net, _ops, _key_size + _value_size);
+                return result(elapsed, _ops, _key_size + _value_size);
             }
 
 
