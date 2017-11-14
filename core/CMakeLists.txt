@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(stor)
 
 #project version
-set(VERSION 0.9.0)
+set(VERSION 0.9.1)
 
 
 #### options ###
