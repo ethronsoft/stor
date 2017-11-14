@@ -96,16 +96,30 @@ namespace esft {
 
             leveldb::WriteBatch batch;
 
-            std::string stop = impl::next_smallest("#/");
-
-            leveldb::Iterator *it = _db->NewIterator(leveldb::ReadOptions{});
-            for (it->Seek("#"); it->Valid() && it->key().ToString() < stop; it->Next()) {
-                batch.Delete(it->key());
+            //delete indices
+            {
+                std::string stop = impl::next_smallest("#/");
+                leveldb::Iterator *it = _db->NewIterator(leveldb::ReadOptions{});
+                for (it->Seek("#"); it->Valid() && it->key().ToString() < stop; it->Next()) {
+                    batch.Delete(it->key());
+                }
+                delete it;
             }
+
+            //delete index references
+            {
+                std::string stop = impl::next_smallest("@/");
+                leveldb::Iterator *it = _db->NewIterator(leveldb::ReadOptions{});
+                for (it->Seek("@"); it->Valid() && it->key().ToString() < stop; it->Next()) {
+                    batch.Delete(it->key());
+                }
+                delete it;
+            }
+
 
             auto st = _db->Write(wo, &batch);
 
-            delete it;
+
 
             if (st.ok()) {
                 _indices.clear();
@@ -135,18 +149,20 @@ namespace esft {
 
             //document may have been modified
             //so drop indices and reinsert
-            leveldb::ReadOptions ro;
-            ro.snapshot = _db->GetSnapshot();
-            auto curr_indices = impl::get_indices(*_db, doc, ro);
-            for (const auto &im: curr_indices) {
-                batch.Delete(im.first);
-                batch.Delete(im.second);
-            }
+            if (!_indices.empty()){
+                leveldb::ReadOptions ro;
+                ro.snapshot = _db->GetSnapshot();
+                auto curr_indices = impl::get_indices(*_db, doc, ro);
+                for (const auto &im: curr_indices) {
+                    batch.Delete(im.first);
+                    batch.Delete(im.second);
+                }
 
-            for (const auto &path: _indices) {
-                put(batch, path, doc);
+                for (const auto &path: _indices) {
+                    put(batch, path, doc);
+                }
+                _db->ReleaseSnapshot(ro.snapshot);
             }
-            _db->ReleaseSnapshot(ro.snapshot);
 
             //document insertion
             put(batch, doc);

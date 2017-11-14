@@ -815,3 +815,46 @@ TEST_CASE("collection indices query test","[store_test]"){
     }
 
 }
+
+TEST_CASE("collection indices removal test", "[store_test]"){
+    stor::store db{stor_test::home(), "query_test",true};
+
+    auto &c = db["eq_test_collection"];
+
+    //fill documents with some
+    stor::document d1 = stor::document::as_object();
+    d1.put("a",1);
+    d1.put("z",true);
+    d1.with("sub").put("b","aaa");
+
+    stor::document d2 = stor::document::as_object();
+    d2.put("a",2);
+    d2.put("z",true);
+    d2.with("sub").put("b","baa");
+
+    c.add_indices(std::vector<stor::index_path>{"a","z","sub.b"});
+
+    c.put(d1);
+    c.put(d2);
+
+    stor::query q{R"( { "$eq":{"a": 1} } )"};
+    auto res = c.find(q);
+
+    REQUIRE(res.size() == 1);
+    CHECK((*res.begin()).id() == d1.id());
+
+    stor::query q1{R"( { "$eq":{"sub.b": "aaa"} } )"};
+    res = c.find(q1);
+
+    REQUIRE(res.size() == 1);
+    CHECK((*res.begin()).id() == d1.id());
+
+    //clear indices and expect no result
+    c.clear_indices();
+
+    REQUIRE(c.indices().empty());
+
+    CHECK(c.find(q).empty());
+    CHECK(c.find(q1).empty());
+
+}
