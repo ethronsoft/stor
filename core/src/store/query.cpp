@@ -26,7 +26,7 @@ namespace esft{
 
         query::query(const char *json)
         {
-            stor::document d{json};
+            stor::document d{json, ""};//no identifier required, better performance
 
             //construct instruction tree
             if (d.empty()) throw store_exception{"empty query."};

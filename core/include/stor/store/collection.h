@@ -116,9 +116,11 @@ namespace esft {
             const std::string &name() const;
 
             /**
-             * @brief Insert/Update document 'doc' in the collection
+             * @brief Insert/Update document @p doc in the collection
              *
              * @param doc document to insert into collection
+             *
+             * @returns true if document @p doc was successfully added, false if not
              */
             bool put(const document &doc);
 

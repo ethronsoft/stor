@@ -49,12 +49,13 @@ namespace esft {
                         }
                     }
 
-                    void exec(std::vector<std::string> values) {
+                    std::size_t exec(std::vector<std::string> values) {
                         for (std::size_t i = 0; i < values.size(); ++i) {
                             sqlite3_bind_text(_stmnt, i + 1, values[i].c_str(), -1, nullptr);
                         }
                         sqlite3_step(_stmnt);
                         sqlite3_reset(_stmnt);
+                        return values.size();
                     }
 
                     void flush() {
@@ -93,12 +94,7 @@ namespace esft {
                         auto step = sqlite3_step(_stmnt);
                         std::unordered_set<document> docs;
                         if (step == SQLITE_ROW) {
-                            //STOR query function creates a new document and uses
-                            //document::make_id(). Let's do the same here, to make
-                            //STOR and SQLite query performance comparable
-
-                            //std::string id(((const char*)sqlite3_column_text(_stmnt, 0)));
-                            auto id = document::make_id();
+                            std::string id(((const char*)sqlite3_column_text(_stmnt, 0)));
                             std::string json(((const char*)sqlite3_column_text(_stmnt, 1)));
                             docs.insert(document(json, id));
                         }
@@ -164,15 +160,20 @@ namespace esft {
                     detail::prepared_write_stmnt writes(db, "INSERT INTO TBL(ID, VALUE) VALUES(?,?);");
 
                     value_generator kg1(_key_size);
-                    value_generator vg1(_value_size);
+                    value_generator vg1(_value_size - 7 - 1);
 
 
                     auto runner = [this, &writes, &kg1, &vg1]() {
+                        std::size_t some_value_to_prevent_optimizaton = 0;
                         for (std::size_t i = 0; i < _ops; ++i) {
-                            writes.exec({kg1(), vg1()});
+                            std::string jsn = json_generator(vg1);
+                            std::string id = kg1();
+                            document doc(jsn, id);
+                            some_value_to_prevent_optimizaton += doc.id().size();
+                            some_value_to_prevent_optimizaton += writes.exec({id, jsn});
                         }
                         writes.flush();
-                        return 1;
+                        return some_value_to_prevent_optimizaton;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
@@ -223,11 +224,13 @@ namespace esft {
 
                     value_generator kg1(_key_size);
                     auto runner = [this, &reads, &kg1]() {
+                        std::size_t some_value_to_prevent_optimizaton = 0;
                         for (std::size_t i = 0; i < _ops; ++i) {
                             auto res = reads.exec({kg1()});
+                            some_value_to_prevent_optimizaton += res.size();
                         }
                         reads.flush();
-                        return 1;
+                        return some_value_to_prevent_optimizaton;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
@@ -276,13 +279,24 @@ namespace esft {
                     detail::prepared_read_stmnt reads(db, "SELECT ID, VALUE FROM TBL WHERE VALUE = ?;");
 
                     value_generator vg1(_value_size - 7 - 1);
+                    auto _value_gen2 = value_generator(_value_size - 7 - 1);
+                    //to simulate the same query generation made by STOR
+                    auto query_gen = [&_value_gen2]() {
+                        auto q = document("{}","fake_id");
+                        q.with("$eq").put("a", _value_gen2());
+                        return q;
+                    };
 
-                    auto runner = [this, &reads, &vg1]() {
+                    auto runner = [this, &reads, &vg1, &query_gen]() {
+                        std::size_t some_value_to_prevent_optimizaton = 0;
                         for (std::size_t i = 0; i < _ops; ++i) {
+                            auto q = query_gen();
+                            some_value_to_prevent_optimizaton+= q.size();
                             auto res = reads.exec({json_generator(vg1)});
+                            some_value_to_prevent_optimizaton += res.size();
                         }
                         reads.flush();
-                        return 1;
+                        return some_value_to_prevent_optimizaton;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);

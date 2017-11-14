@@ -46,7 +46,7 @@ namespace esft{
             std::vector<std::string> attempted;
 
             /**
-             * take all _tmp files in attempted
+             * take all attempted files ending in _tmp
              * and rename them to original file name.
              * Delete _encrypted files if existing.
              */
@@ -58,7 +58,7 @@ namespace esft{
             };
 
             /**
-             * take all files in completed ending in
+             * take all attempted files ending in
              * _crypted_file_name_ext files.
              * Rename them to original file name.
              * if Rename succeeds on all files,

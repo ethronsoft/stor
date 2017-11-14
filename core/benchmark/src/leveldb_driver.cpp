@@ -45,15 +45,21 @@ namespace esft {
                     }
 
                     value_generator kg1(_key_size);
-                    value_generator vg1(_value_size);
+                    value_generator vg1(_value_size - 7 - 1);
 
                     leveldb::WriteOptions wo;
                     wo.sync = false;
                     auto runner = [this, db, &wo, &kg1, &vg1]() {
+                        std::size_t some_value_to_prevent_optimizaton = 0;
                         for (std::size_t i = 0; i < _ops; ++i){
-                            auto s = db->Put(wo,kg1(),json_generator(vg1));
+                            std::string id = kg1();
+                            std::string jsn = json_generator(vg1);
+                            document doc(jsn, id);
+                            some_value_to_prevent_optimizaton += doc.id().size();
+                            auto s = db->Put(wo,id, jsn);
+                            some_value_to_prevent_optimizaton += (std::size_t) &s;
                         }
-                        return 1;
+                        return some_value_to_prevent_optimizaton;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);
@@ -107,15 +113,17 @@ namespace esft {
                     leveldb::ReadOptions ro;
                     ro.snapshot = db->GetSnapshot();
                     auto runner = [this, db, &ro, &kg1, &vg1]() {
+                        std::size_t some_value_to_prevent_optimizaton = 0;
                         for (std::size_t i = 0; i < _ops; ++i){
                             std::string json;
                             std::string id = kg1();
                             db->Get(ro,id, &json);
                             std::unordered_set<document> docs;
-                            docs.emplace(json,id);
+                            auto p = docs.emplace(json,id);
+                            some_value_to_prevent_optimizaton += (std::size_t) &p.first;
                         }
                         db->ReleaseSnapshot(ro.snapshot);
-                        return 1;
+                        return some_value_to_prevent_optimizaton;
                     };
 
                     auto elapsed = timer<std::chrono::microseconds>{}(runner);

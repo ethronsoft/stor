@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     std::size_t value_len = 50;
 
     //number of performed operations
-    std::size_t ops = 1000;
+    std::size_t ops = 10000;
 
     //order list of columns for write
     //test. -- must match those
@@ -83,7 +83,7 @@ int main(int argc, char **argv) {
     std::cout << "STOR VERSION: " << ESFT_STOR_VERSION << "\n";
     std::cout << "Document Key Bytes: " << key_len << "\n";
     std::cout << "Document Value Bytes: " << value_len << "\n";
-    std::cout << "STOR Caching: " << false << "\n";
+    std::cout << "Caching: " << false << "\n";
     std::cout << "Operations: " << ops << "\n";
     std::cout << "LevelDB Block Size: " << 4096 << "\n"; //as per: https://github.com/google/leveldb/blob/master/doc/index.md
     std::cout << "SQLITE page size: " << 4096 << "\n"; //as per: https://sqlite.org/pragma.html#pragma_page_size

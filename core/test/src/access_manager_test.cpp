@@ -170,7 +170,7 @@ TEST_CASE("tampered file failure","[tampering]"){
 
 #else
 
-TEST_CASE("no access_manager"){
+TEST_CASE("no access_manager", "[store_test]"){
     using namespace esft::stor;
 
     CHECK_THROWS_AS(access_manager{"0123456789012345"}.encrypt("a","b"),access_exception);

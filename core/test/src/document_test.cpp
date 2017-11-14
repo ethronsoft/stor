@@ -10,7 +10,7 @@
 using namespace esft::stor;
 
 
-TEST_CASE("document parsing json","[json_parse]"){
+TEST_CASE("document parsing json","[document_test]"){
 
 
     SECTION("object parsing"){
@@ -95,7 +95,7 @@ TEST_CASE("document parsing json","[json_parse]"){
     }
 }
 
-TEST_CASE("document creation","[creation]"){
+TEST_CASE("document creation","[document_test]"){
 
     SECTION("object creation"){
         document d = document::as_object();
@@ -232,7 +232,7 @@ TEST_CASE("document creation","[creation]"){
 
 }
 
-TEST_CASE("document modification", "[modification]"){
+TEST_CASE("document modification", "[document_test]"){
 
 
     SECTION("modifying by replacement"){
@@ -307,7 +307,7 @@ TEST_CASE("document modification", "[modification]"){
     }
 }
 
-TEST_CASE("document streams","[streams]"){
+TEST_CASE("document streams","[document_test]"){
     SECTION("create with stream"){
         std::string s = R"( {"a":1,"b":[true, { "z":2 }]} )";
         std::istringstream iss{s};
@@ -333,7 +333,7 @@ TEST_CASE("document streams","[streams]"){
     }
 }
 
-TEST_CASE("document uniqueness","[doc_uniqueness]")
+TEST_CASE("document uniqueness","[document_test]")
 {
     document prev;
     bool ok = true;

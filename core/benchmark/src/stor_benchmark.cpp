@@ -71,10 +71,12 @@ namespace esft {
                 value_generator kg{_key_size};
 
                 auto runner = [this, &coll, &kg, &_value_gen1]() {
+                    std::size_t some_value_to_prevent_optimizaton = 0;
                     for (std::size_t i = 0; i < _ops; ++i) {
-                        coll.put(document(json_generator(_value_gen1), kg()));
+                        int x = (int) coll.put(document(json_generator(_value_gen1), kg()));
+                        some_value_to_prevent_optimizaton += x;
                     }
-                    return 1;
+                    return some_value_to_prevent_optimizaton;
                 };
 
                 auto elapsed = timer<std::chrono::microseconds>{}(runner);
@@ -102,11 +104,13 @@ namespace esft {
 
                 //testing
                 auto runner = [this, &coll, &read_kg]() {
+                    std::size_t some_value_to_prevent_optimizaton = 0;
                     for (std::size_t i = 0; i < _ops; ++i) {
                         auto key = read_kg();
                         auto d = coll[key];
+                        some_value_to_prevent_optimizaton+= d.id().size();
                     }
-                    return 1;
+                    return some_value_to_prevent_optimizaton;
                 };
 
                 auto elapsed = timer<std::chrono::microseconds>{}(runner);
@@ -136,17 +140,19 @@ namespace esft {
 
                 //testing
                 auto query_gen = [&_value_gen2]() {
-                    auto q = document::as_object();
+                    auto q = document("{}","fake_id");
                     q.with("$eq").put("a", _value_gen2());
                     return q;
                 };
 
                 auto runner = [this, &coll, &query_gen]() {
+                    std::size_t some_value_to_prevent_optimizaton = 0;
                     for (std::size_t i = 0; i < _ops; ++i) {
                         auto q = query_gen();
                         auto res = coll.find(q);
+                        some_value_to_prevent_optimizaton += res.size();
                     }
-                    return 1;
+                    return some_value_to_prevent_optimizaton;
                 };
 
                 auto elapsed = timer<std::chrono::microseconds>{}(runner);
