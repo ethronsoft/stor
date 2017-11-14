@@ -110,19 +110,23 @@ namespace esft {
                     value_generator kg1(_key_size);
                     value_generator vg1(_value_size);
 
-                    leveldb::ReadOptions ro;
-                    ro.snapshot = db->GetSnapshot();
-                    auto runner = [this, db, &ro, &kg1, &vg1]() {
+                    auto runner = [this, db, &kg1, &vg1]() {
                         std::size_t some_value_to_prevent_optimizaton = 0;
                         for (std::size_t i = 0; i < _ops; ++i){
+
+
+                            leveldb::ReadOptions ro;
+                            ro.snapshot = db->GetSnapshot();
+
                             std::string json;
                             std::string id = kg1();
-                            db->Get(ro,id, &json);
-                            std::unordered_set<document> docs;
-                            auto p = docs.emplace(json,id);
-                            some_value_to_prevent_optimizaton += (std::size_t) &p.first;
+                            db->Get(leveldb::ReadOptions{}, id, &json);
+
+                            db->ReleaseSnapshot(ro.snapshot);
+
+                            auto p = document(json,id);
+                            some_value_to_prevent_optimizaton += p.id().size();
                         }
-                        db->ReleaseSnapshot(ro.snapshot);
                         return some_value_to_prevent_optimizaton;
                     };
 
