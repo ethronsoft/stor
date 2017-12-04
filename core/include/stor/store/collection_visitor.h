@@ -1,6 +1,4 @@
-//
-// Created by devhack on 11/06/16.
-//
+
 
 #ifndef ESNPL_STOR_DIRECTORY_ITERATOR_H
 #define ESNPL_STOR_DIRECTORY_ITERATOR_H

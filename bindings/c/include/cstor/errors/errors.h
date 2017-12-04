@@ -1,6 +1,4 @@
-//
-// Created by efelici on 8/30/2017.
-//
+
 
 #ifndef CSTOR_ERRORS_H_H
 #define CSTOR_ERRORS_H_H

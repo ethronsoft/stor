@@ -1,6 +1,4 @@
-//
-// Created by efelici on 8/31/2017.
-//
+
 
 #ifndef CSTOR_TYPES_H
 #define CSTOR_TYPES_H

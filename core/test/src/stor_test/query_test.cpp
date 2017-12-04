@@ -1,6 +1,4 @@
-//
-// Created by devhack on 06/06/16.
-//
+
 
 #include <stor_test/query_test.h>
 #include <exception>

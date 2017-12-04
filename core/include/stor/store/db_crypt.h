@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/15/2016.
-//
+
 
 #ifndef ESNPL_STOR_DB_CRYPT_H
 #define ESNPL_STOR_DB_CRYPT_H

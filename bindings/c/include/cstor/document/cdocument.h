@@ -1,6 +1,4 @@
-//
-// Created by efelici on 8/30/2017.
-//
+
 
 #ifndef PROJECT_CSTOR_DOCUMENT_H
 #define PROJECT_CSTOR_DOCUMENT_H

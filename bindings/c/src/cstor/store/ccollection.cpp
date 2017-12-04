@@ -1,6 +1,4 @@
-//
-// Created by efelici on 9/4/2017.
-//
+
 #include <cstor/store/ccollection.h>
 #include <internal/opaque_types.h>
 #include <cstor/document/cdocument.h>

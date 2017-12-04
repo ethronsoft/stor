@@ -1,6 +1,4 @@
-//
-// Created by devhack on 05/06/16.
-//
+
 
 #include <leveldb/db.h>
 #include <stor/store/onclose.h>

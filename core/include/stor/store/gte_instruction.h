@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/27/2016.
-//
+
 
 #ifndef ESNPL_STOR_GTE_INSTRUCTION_H
 #define ESNPL_STOR_GTE_INSTRUCTION_H

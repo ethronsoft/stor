@@ -1,6 +1,4 @@
-//
-// Created by efelici on 9/1/2017.
-//
+
 
 #include <catch/catch.hpp>
 

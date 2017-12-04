@@ -1,6 +1,4 @@
-//
-// Created by Edd on 04/11/2017.
-//
+
 
 #ifndef STOR_LEVELDB_BENCHMARK_H
 #define STOR_LEVELDB_BENCHMARK_H

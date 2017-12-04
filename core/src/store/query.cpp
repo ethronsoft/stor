@@ -1,6 +1,4 @@
-//
-// Created by devhack on 05/06/16.
-//
+
 
 #include <sstream>
 #include <stor/exceptions/store_exception.h>

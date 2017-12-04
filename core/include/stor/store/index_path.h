@@ -1,6 +1,4 @@
-//
-// Created by devhack on 30/05/16.
-//
+
 
 #ifndef ESNPL_STOR_INDEX_PATH_H
 #define ESNPL_STOR_INDEX_PATH_H

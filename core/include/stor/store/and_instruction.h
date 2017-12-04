@@ -1,6 +1,4 @@
-//
-// Created by devhack on 25/06/2016.
-//
+
 
 #ifndef ESNPL_STOR_AND_INSTRUCTION_H
 #define ESNPL_STOR_AND_INSTRUCTION_H

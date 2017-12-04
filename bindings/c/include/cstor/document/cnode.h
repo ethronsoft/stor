@@ -1,6 +1,4 @@
-//
-// Created by efelici on 8/30/2017.
-//
+
 
 #ifndef CSTOR_CSTOR_NODE_H
 #define CSTOR_CSTOR_NODE_H

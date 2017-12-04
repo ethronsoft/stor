@@ -1,6 +1,4 @@
-//
-// Created by efelici on 8/31/2017.
-//
+
 
 #include <cstor/document/cnode.h>
 #include <internal/opaque_types.h>

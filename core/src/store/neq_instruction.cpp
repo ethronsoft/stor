@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/28/2016.
-//
+
 
 #include <stor/store/neq_instruction.h>
 

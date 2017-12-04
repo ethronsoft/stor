@@ -1,6 +1,4 @@
-//
-// Created by devhack on 06/06/16.
-//
+
 
 #ifndef STOR_QUERY_TEST_H
 #define STOR_QUERY_TEST_H

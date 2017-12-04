@@ -1,6 +1,4 @@
-//
-// Created by efelici on 8/30/2017.
-//
+
 
 #include <cstor/errors/errors.h>
 

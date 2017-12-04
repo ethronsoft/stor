@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/15/2016.
-//
+
 
 #include <thread>
 #include <future>

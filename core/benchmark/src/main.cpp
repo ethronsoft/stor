@@ -1,6 +1,4 @@
-//
-// Created by efelici on 10/31/2017.
-//
+
 
 #include <iostream>
 #include <chrono>

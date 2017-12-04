@@ -1,6 +1,4 @@
-//
-// Created by devhack on 11/06/16.
-//
+
 
 #include <stor/store/collection_visitor.h>
 #include <leveldb/env.h>

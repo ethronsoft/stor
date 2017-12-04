@@ -1,6 +1,3 @@
-//
-// Created by devhack on 05/06/16.
-//
 
 #include <stor/store/index_path.h>
 #include <sstream>

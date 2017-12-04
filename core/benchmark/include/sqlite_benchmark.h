@@ -1,6 +1,4 @@
-//
-// Created by efelici on 10/31/2017.
-//
+
 
 #ifndef STOR_SQLITE_BENCHMARK_H
 #define STOR_SQLITE_BENCHMARK_H

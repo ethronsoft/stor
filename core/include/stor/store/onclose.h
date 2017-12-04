@@ -1,6 +1,4 @@
-//
-// Created by devhack on 05/06/16.
-//
+
 
 #ifndef ESNPL_STOR_AUTODELETE_H
 #define ESNPL_STOR_AUTODELETE_H

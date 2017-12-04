@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/13/2016.
-//
+
 
 #ifndef ESNPL_STOR_NODE_TMP_H
 #define ESNPL_STOR_NODE_TMP_H

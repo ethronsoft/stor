@@ -1,6 +1,4 @@
-//
-// Created by devhack on 09/06/16.
-//
+
 
 #ifndef ESNPL_STOR_ACCESS_MANAGER_H
 #define ESNPL_STOR_ACCESS_MANAGER_H

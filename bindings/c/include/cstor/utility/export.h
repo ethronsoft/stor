@@ -1,6 +1,4 @@
-//
-// Created by Edd on 21/09/2017.
-//
+
 
 #ifndef PYSTOR_EXPORT_H
 #define PYSTOR_EXPORT_H

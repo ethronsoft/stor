@@ -1,6 +1,4 @@
-//
-// Created by efelici on 9/4/2017.
-//
+
 
 #include <catch/catch.hpp>
 #include <cstor/store/cstore.h>

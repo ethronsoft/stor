@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/27/2016.
-//
+
 
 #include <stor/store/gt_instruction.h>
 

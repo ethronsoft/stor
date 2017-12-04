@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/13/2016.
-//
+
 
 #include <sstream>
 #include <stor/document/iterator.h>

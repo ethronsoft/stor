@@ -1,6 +1,4 @@
-//
-// Created by Edd on 04/11/2017.
-//
+
 
 #include <leveldb/db.h>
 #include <leveldb/filter_policy.h>

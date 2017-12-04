@@ -1,6 +1,4 @@
-//
-// Created by efelici on 9/7/2017.
-//
+
 
 #ifndef PYSTOR_UTILITY_H
 #define PYSTOR_UTILITY_H

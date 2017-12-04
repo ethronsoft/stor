@@ -1,6 +1,4 @@
-//
-// Created by Edd on 24/06/2017.
-//
+
 
 #include <string>
 #include <stor/store/access_manager.h>

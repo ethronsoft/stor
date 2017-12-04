@@ -1,6 +1,4 @@
-//
-// Created by efelici on 6/6/2016.
-//
+
 
 #ifndef STOR_MULTIPLATFORM_H
 #define STOR_MULTIPLATFORM_H

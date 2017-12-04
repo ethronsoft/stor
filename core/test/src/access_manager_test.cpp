@@ -1,6 +1,4 @@
-//
-// Created by Edd on 25/06/2017.
-//
+
 #include <catch/catch.hpp>
 #include <stor/store/access_manager.h>
 #include <stor/exceptions/access_exception.h>
