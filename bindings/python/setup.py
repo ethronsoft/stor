@@ -2,7 +2,7 @@ from setuptools import  setup
 
 setup(
     name="pystor",
-    version="0.9.0",
+    version="0.9.1",
     author="Ethronsoft",
     author_email='dev@ethronsoft.com',
     zip_safe=False,
