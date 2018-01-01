@@ -79,9 +79,9 @@ if(STOR_CRYPTO)
     SET(CSTOR_LINK_DIRS ${CSTOR_LINK_DIRS}
             ${openssl_ROOT_DIR}/bin)
     SET(CSTOR_TEST_LIBRARIES
+            ${CSTOR_TEST_LIBRARIES}
             ssl
-            crypto
-            ${CSTOR_TEST_LIBRARIES})
+            crypto)
 endif(STOR_CRYPTO)
 
 # targets
