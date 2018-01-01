@@ -9,8 +9,8 @@ C++ serverless NoSQL document-store
 
 Platforms:
  - Windows - (tested with MinGW)
- - OSX
- - Linux (tested on Ubuntu 1x.xx)
+ - OSX 
+ - Linux - (tested on Ubuntu 1x.xx)
 
 Tool Dependencies:
  - Cmake (version >=3.6)
@@ -39,19 +39,44 @@ in the respective folder under dependencies/.
 
   Note:
   
-    All dependencies are already provided (for convenience and for self-contained testing) 
+  - All dependencies are already provided (for convenience and for self-contained testing) 
     in the dependencies/ folder for the respective
     platforms. 
     Building scripts called during CMake-builds automatically take care
     of building the respective 64-bit libraries for you. You are free to manage
     the dependencies the way you like, just make sure you modify the CmakeLists.txt accordingly.
     
-    Boost UUID dependencies, extracted with the bcp utility (http://www.boost.org/doc/libs/1_64_0/tools/bcp/doc/html/index.html)
+  - Boost UUID dependencies, extracted with the bcp utility (http://www.boost.org/doc/libs/1_64_0/tools/bcp/doc/html/index.html)
     are also included. If you already have Boost headers on the PATH g++ looks into for headers, then you may remove
     it from the dependencies/build.py and remove boost_uuid_ROOT_DIR from CmakeLists.txt.
     
-    Tip: When linking libstor.a to your own executable, you may want to take note of the dependencies linked with the `stor_test` target
-    for each platform and replicate the linking them in your own executable. 
+  - When building with STOR_CRYPTO on **Windows**, building OpenSSL is the major source of problems, as the build files depend on various subsystems.
+    Perl is a dependency, so make sure it's on the PATH (this should be the case by default if using MSYS or https://git-for-windows.github.io/).
+    Build commands also make use of Unix tools, so having UnxUtils on the path if using Cmd.exe is
+    also required. With this, following the Installation instructions should be enough. 
+    If you still experience failures, build OpenSSL directly from the source:
+    
+        ./store/core/dependencies/mingw/openssl/source
+        
+    The build commands we use are:
+    
+        perl Configure mingw64 no-shared no-asm
+        mingw32-make.exe build_libs
+        
+    to obtain static libraries libssl.a and libcrypto.a. Copy these libraries in:
+        
+        ./store/core/dependencies/mingw/openssl/bin
+        
+    and copy the include headers generated in source in 
+    
+        ./store/core/dependencies/mingw/openssl/include
+        
+    You can add this file to make the build system believe everything is ready for use:
+    
+        ./store/core/dependencies/mingw/openssl/.built
+        
+  Tip: When linking libstor.a to your own executable, you may want to take note of the dependencies linked with the `stor_test` target
+    for each platform and replicate the linking for your own executable. 
     
 Install:
 
@@ -63,7 +88,7 @@ To build the library, make an out of source directory
 Then setup the project Cmake cache and relative files that will be used during the build
 
    `chdir stor_build`
-   `cmake [OPT] ../stor`
+   `cmake [OPT] ../stor/core`
    
    Note:
    
