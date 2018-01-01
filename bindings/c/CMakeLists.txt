@@ -67,8 +67,7 @@ elseif(UNIX)
     SET(CSTOR_TEST_LIBRARIES
             stor_static_pic
             leveldb
-            pthread
-            dl)
+            pthread)
 endif()
 
 # optional directories
@@ -83,6 +82,12 @@ if(STOR_CRYPTO)
             ssl
             crypto)
 endif(STOR_CRYPTO)
+#error on linux if dl not added at the end
+if(UNIX)
+    SET(CSTOR_TEST_LIBRARIES
+            ${CSTOR_TEST_LIBRARIES}
+            dl)
+endif()
 
 # targets
 include_directories(${CSTOR_INCLUDE_DIRS})
